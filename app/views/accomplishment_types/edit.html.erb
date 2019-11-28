@@ -1,0 +1,8 @@
+<% content_for(:title, "Edit #{@accomplishment_type.name}") %>
+
+<h1>Editing Accomplishment Type</h1>
+
+<%= render 'form', accomplishment_type: @accomplishment_type %>
+
+<%= link_to 'Show', @accomplishment_type %> |
+<%= link_to 'Back', accomplishment_types_path %>

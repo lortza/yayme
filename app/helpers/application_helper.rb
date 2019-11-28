@@ -5,7 +5,7 @@ module ApplicationHelper
     if content_for?(:title)
       content_for(:title)
     else
-      'MyFoodPlanner'
+      'Yay Me!'
     end
   end
 
@@ -33,16 +33,7 @@ module ApplicationHelper
     end
   end
 
-  def display_time(minutes)
-    TimeHelper.display_time(minutes)
-  end
-
   def button_class(style = 'primary')
     "btn btn-sm btn-outline-#{style}"
-  end
-
-  def display_link_to_plan(user)
-    upcoming = MealPlan.upcoming(user)
-    link_to "Meal Plan: #{upcoming.start_date.to_s(:short)}", meal_plan_path(upcoming), class: 'nav-link' if upcoming
   end
 end

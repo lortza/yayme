@@ -6,13 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :recipes, dependent: :destroy
-  has_many :experimental_recipes, dependent: :destroy
-  has_many :meal_plans, dependent: :destroy
-  has_many :shopping_lists, dependent: :destroy
-  has_many :aisles, dependent: :destroy
+  has_many :accomplishment_types, dependent: :destroy
+  has_many :accomplishments, through: :accomplishment_types
 
-  def favorite_list
-    shopping_lists.find_by(favorite: true)
-  end
 end

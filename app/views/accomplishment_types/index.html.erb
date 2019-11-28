@@ -1,0 +1,27 @@
+<% content_for(:title, "Accomplishment Types") %>
+
+<h1>Accomplishment Types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @accomplishment_types.each do |accomplishment_type| %>
+      <tr>
+        <td><%= accomplishment_type.name %></td>
+        <td><%= link_to 'Show', accomplishment_type %></td>
+        <td><%= link_to 'Edit', edit_accomplishment_type_path(accomplishment_type) %></td>
+        <td><%= link_to 'Destroy', accomplishment_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Accomplishment Type', new_accomplishment_type_path %>

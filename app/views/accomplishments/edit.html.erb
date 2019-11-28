@@ -1,0 +1,7 @@
+<% content_for(:title, "Edit #{@accomplishment.date}") %>
+
+<%= link_to 'Back', accomplishments_path, class: button_class('secondary float-right ml-2') %>
+
+<h1>Editing Accomplishment</h1>
+
+<%= render 'form', accomplishment: @accomplishment %>

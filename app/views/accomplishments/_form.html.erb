@@ -1,0 +1,37 @@
+<%= form_with(model: accomplishment, local: true) do |form| %>
+  <%= render 'shared/errors', object: accomplishment %>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.date_field :date, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :accomplishment_type_id %>
+    <%= form.text_field :accomplishment_type_id, class: 'form-control'  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :given_by %>
+    <%= form.text_field :given_by, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :url %>
+    <%= form.text_field :url, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bookmarked %>
+    <%= form.check_box :bookmarked, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: button_class %>
+  </div>
+<% end %>

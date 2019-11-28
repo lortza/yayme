@@ -10,10 +10,7 @@ Live on heroku as [yayme](http://yayme.herokuapp.com)
 
 ## Features
 
-* List of recipes & ingredients
-* Display full recipes
-* Display ingredient breakdown for meal prep
-* ERD https://dbdiagram.io/d/5d6ea192ced98361d6de29cd
+* WIP
 
 ## Getting Started
 
