@@ -1,0 +1,47 @@
+@import 'variables';
+@import 'recipes';
+
+.right {
+  float: right;
+}
+
+.footer--delete {
+  border-top: 1px solid $gray;
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+
+// Links
+a { color: $link-color; }
+
+
+// SEARCH BAR
+.search-icon {
+  color: $medium-gray;
+  float: right;
+  position: relative;
+  right: 14px;
+  top: 25px;
+}
+
+.clear-search {
+  font-size: 90%;
+  margin-bottom: 2em;
+  text-align: center;
+  a { color: $medium-gray; }
+}
+
+
+// BOOTSTRAP OVERRIDES
+.card {
+  // height: $card-height;
+  .card-img-top {
+    background-color: $gray;
+    height: $card-image-height;
+  }
+}
+
+.btn-xs {
+  font-size: .4em;
+  padding: 1px 4px;
+}

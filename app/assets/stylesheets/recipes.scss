@@ -1,0 +1,39 @@
+@import 'variables';
+
+.table--recipes-index {
+  .img--container {
+    height: $table-thumbnail;
+    overflow: hidden;
+    width: $table-thumbnail;
+
+    img {
+      height: 100%;
+      margin: 0 auto;
+      min-height: $table-thumbnail;
+      min-width: $table-thumbnail;
+      width: 100%;
+    }
+  }
+}
+
+.recipe-form {
+  .instructions {
+    height: 400px;
+    width: 100%;
+  }
+
+  .input--small { width: 4.5rem; }
+
+  .table-ingredients {
+    border: 0;
+    margin-top: 1rem;
+  }
+}
+
+.image-container {
+  height: 200px;
+  max-width: 300px;
+  overflow: hidden;
+  width: 100%;
+  .image { width: 100%; }
+}
