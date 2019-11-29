@@ -1,30 +1,22 @@
 class AccomplishmentTypesController < ApplicationController
   before_action :set_accomplishment_type, only: [:show, :edit, :update, :destroy]
 
-  # GET /accomplishment_types
-  # GET /accomplishment_types.json
   def index
-    @accomplishment_types = AccomplishmentType.all
+    @accomplishment_types = current_user.accomplishment_types.all
   end
 
-  # GET /accomplishment_types/1
-  # GET /accomplishment_types/1.json
   def show
   end
 
-  # GET /accomplishment_types/new
   def new
-    @accomplishment_type = AccomplishmentType.new
+    @accomplishment_type = current_user.accomplishment_types.new
   end
 
-  # GET /accomplishment_types/1/edit
   def edit
   end
 
-  # POST /accomplishment_types
-  # POST /accomplishment_types.json
   def create
-    @accomplishment_type = AccomplishmentType.new(accomplishment_type_params)
+    @accomplishment_type = current_user.accomplishment_types.new(accomplishment_type_params)
 
     respond_to do |format|
       if @accomplishment_type.save
@@ -37,8 +29,6 @@ class AccomplishmentTypesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /accomplishment_types/1
-  # PATCH/PUT /accomplishment_types/1.json
   def update
     respond_to do |format|
       if @accomplishment_type.update(accomplishment_type_params)
@@ -51,8 +41,6 @@ class AccomplishmentTypesController < ApplicationController
     end
   end
 
-  # DELETE /accomplishment_types/1
-  # DELETE /accomplishment_types/1.json
   def destroy
     @accomplishment_type.destroy
     respond_to do |format|
@@ -62,13 +50,12 @@ class AccomplishmentTypesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_accomplishment_type
-      @accomplishment_type = AccomplishmentType.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def accomplishment_type_params
-      params.require(:accomplishment_type).permit(:name)
-    end
+  def set_accomplishment_type
+    @accomplishment_type = current_user.accomplishment_types.find(params[:id])
+  end
+
+  def accomplishment_type_params
+    params.require(:accomplishment_type).permit(:name)
+  end
 end

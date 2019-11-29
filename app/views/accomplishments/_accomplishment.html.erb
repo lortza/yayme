@@ -1,0 +1,19 @@
+<div class="card mb-2">
+  <div class="card-header">
+    <%= accomplishment.date %>
+    <% if accomplishment.bookmarked? %>
+      <i class="fas fa-bookmark float-right ml-2"></i>
+    <% end %>
+    <span class="float-right ml-2"><%= accomplishment.accomplishment_type_name %></span>
+  </div>
+  <div class="card-body">
+    <% if accomplishment.given_by.present? %>
+      <h5 class="card-title"><%= accomplishment.given_by %> said:</h5>
+    <% end %>
+    <p class="card-text">
+      <%= accomplishment.description %>
+      <small class="text-muted"><%= link_to 'related info', accomplishment.url %></small>
+      <small class="text-muted"><%= link_to 'edit', edit_accomplishment_path(accomplishment), class: 'float-right ml-2' %></small>
+    </p>
+  </div>
+</div>

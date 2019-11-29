@@ -1,26 +1,8 @@
 <% content_for(:title, "Accomplishments") %>
-<%= link_to 'New Accomplishment', new_accomplishment_path, class: button_class('success float-right') %>
+<%= link_to 'New Accomplishment', new_accomplishment_path, class: button_class('primary float-right') %>
 
 <h1>Accomplishments</h1>
 
-
 <% @accomplishments.each do |accomplishment| %>
-  <div class="card mb-2">
-    <div class="card-header">
-      <%= accomplishment.date %>
-      <% if accomplishment.bookmarked? %>
-        <i class="fas fa-bookmark float-right ml-2"></i>
-      <% end %>
-      <span class="float-right ml-2"><%= accomplishment.accomplishment_type_name %></span>
-    </div>
-    <div class="card-body">
-      <% if accomplishment.given_by.present? %>
-        <h5 class="card-title"><%= accomplishment.given_by %> said:</h5>
-      <% end %>
-      <p class="card-text"><%= accomplishment.description %></p>
-      <%= link_to 'related info', accomplishment.url, class: 'btn btn-sm btn-outline-success' %>
-      <%= link_to 'Edit', edit_accomplishment_path(accomplishment) %>
-      <%= link_to 'Destroy', accomplishment, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </div>
-  </div>
+  <%= render partial: 'accomplishment', locals: { accomplishment: accomplishment } %>
 <% end %>

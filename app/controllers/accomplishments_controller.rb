@@ -2,18 +2,27 @@ class AccomplishmentsController < ApplicationController
   before_action :set_accomplishment, only: [:edit, :update, :destroy]
 
   def index
-    @accomplishments = Accomplishment.all
+    @accomplishments = current_user.accomplishments.includes(:accomplishment_type).by_date
+
+    user_accomplishments = current_user.accomplishments
+    search_term = params[:search]
+
+    @accomplishments = if search_term
+                         user_accomplishments.search(search_term).by_date
+                       else
+                         user_accomplishments.by_date
+                       end
   end
 
   def new
-    @accomplishment = Accomplishment.new
+    @accomplishment = current_user.accomplishments.new
   end
 
   def edit
   end
 
   def create
-    @accomplishment = Accomplishment.new(accomplishment_params)
+    @accomplishment = current_user.accomplishments.new(accomplishment_params)
 
     respond_to do |format|
       if @accomplishment.save
@@ -48,10 +57,16 @@ class AccomplishmentsController < ApplicationController
 
   private
     def set_accomplishment
-      @accomplishment = Accomplishment.find(params[:id])
+      @accomplishment = current_user.accomplishments.find(params[:id])
     end
 
     def accomplishment_params
-      params.require(:accomplishment).permit(:description, :accomplishment_type_id, :url, :bookmarked)
+      params.require(:accomplishment)
+            .permit(:accomplishment_type_id,
+                    :date,
+                    :description,
+                    :given_by,
+                    :url,
+                    :bookmarked)
     end
 end

@@ -1,9 +1,10 @@
-<p id="notice"><%= notice %></p>
+<% content_for(:title, @accomplishment_type.name) %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @accomplishment_type.name %>
-</p>
+<%= link_to 'Back', accomplishment_types_path, class: button_class('secondary float-right ml-2') %>
+<%= link_to 'New Accomplishment', new_accomplishment_path, class: button_class('primary float-right ml-2') %>
 
-<%= link_to 'Edit', edit_accomplishment_type_path(@accomplishment_type) %> |
-<%= link_to 'Back', accomplishment_types_path %>
+<h1><%= @accomplishment_type.name %></h1>
+
+<% @accomplishment_type.accomplishments.each do |accomplishment| %>
+  <%= render partial: 'accomplishments/accomplishment', locals: { accomplishment: accomplishment } %>
+<% end %>

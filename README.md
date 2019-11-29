@@ -6,7 +6,7 @@
 
 WIP accomplishment tracking app.
 
-Live on heroku as [yayme](http://yayme.herokuapp.com)
+Live on heroku as [yayme](http://yay-me.herokuapp.com)
 
 ## Features
 
