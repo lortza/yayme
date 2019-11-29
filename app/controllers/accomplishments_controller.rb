@@ -2,15 +2,13 @@ class AccomplishmentsController < ApplicationController
   before_action :set_accomplishment, only: [:edit, :update, :destroy]
 
   def index
-    @accomplishments = current_user.accomplishments.includes(:accomplishment_type).by_date
-
     user_accomplishments = current_user.accomplishments
     search_term = params[:search]
 
     @accomplishments = if search_term
-                         user_accomplishments.search(search_term).by_date
+                         user_accomplishments.includes(:accomplishment_type).search(search_term).by_date
                        else
-                         user_accomplishments.by_date
+                         user_accomplishments.includes(:accomplishment_type).by_date
                        end
   end
 
