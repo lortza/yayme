@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_28_184330) do
+ActiveRecord::Schema.define(version: 2019_11_29_222226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accomplishment_categories", force: :cascade do |t|
+    t.bigint "accomplishment_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["accomplishment_id"], name: "index_accomplishment_categories_on_accomplishment_id"
+    t.index ["category_id"], name: "index_accomplishment_categories_on_category_id"
+  end
 
   create_table "accomplishment_types", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -35,6 +44,14 @@ ActiveRecord::Schema.define(version: 2019_11_28_184330) do
     t.index ["accomplishment_type_id"], name: "index_accomplishments_on_accomplishment_type_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.boolean "admin", default: false
@@ -49,6 +66,9 @@ ActiveRecord::Schema.define(version: 2019_11_28_184330) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "accomplishment_categories", "accomplishments"
+  add_foreign_key "accomplishment_categories", "categories"
   add_foreign_key "accomplishment_types", "users"
   add_foreign_key "accomplishments", "accomplishment_types"
+  add_foreign_key "categories", "users"
 end

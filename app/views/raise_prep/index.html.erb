@@ -1,0 +1,8 @@
+<% content_for(:title, "Raise Prep") %>
+<%= link_to 'New Accomplishment', new_accomplishment_path, class: button_class('primary float-right') %>
+
+<h1>Raise Prep</h1>
+
+<% @accomplishments.each do |accomplishment| %>
+  <%= render partial: 'accomplishments/accomplishment', locals: { accomplishment: accomplishment } %>
+<% end %>

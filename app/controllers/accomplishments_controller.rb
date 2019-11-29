@@ -24,7 +24,7 @@ class AccomplishmentsController < ApplicationController
 
     respond_to do |format|
       if @accomplishment.save
-        format.html { redirect_back fallback_location: accomplishments_url, notice: "#{@accomplishment.date} #{@accomplishment.accomplishment_type_name} was successfully created." }
+        format.html { redirect_to accomplishments_url, notice: "#{@accomplishment.date} #{@accomplishment.accomplishment_type_name} was successfully created." }
         format.json { render :show, status: :created, location: accomplishments_url }
       else
         format.html { render :new }
@@ -54,17 +54,18 @@ class AccomplishmentsController < ApplicationController
   end
 
   private
-    def set_accomplishment
-      @accomplishment = current_user.accomplishments.find(params[:id])
-    end
 
-    def accomplishment_params
-      params.require(:accomplishment)
-            .permit(:accomplishment_type_id,
-                    :date,
-                    :description,
-                    :given_by,
-                    :url,
-                    :bookmarked)
-    end
+  def set_accomplishment
+    @accomplishment = current_user.accomplishments.find(params[:id])
+  end
+
+  def accomplishment_params
+    params.require(:accomplishment)
+          .permit(:accomplishment_type_id,
+                  :date,
+                  :description,
+                  :given_by,
+                  :url,
+                  :bookmarked)
+  end
 end

@@ -10,6 +10,8 @@
     <% current_user.accomplishment_types.each do |type| %>
       <%= link_to type.name, accomplishment_type_path(type), class: 'dropdown-item' %>
     <% end %>
+    <div class='dropdown-divider'></div>
+    <%= link_to 'Raise Prep', raise_prep_index_path, class: 'dropdown-item' %>
   </div>
 </li>
 
@@ -20,5 +22,4 @@
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
     <%= link_to '+ New Accomplishment Type', new_accomplishment_type_path, class: 'dropdown-item' %>
     <%= link_to 'All Accomplishment Types', accomplishment_types_path, class: 'dropdown-item' %>
-  </div>
 </li>
