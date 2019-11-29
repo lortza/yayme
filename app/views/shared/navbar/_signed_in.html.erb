@@ -4,6 +4,17 @@
 
 <li class="nav-item dropdown">
   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    By Type
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <% current_user.accomplishment_types.each do |type| %>
+      <%= link_to type.name, accomplishment_type_path(type), class: 'dropdown-item' %>
+    <% end %>
+  </div>
+</li>
+
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Manage
   </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">

@@ -24,7 +24,7 @@ class AccomplishmentsController < ApplicationController
 
     respond_to do |format|
       if @accomplishment.save
-        format.html { redirect_to accomplishments_url, notice: 'Accomplishment was successfully created.' }
+        format.html { redirect_back fallback_location: accomplishments_url, notice: "#{@accomplishment.date} #{@accomplishment.accomplishment_type_name} was successfully created." }
         format.json { render :show, status: :created, location: accomplishments_url }
       else
         format.html { render :new }
@@ -36,7 +36,7 @@ class AccomplishmentsController < ApplicationController
   def update
     respond_to do |format|
       if @accomplishment.update(accomplishment_params)
-        format.html { redirect_to accomplishments_url, notice: 'Accomplishment was successfully updated.' }
+        format.html { redirect_to accomplishments_url, notice: "#{@accomplishment.date} #{@accomplishment.accomplishment_type_name} was successfully updated." }
         format.json { render :index, status: :ok, location: accomplishments_url }
       else
         format.html { render :edit }
@@ -48,7 +48,7 @@ class AccomplishmentsController < ApplicationController
   def destroy
     @accomplishment.destroy
     respond_to do |format|
-      format.html { redirect_to accomplishments_url, notice: 'Accomplishment was successfully destroyed.' }
+      format.html { redirect_to accomplishments_url, notice: "#{@accomplishment.date} #{@accomplishment.accomplishment_type_name} was successfully deleted." }
       format.json { head :no_content }
     end
   end
