@@ -1,7 +1,4 @@
 <% content_for(:title, "Accomplishments") %>
-<%= link_to 'New Accomplishment', new_accomplishment_path, class: button_class('primary float-right') %>
-
-<h1>Accomplishments</h1>
 
 <% @accomplishments.each do |accomplishment| %>
   <%= render partial: 'accomplishment', locals: { accomplishment: accomplishment } %>
