@@ -66,6 +66,7 @@ class AccomplishmentsController < ApplicationController
                   :description,
                   :given_by,
                   :url,
-                  :bookmarked)
+                  :bookmarked,
+                  category_ids: [])
   end
 end

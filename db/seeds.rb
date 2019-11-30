@@ -2,6 +2,7 @@ puts '**** Running seeds...'
 
 puts 'Destroying AllTheThings!TM'
 User.destroy_all
+Category.destroy_all
 AccomplishmentType.destroy_all
 Accomplishment.destroy_all
 
@@ -18,6 +19,14 @@ merit = AccomplishmentType.create!(user_id: user.id, name: 'Merit')
 praise = AccomplishmentType.create!(user_id: user.id, name: 'Praise')
 gratitude = AccomplishmentType.create!(user_id: user.id, name: 'Gratitude')
 puts "Created #{AccomplishmentType.count} AccomplishmentTypes"
+
+
+# Categories
+citizenship = Category.create!(user_id: user.id, name: 'Citizenship')
+skills = Category.create!(user_id: user.id, name: 'Skills & Competencies')
+leadership = Category.create!(user_id: user.id, name: 'Leadership')
+puts "Created #{Category.count} Categories"
+
 
 # Accomplishments
 Accomplishment.create!([

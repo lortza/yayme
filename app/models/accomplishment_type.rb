@@ -1,4 +1,6 @@
 class AccomplishmentType < ApplicationRecord
+  extend Sortable
+
   belongs_to :user
   has_many :accomplishments, dependent: :destroy
 

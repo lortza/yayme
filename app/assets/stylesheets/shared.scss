@@ -14,6 +14,21 @@
 a { color: $link-color; }
 
 
+// Forms
+.field {
+  label {
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+
+  .form-check-label {
+    font-weight: normal;
+    margin-top: 0;
+  }
+}
+
+
 // SEARCH BAR
 .search-icon {
   color: $medium-gray;
