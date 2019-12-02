@@ -10,7 +10,7 @@
     <div class='col-10'>
       <div class="field">
         <%= form.label :accomplishment_type_id %>
-        <%= form.collection_select :accomplishment_type_id, current_user.accomplishment_types, :id, :name, {}, class: 'form-control' %>
+        <%= form.collection_select :accomplishment_type_id, current_user.accomplishment_types.by_name, :id, :name, {}, class: 'form-control' %>
       </div>
     </div>
     <div class='col-2'>

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AccomplishmentTypesController < ApplicationController
   before_action :set_accomplishment_type, only: [:show, :edit, :update, :destroy]
 

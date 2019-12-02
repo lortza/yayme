@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Accomplishment < ApplicationRecord
   belongs_to :accomplishment_type
   has_many :accomplishment_categories
