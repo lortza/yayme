@@ -29,4 +29,16 @@ class Accomplishment < ApplicationRecord
   def self.in_last_calendar_year
     where('date BETWEEN ? AND ?', Date.today - 365, Date.today)
   end
+
+  def word_heat_map
+    mapped_words = {}
+    description.split(' ').each do |word|
+      if mapped_words[word] == nil
+        mapped_words[word] = 1
+      else
+        mapped_words[word] += 1
+      end
+    end
+    mapped_words
+  end
 end

@@ -24,4 +24,27 @@ RSpec.describe Accomplishment, type: :model do
   context 'delegations' do
     it { should delegate_method(:name).to(:accomplishment_type).with_prefix }
   end
+
+  describe 'heat_map' do
+    it 'returns a hash with words as keys' do
+      accomplishment = build(:accomplishment, description: 'a a b b c')
+      first_key = 'a'
+
+      expect(accomplishment.word_heat_map.keys.first).to eq(first_key)
+    end
+
+    it 'returns a hash with integers as values' do
+      accomplishment = build(:accomplishment, description: 'a a b b c')
+      first_value = 2
+
+      expect(accomplishment.word_heat_map.values.first).to eq(first_value)
+    end
+
+    it 'counts each unique word that appears in a descritption' do
+      accomplishment = build(:accomplishment, description: 'a a b b c')
+      expected_output = {'a' => 2, 'b' => 2, 'c' => 1}
+      
+      expect(accomplishment.word_heat_map).to eq(expected_output)
+    end
+  end
 end
