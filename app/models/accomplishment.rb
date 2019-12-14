@@ -33,6 +33,7 @@ class Accomplishment < ApplicationRecord
   def word_heat_map
     mapped_words = {}
     description.split(' ').each do |word|
+      word = stripped_word(word).downcase
       if mapped_words[word] == nil
         mapped_words[word] = 1
       else
@@ -40,5 +41,15 @@ class Accomplishment < ApplicationRecord
       end
     end
     mapped_words
+  end
+
+  private
+
+  def stripped_word(word)
+    unwanted_punctuation = %w[: " . ( ) [ ] , … ...]
+    unwanted_punctuation.each do |mark|
+      word = word.gsub(mark, '')
+    end
+    word
   end
 end

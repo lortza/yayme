@@ -43,7 +43,21 @@ RSpec.describe Accomplishment, type: :model do
     it 'counts each unique word that appears in a descritption' do
       accomplishment = build(:accomplishment, description: 'a a b b c')
       expected_output = {'a' => 2, 'b' => 2, 'c' => 1}
-      
+
+      expect(accomplishment.word_heat_map).to eq(expected_output)
+    end
+
+    it 'is case-insensitive' do
+      accomplishment = build(:accomplishment, description: 'A a B b c')
+      expected_output = {'a' => 2, 'b' => 2, 'c' => 1}
+
+      expect(accomplishment.word_heat_map).to eq(expected_output)
+    end
+
+    it 'removes unnecessary punctuation' do
+      accomplishment = build(:accomplishment, description: 'a, a (b) b. c c, d')
+      expected_output = {'a' => 2, 'b' => 2, 'c' => 2, 'd' => 1}
+
       expect(accomplishment.word_heat_map).to eq(expected_output)
     end
   end
