@@ -1,0 +1,5 @@
+<h1>Word Heat Map</h1>
+
+<% @words.each do |word, count| %>
+  <span style="<%= styler(count) %>"><%= word %></span>
+<% end %>

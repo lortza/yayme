@@ -40,8 +40,8 @@ class Accomplishment < ApplicationRecord
   private
 
   def stripped_word(word)
-    unwanted_punctuation = %w[: " . ( ) [ ] , … ...]
-    unwanted_punctuation.each do |mark|
+    unwanted_characters = %w[: " . ( ) [ ] , … ... ? — -- & ; 0 1 2 3 4 5 6 7 8 9]
+    unwanted_characters.each do |mark|
       word = word.gsub(mark, '')
     end
     word
