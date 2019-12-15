@@ -16,9 +16,9 @@ class Accomplishment < ApplicationRecord
 
   def self.search(terms)
     if terms.blank?
-      all
+      includes(:accomplishment_type).by_date
     else
-      where('description ILIKE ?', "%#{terms}%")
+      includes(:accomplishment_type).where('description ILIKE ? OR given_by ILIKE ?', "%#{terms}%", "%#{terms}%").by_date
     end
   end
 

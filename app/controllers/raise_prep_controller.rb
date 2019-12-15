@@ -9,6 +9,7 @@ class RaisePrepController < ApplicationController
                                    .includes(:accomplishment_type)
                                    .joins(:accomplishment_type)
                                    .where('accomplishment_types.name ILIKE ? OR accomplishment_types.name ILIKE ?', "%merit%", "%praise%")
+                                   .paginate(page: params[:page], per_page: 50)
   end
 
 

@@ -3,3 +3,5 @@
 <% @accomplishments.each do |accomplishment| %>
   <%= render partial: 'accomplishment', locals: { accomplishment: accomplishment } %>
 <% end %>
+
+<%= will_paginate @accomplishments, :page_links => false %>
