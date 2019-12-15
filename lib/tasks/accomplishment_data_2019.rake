@@ -5,7 +5,7 @@
 
 namespace :accomplishments do
   desc 'populate gratitude journal'
-  task gratitude: :environment do
+  task gratitude_2019: :environment do
     puts 'Populating 2019 gratitude journal...'
     # Accomplishment.destroy_all
 
@@ -123,7 +123,7 @@ namespace :accomplishments do
 
 
   desc 'populate gratitude journal'
-  task merit: :environment do
+  task merit_2019: :environment do
     puts 'Populating 2019 merit notes...'
 
     user = User.first

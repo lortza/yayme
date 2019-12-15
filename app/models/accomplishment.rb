@@ -29,4 +29,21 @@ class Accomplishment < ApplicationRecord
   def self.in_last_calendar_year
     where('date BETWEEN ? AND ?', Date.today - 365, Date.today)
   end
+
+  def word_heat_map
+    description.split(' ').each_with_object({}) do |raw_word, hash|
+      word = stripped_word(raw_word).downcase
+      hash[word].nil? ? hash[word] = 1 : hash[word] += 1
+    end
+  end
+
+  private
+
+  def stripped_word(word)
+    unwanted_characters = %w[: " . ( ) [ ] , … ... ? — -- & ; 0 1 2 3 4 5 6 7 8 9]
+    unwanted_characters.each do |mark|
+      word = word.gsub(mark, '')
+    end
+    word
+  end
 end

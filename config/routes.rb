@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   resources :accomplishments, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :categories, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :raise_prep, only: [:index]
+
+  get '/word_heat_map', to: 'reports#word_heat_map'
 end
