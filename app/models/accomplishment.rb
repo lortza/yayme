@@ -31,16 +31,10 @@ class Accomplishment < ApplicationRecord
   end
 
   def word_heat_map
-    mapped_words = {}
-    description.split(' ').each do |word|
-      word = stripped_word(word).downcase
-      if mapped_words[word] == nil
-        mapped_words[word] = 1
-      else
-        mapped_words[word] += 1
-      end
+    description.split(' ').each_with_object({}) do |raw_word, hash|
+      word = stripped_word(raw_word).downcase
+      hash[word].nil? ? hash[word] = 1 : hash[word] += 1
     end
-    mapped_words
   end
 
   private

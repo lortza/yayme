@@ -3,5 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'associations' do
+    it { should belong_to(:user) }
+    it { should have_many(:accomplishment_categories) }
+    it { should have_many(:accomplishments).through(:accomplishment_categories) }
+  end
 end
