@@ -1,10 +1,12 @@
 <% content_for(:title, @accomplishment_type.name) %>
 
 <%= link_to 'Back', accomplishment_types_path, class: button_class('secondary float-right ml-2') %>
-<%= link_to 'New Accomplishment', new_accomplishment_path, class: button_class('primary float-right ml-2') %>
+<%= link_to 'New Entry', new_accomplishment_path, class: button_class('primary float-right ml-2') %>
 
 <h1><%= @accomplishment_type.name %></h1>
 
-<% @accomplishment_type.accomplishments.by_date.each do |accomplishment| %>
+<% @accomplishments.by_date.each do |accomplishment| %>
   <%= render partial: 'accomplishments/accomplishment', locals: { accomplishment: accomplishment } %>
 <% end %>
+
+<%= will_paginate @accomplishments, :page_links => false %>

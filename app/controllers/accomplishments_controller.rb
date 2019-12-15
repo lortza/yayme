@@ -4,14 +4,8 @@ class AccomplishmentsController < ApplicationController
   before_action :set_accomplishment, only: [:edit, :update, :destroy]
 
   def index
-    user_accomplishments = current_user.accomplishments
-    search_term = params[:search]
-
-    @accomplishments = if search_term
-                         user_accomplishments.includes(:accomplishment_type).search(search_term).by_date
-                       else
-                         user_accomplishments.includes(:accomplishment_type).by_date
-                       end
+    search_terms = params[:search]
+    @accomplishments = current_user.accomplishments.search(search_terms).paginate(page: params[:page], per_page: 50)
   end
 
   def new
