@@ -61,4 +61,23 @@ RSpec.describe Accomplishment, type: :model do
       expect(accomplishment.word_heat_map).to eq(expected_output)
     end
   end
+
+  describe 'self.for_year' do
+    it 'returns all records if no year is given' do
+      accomplishment1 = create(:accomplishment, date: '2018-01-16')
+      accomplishment2 = create(:accomplishment, date: '2019-01-16')
+      given_year = ''
+
+      expect(Accomplishment.for_year(given_year)).to include(accomplishment1, accomplishment2)
+    end
+
+    it 'returns only accomplishments for a given year' do
+      accomplishment1 = create(:accomplishment, date: '2018-01-16')
+      accomplishment2 = create(:accomplishment, date: '2019-01-16')
+      given_year = '2018'
+
+      expect(Accomplishment.for_year(given_year)).to include(accomplishment1)
+      expect(Accomplishment.for_year(given_year)).to_not include(accomplishment2)
+    end
+  end
 end
