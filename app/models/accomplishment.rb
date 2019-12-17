@@ -22,6 +22,14 @@ class Accomplishment < ApplicationRecord
     end
   end
 
+  def self.for_year(given_year)
+    if given_year.blank?
+      includes(:accomplishment_type).by_date
+    else
+      includes(:accomplishment_type).where('extract(year from date) = ?', given_year)
+    end
+  end
+
   def self.bookmarked
     where(bookmarked: true)
   end

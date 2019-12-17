@@ -14,4 +14,34 @@ RSpec.describe Report, type: :model do
       expect(Report.generate_word_heat_map(accomplishments: Accomplishment.all, minimum_count: 0)).to eq(expected_output)
     end
   end
+
+  describe 'self.available_years' do
+    it 'returns an array of years taken from Accomlishment records' do
+      create(:accomplishment, date: '2018-01-16')
+      create(:accomplishment, date: '2019-01-16')
+
+      expect(Report.available_years).to eq([2019, 2018])
+    end
+
+    it 'orders years in descending order' do
+      create(:accomplishment, date: '2018-01-16')
+      create(:accomplishment, date: '2017-01-16')
+      create(:accomplishment, date: '2019-01-16')
+
+      expect(Report.available_years).to eq([2019, 2018, 2017])
+    end
+
+    it 'defaults to the "Accomplishment" model' do
+      create(:accomplishment, date: '2018-01-16')
+      create(:accomplishment, date: '2019-01-16')
+
+      expect(Report.available_years).to eq([2019, 2018])
+    end
+
+    it 'can work for any model and date field' do
+      create(:accomplishment_type, created_at: '2018-01-16')
+
+      expect(Report.available_years(AccomplishmentType, :created_at)).to eq([2018])
+    end
+  end
 end

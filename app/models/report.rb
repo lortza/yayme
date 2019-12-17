@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Report < ApplicationRecord
+  def self.available_years(model = Accomplishment, date_field = :date)
+    model.all.pluck(date_field).map(&:year).uniq.sort.reverse
+  end
+
   def self.generate_word_heat_map(accomplishments:, minimum_count:)
     words = accomplishments.each_with_object({}) do |accomplishment, words_hash |
       words_hash.merge!(accomplishment.word_heat_map) do |k, hash_value, incoming_value|
