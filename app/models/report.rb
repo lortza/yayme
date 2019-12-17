@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Report < ApplicationRecord
-  def self.available_years
-    Accomplishment.all.pluck(:date).map(&:year).uniq.sort.reverse
+  def self.available_years(model = Accomplishment, date_field = :date)
+    model.all.pluck(date_field).map(&:year).uniq.sort.reverse
   end
 
   def self.generate_word_heat_map(accomplishments:, minimum_count:)
