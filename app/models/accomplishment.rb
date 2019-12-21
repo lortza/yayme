@@ -38,7 +38,7 @@ class Accomplishment < ApplicationRecord
     where('date BETWEEN ? AND ?', Date.today - 365, Date.today)
   end
 
-  def word_heat_map
+  def word_cloud
     description.split(' ').each_with_object({}) do |raw_word, hash|
       word = stripped_word(raw_word).downcase
       hash[word].nil? ? hash[word] = 1 : hash[word] += 1
