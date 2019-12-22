@@ -13,6 +13,7 @@ class Accomplishment < ApplicationRecord
   delegate :name, to: :accomplishment_type, prefix: true
 
   scope :by_date, -> { order(date: :desc) }
+  scope :in_chronological_order, -> { order(date: :asc) }
 
   def self.search(given_year: '', search_terms: '')
     if given_year.present? && search_terms.present?

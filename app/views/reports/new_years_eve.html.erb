@@ -1,6 +1,6 @@
 <% content_for(:title, "Celebrations") %>
 <h1>Happy New Year's Eve!</h1>
-<p>Let's clelebrate all of the good things from the past year</p>
+<p>Remember and celebrate all of the good things we've experienced over the past year.</p>
 
 <% @celebrations.each do |celebration| %>
   <%= render partial: 'accomplishments/accomplishment', locals: { accomplishment: celebration } %>
