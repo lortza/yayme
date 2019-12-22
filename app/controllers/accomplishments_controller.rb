@@ -5,7 +5,12 @@ class AccomplishmentsController < ApplicationController
 
   def index
     search_terms = params[:search]
-    @accomplishments = current_user.accomplishments.search(search_terms).paginate(page: params[:page], per_page: 50)
+    given_year = params[:given_year]
+
+    @accomplishments = current_user.accomplishments
+                                   .search(given_year: given_year, search_terms: search_terms)
+                                   .by_date
+                                   .paginate(page: params[:page], per_page: 50)
   end
 
   def new

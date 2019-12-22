@@ -1,5 +1,7 @@
 <% content_for(:title, "Accomplishments") %>
 
+<%= render partial: 'shared/filter_form', locals: { destination_url: accomplishments_path } %>
+
 <% @accomplishments.each do |accomplishment| %>
   <%= render partial: 'accomplishment', locals: { accomplishment: accomplishment } %>
 <% end %>

@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   resources :categories, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :raise_prep, only: [:index]
 
-  get '/word_heat_map', to: 'reports#word_heat_map'
+  get '/word_cloud', to: 'reports#word_cloud'
+  get '/new_years_eve', to: 'reports#new_years_eve'
 end

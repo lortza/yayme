@@ -15,8 +15,14 @@
   </div>
 </li>
 
-<li class="nav-item">
-  <%= link_to 'Word Map', word_heat_map_path, class: 'nav-link' %>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Fancy Views
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <%= link_to 'Word Cloud', word_cloud_path, class: 'dropdown-item' %>
+    <%= link_to "New Year's Eve", new_years_eve_path, class: 'dropdown-item' %>
+  </div>
 </li>
 
 <li class="nav-item dropdown">
