@@ -2,7 +2,7 @@
 
 class Report < ApplicationRecord
   def self.available_years(model = Accomplishment, date_field = :date)
-    model.all.pluck(date_field).map(&:year).uniq.sort.reverse
+    model.all.pluck(date_field).map(&:year).uniq.sort.reverse.push('All Time')
   end
 
   def self.generate_word_cloud(accomplishments:, minimum_count:)

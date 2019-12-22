@@ -25,7 +25,59 @@ RSpec.describe Accomplishment, type: :model do
     it { should delegate_method(:name).to(:accomplishment_type).with_prefix }
   end
 
-  describe 'heat_map' do
+  describe 'self.for_year' do
+    it 'returns all records if no year is given' do
+      accomplishment1 = create(:accomplishment, date: '2018-01-16')
+      accomplishment2 = create(:accomplishment, date: '2019-01-16')
+      given_year = ''
+
+      expect(Accomplishment.for_year(given_year)).to include(accomplishment1, accomplishment2)
+    end
+
+    it 'returns only accomplishments for a given year' do
+      accomplishment1 = create(:accomplishment, date: '2018-01-16')
+      accomplishment2 = create(:accomplishment, date: '2019-01-16')
+      given_year = '2018'
+
+      expect(Accomplishment.for_year(given_year)).to include(accomplishment1)
+      expect(Accomplishment.for_year(given_year)).to_not include(accomplishment2)
+    end
+  end
+
+  describe 'self.search' do
+    xit 'does stuff' do
+    end
+  end
+
+  describe 'self.for_words' do
+    it 'returns all records if no search_term is given' do
+      accomplishment1 = create(:accomplishment, description: 'flower')
+      accomplishment2 = create(:accomplishment, description: 'moonwalk')
+      search_term = ''
+
+      expect(Accomplishment.for_words(search_term)).to include(accomplishment1, accomplishment2)
+    end
+
+    it 'returns only relevant records if a search term is present in the description' do
+      accomplishment1 = create(:accomplishment, description: 'flower')
+      accomplishment2 = create(:accomplishment, description: 'moonwalk')
+      search_term = 'flower'
+
+      expect(Accomplishment.for_words(search_term)).to include(accomplishment1)
+      expect(Accomplishment.for_words(search_term)).to_not include(accomplishment2)
+    end
+
+    it 'returns only relevant records if a search term is present in the given_by field' do
+      accomplishment1 = create(:accomplishment, given_by: 'Starsky')
+      accomplishment2 = create(:accomplishment, given_by: 'Hutch')
+      search_term = 'Starsky'
+
+      expect(Accomplishment.for_words(search_term)).to include(accomplishment1)
+      expect(Accomplishment.for_words(search_term)).to_not include(accomplishment2)
+    end
+  end
+
+  describe 'word_cloud' do
     it 'returns a hash with words as keys' do
       accomplishment = build(:accomplishment, description: 'a a b b c')
       first_key = 'a'
@@ -59,25 +111,6 @@ RSpec.describe Accomplishment, type: :model do
       expected_output = {'a' => 2, 'b' => 2, 'c' => 2, 'd' => 1}
 
       expect(accomplishment.word_cloud).to eq(expected_output)
-    end
-  end
-
-  describe 'self.for_year' do
-    it 'returns all records if no year is given' do
-      accomplishment1 = create(:accomplishment, date: '2018-01-16')
-      accomplishment2 = create(:accomplishment, date: '2019-01-16')
-      given_year = ''
-
-      expect(Accomplishment.for_year(given_year)).to include(accomplishment1, accomplishment2)
-    end
-
-    it 'returns only accomplishments for a given year' do
-      accomplishment1 = create(:accomplishment, date: '2018-01-16')
-      accomplishment2 = create(:accomplishment, date: '2019-01-16')
-      given_year = '2018'
-
-      expect(Accomplishment.for_year(given_year)).to include(accomplishment1)
-      expect(Accomplishment.for_year(given_year)).to_not include(accomplishment2)
     end
   end
 end

@@ -14,7 +14,19 @@ class Accomplishment < ApplicationRecord
 
   scope :by_date, -> { order(date: :desc) }
 
-  def self.search(terms)
+  def self.search(given_year: '', search_terms: '')
+    if given_year.present? && search_terms.present?
+      for_words(search_terms).for_year(given_year)
+    elsif given_year.present? && search_terms.blank?
+      for_year(given_year)
+    elsif given_year.blank? && search_terms.present?
+      for_words(search_terms)
+    else
+      for_year(Date.today.year)
+    end
+  end
+
+  def self.for_words(terms)
     if terms.blank?
       includes(:accomplishment_type).by_date
     else
@@ -23,7 +35,7 @@ class Accomplishment < ApplicationRecord
   end
 
   def self.for_year(given_year)
-    if given_year.blank?
+    if given_year.blank? || given_year.to_i == 0
       includes(:accomplishment_type).by_date
     else
       includes(:accomplishment_type).where('extract(year from date) = ?', given_year)

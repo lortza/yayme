@@ -1,6 +1,0 @@
-<h1>Word Heat Map</h1>
-<%= render partial: 'filter_form' %>
-
-<% @words.each do |word, count| %>
-  <span style="<%= styler(count) %>"><%= word %></span>
-<% end %>
