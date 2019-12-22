@@ -9,7 +9,7 @@
 
     <div class='col-2'>
       <%= select_tag :given_year,
-        options_for_select(Report.available_years, params[:given_year]),
+        options_for_select(years_dropdown, params[:given_year]),
         class: 'form-control'
       %>
     </div>
