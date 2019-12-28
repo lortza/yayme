@@ -5,6 +5,8 @@
 
 <h1><%= @accomplishment_type.name %></h1>
 
+<%= render partial: 'shared/filter_form', locals: { destination_url: @accomplishment_type } %>
+
 <% @accomplishments.by_date.each do |accomplishment| %>
   <%= render partial: 'accomplishments/accomplishment', locals: { accomplishment: accomplishment } %>
 <% end %>
