@@ -16,4 +16,19 @@ RSpec.describe AccomplishmentsHelper, type: :helper do
       expect(helper.years_dropdown.last).to eq(last_item)
     end
   end
+
+  describe 'display_categories' do
+    let!(:category1) { create(:category, name: 'lorem') }
+    let!(:category2) { create(:category, name: 'ipsum') }
+    let!(:accomplishment) { create(:accomplishment) }
+
+    it 'displays a list of categories for the accomplishment' do
+      accomplishment.categories << [category1, category2]
+      expect(helper.display_categories(accomplishment)).to eq('lorem, ipsum')
+    end
+
+    it 'returns an empty string if no categories are available' do
+      expect(helper.display_categories(accomplishment)).to eq('')
+    end
+  end
 end
