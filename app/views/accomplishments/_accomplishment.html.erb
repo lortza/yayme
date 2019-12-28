@@ -14,6 +14,8 @@
       <%= accomplishment.description %>
       <small class="text-muted"><%= link_to 'related info', accomplishment.url, target: '_blank' if accomplishment.url.present? %></small>
       <small class="text-muted"><%= link_to 'edit', edit_accomplishment_path(accomplishment), class: 'float-right ml-2' %></small>
+      <br>
+      <small class="text-muted"><%= display_categories(accomplishment) %></small>
     </p>
   </div>
 </div>
