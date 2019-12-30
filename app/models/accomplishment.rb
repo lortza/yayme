@@ -10,7 +10,7 @@ class Accomplishment < ApplicationRecord
             :accomplishment_type,
             presence: true
 
-  before_save :format_dropbox_url
+  before_save :format_image_url
 
   delegate :name, to: :accomplishment_type, prefix: true
 
@@ -66,8 +66,8 @@ class Accomplishment < ApplicationRecord
     end
   end
 
-  def format_dropbox_url
-    self.image_url = self.image_url.gsub('?dl=0', '').gsub('www.dropbox.com', 'dl.dropboxusercontent.com')
+  def format_image_url
+    self.image_url = image_url.present? ? DropboxApi.format_url(self.image_url) : ''
   end
 
   private

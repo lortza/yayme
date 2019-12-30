@@ -112,4 +112,23 @@ RSpec.describe Accomplishment, type: :model do
       expect(accomplishment.word_cloud).to eq(expected_output)
     end
   end
+
+  describe 'self.format_image_url' do
+    # NOTE: method runs before_save
+
+    it 'safely handles nils' do
+      accomplishment = build(:accomplishment, image_url: nil)
+      accomplishment.save
+
+      expect(accomplishment.image_url).to eq('')
+    end
+
+    it 'formats the url' do
+      accomplishment = build(:accomplishment, image_url: 'some_url')
+      allow(DropboxApi).to receive(:format_url).and_return('fixed_url')
+      accomplishment.save
+
+      expect(accomplishment.image_url).to eq('fixed_url')
+    end
+  end
 end
