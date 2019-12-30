@@ -63,11 +63,12 @@ class AccomplishmentsController < ApplicationController
   def accomplishment_params
     params.require(:accomplishment)
           .permit(:accomplishment_type_id,
+                  :bookmarked,
                   :date,
                   :description,
                   :given_by,
+                  :image_url,
                   :url,
-                  :bookmarked,
                   category_ids: [])
   end
 end

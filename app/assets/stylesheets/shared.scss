@@ -1,14 +1,14 @@
 @import 'variables';
 
-.right {
-  float: right;
-}
+.right { float: right; }
 
 .footer--delete {
   border-top: 1px solid $gray;
   margin-top: 2rem;
   padding-top: 1rem;
 }
+
+.image { width: 100%; }
 
 // Links
 a { color: $link-color; }

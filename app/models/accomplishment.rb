@@ -10,6 +10,8 @@ class Accomplishment < ApplicationRecord
             :accomplishment_type,
             presence: true
 
+  before_save :format_dropbox_url
+
   delegate :name, to: :accomplishment_type, prefix: true
 
   scope :by_date, -> { order(date: :desc) }
@@ -62,6 +64,10 @@ class Accomplishment < ApplicationRecord
       word = stripped_word(raw_word).downcase
       hash[word].nil? ? hash[word] = 1 : hash[word] += 1
     end
+  end
+
+  def format_dropbox_url
+    self.image_url = self.image_url.gsub('?dl=0', '').gsub('www.dropbox.com', 'dl.dropboxusercontent.com')
   end
 
   private
