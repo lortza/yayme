@@ -8,7 +8,7 @@
   </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
     <% current_user.accomplishment_types.each do |type| %>
-      <%= link_to type.name, accomplishment_type_path(type), class: 'dropdown-item' %>
+      <%= link_to type.name, accomplishment_type_path(type), class: 'dropdown-item' if type.persisted? %>
     <% end %>
   </div>
 </li>
