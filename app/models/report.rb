@@ -6,8 +6,8 @@ class Report < ApplicationRecord
   end
 
   def self.generate_word_cloud(accomplishments:, minimum_count:)
-    words = accomplishments.each_with_object({}) do |accomplishment, words_hash |
-      words_hash.merge!(accomplishment.word_cloud) do |k, hash_value, incoming_value|
+    words = accomplishments.each_with_object({}) do |accomplishment, words_hash|
+      words_hash.merge!(accomplishment.word_cloud) do |_k, hash_value, incoming_value|
         hash_value + incoming_value
       end
     end
@@ -18,16 +18,15 @@ class Report < ApplicationRecord
   private
 
   def self.filter_minimum_count(words_hash, minimum)
-    words_hash.select {|word, count| count >= minimum }
+    words_hash.select { |_word, count| count >= minimum }
   end
 
   def self.sort_descending_count(words_hash)
-    words_hash.sort_by {|word, count| -count}
+    words_hash.sort_by { |_word, count| -count }
   end
 
   def self.filter_out_common(words_hash)
     common_words = %w[a am an at as and be been for from had have i in is it of on that the this to was]
-    words_hash.select {|word, count| common_words.exclude?(word) }
+    words_hash.select { |word, _count| common_words.exclude?(word) }
   end
-
 end

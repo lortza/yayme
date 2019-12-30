@@ -22,7 +22,6 @@ gem 'will_paginate', '~> 3.2.0' # pagination. Styles: http://mislav.github.io/wi
 # gem 'mini_magick', '~> 4.8'  # Use ActiveStorage variant
 # gem 'capistrano-rails', group: :development # Use Capistrano for deployment
 
-
 group :development, :test do
   %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
     gem lib, git: "https://github.com/rspec/#{lib}.git", branch: 'master'
@@ -32,15 +31,15 @@ group :development, :test do
   gem 'bullet'                  # detects n+1 queries
   gem 'byebug', platforms: %i[mri mingw x64_mingw] # Call 'byebug' anywhere in the code to get a debugger console
   gem 'pry-rails'
-  gem 'reek'                    # https://github.com/troessner/reek/blob/master/docs/Code-Smells.md
+  gem 'reek' # https://github.com/troessner/reek/blob/master/docs/Code-Smells.md
 end
 
 group :development do
   gem 'awesome_print'
   gem 'listen', '>= 3.0.5', '< 3.3'
   gem 'magic_frozen_string_literal'
-  gem 'rails-erd'#, require: false   # generates table diagram run `bundle exec erd`
-  gem 'rubycritic', require: false  # provides stats on code build
+  gem 'rails-erd' # , require: false   # generates table diagram run `bundle exec erd`
+  gem 'rubycritic', require: false # provides stats on code build
   # Spring speeds up development by keeping your application running
   # in the background. Read more: https://github.com/rails/spring
   gem 'rubocop-performance'
