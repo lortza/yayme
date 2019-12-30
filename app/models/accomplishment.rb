@@ -10,6 +10,8 @@ class Accomplishment < ApplicationRecord
             :accomplishment_type,
             presence: true
 
+  before_save :format_image_url
+
   delegate :name, to: :accomplishment_type, prefix: true
 
   scope :by_date, -> { order(date: :desc) }
@@ -62,6 +64,10 @@ class Accomplishment < ApplicationRecord
       word = stripped_word(raw_word).downcase
       hash[word].nil? ? hash[word] = 1 : hash[word] += 1
     end
+  end
+
+  def format_image_url
+    self.image_url = image_url.present? ? DropboxApi.format_url(self.image_url) : ''
   end
 
   private

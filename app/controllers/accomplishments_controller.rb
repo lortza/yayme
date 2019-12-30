@@ -23,26 +23,22 @@ class AccomplishmentsController < ApplicationController
   def create
     @accomplishment = current_user.accomplishments.new(accomplishment_params)
 
-    respond_to do |format|
-      if @accomplishment.save
-        format.html { redirect_to accomplishments_url, notice: "#{@accomplishment.date} #{@accomplishment.accomplishment_type_name} was successfully created." }
-        format.json { render :show, status: :created, location: accomplishments_url }
-      else
-        format.html { render :new }
-        format.json { render json: @accomplishment.errors, status: :unprocessable_entity }
-      end
+    if @accomplishment.save
+      redirect_to accomplishments_url
+      # redirect_back(fallback_location: accomplishments_url,
+      #               notice: "#{@accomplishment.date} #{@accomplishment.accomplishment_type_name} was successfully created.")
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @accomplishment.update(accomplishment_params)
-        format.html { redirect_to accomplishments_url, notice: "#{@accomplishment.date} #{@accomplishment.accomplishment_type_name} was successfully updated." }
-        format.json { render :index, status: :ok, location: accomplishments_url }
-      else
-        format.html { render :edit }
-        format.json { render json: @accomplishment.errors, status: :unprocessable_entity }
-      end
+    if @accomplishment.update(accomplishment_params)
+      redirect_to accomplishments_url, notice: "#{@accomplishment.date} #{@accomplishment.accomplishment_type_name} was successfully updated."
+      # redirect_back(fallback_location: accomplishments_url,
+      #               notice: "#{@accomplishment.date} #{@accomplishment.accomplishment_type_name} was successfully updated.")
+    else
+      render :edit
     end
   end
 
@@ -63,11 +59,12 @@ class AccomplishmentsController < ApplicationController
   def accomplishment_params
     params.require(:accomplishment)
           .permit(:accomplishment_type_id,
+                  :bookmarked,
                   :date,
                   :description,
                   :given_by,
+                  :image_url,
                   :url,
-                  :bookmarked,
                   category_ids: [])
   end
 end
