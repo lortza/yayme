@@ -3,8 +3,12 @@
 
 <h1>Raise Prep</h1>
 
-<% @accomplishments.each do |accomplishment| %>
-  <%= render partial: 'accomplishments/accomplishment', locals: { accomplishment: accomplishment } %>
+<% Category.all.each do |category| %>
+  <h3><%= category.name %></h3>
+
+  <% category.accomplishments.in_last_calendar_year.for_merit_and_praise.each do |accomplishment| %>
+    <%= render partial: 'accomplishments/accomplishment', locals: { accomplishment: accomplishment } %>
+  <% end %>
 <% end %>
 
-<%= will_paginate @accomplishments, :page_links => false %>
+<%#= will_paginate @accomplishments, :page_links => false %>

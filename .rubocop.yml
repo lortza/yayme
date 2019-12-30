@@ -2,7 +2,7 @@ require:
   - rubocop-rails
   - rubocop-performance
 
-Documentation:
+Style/Documentation:
   Enabled: false
 Rails:
   Enabled: true

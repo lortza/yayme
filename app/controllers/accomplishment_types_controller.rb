@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AccomplishmentTypesController < ApplicationController
-  before_action :set_accomplishment_type, only: [:show, :edit, :update, :destroy]
+  before_action :set_accomplishment_type, only: %i[show edit update destroy]
 
   def index
     @accomplishment_types = current_user.accomplishment_types.all
@@ -12,9 +12,9 @@ class AccomplishmentTypesController < ApplicationController
     given_year = params[:given_year]
 
     @accomplishments = @accomplishment_type.accomplishments
-                                   .search(given_year: given_year, search_terms: search_terms)
-                                   .by_date
-                                   .paginate(page: params[:page], per_page: 50)                                   
+                                           .search(given_year: given_year, search_terms: search_terms)
+                                           .by_date
+                                           .paginate(page: params[:page], per_page: 50)
   end
 
   def new

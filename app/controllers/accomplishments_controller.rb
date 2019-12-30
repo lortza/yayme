@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AccomplishmentsController < ApplicationController
-  before_action :set_accomplishment, only: [:edit, :update, :destroy]
+  before_action :set_accomplishment, only: %i[edit update destroy]
 
   def index
     search_terms = params[:search]
