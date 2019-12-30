@@ -10,8 +10,6 @@
     <% current_user.accomplishment_types.each do |type| %>
       <%= link_to type.name, accomplishment_type_path(type), class: 'dropdown-item' %>
     <% end %>
-    <div class='dropdown-divider'></div>
-    <%= link_to 'Raise Prep', raise_prep_index_path, class: 'dropdown-item' %>
   </div>
 </li>
 
@@ -22,6 +20,8 @@
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
     <%= link_to 'Word Cloud', word_cloud_path, class: 'dropdown-item' %>
     <%= link_to "New Year's Eve", new_years_eve_path, class: 'dropdown-item' %>
+    <div class='dropdown-divider'></div>
+    <%= link_to 'Raise Prep', raise_prep_index_path, class: 'dropdown-item' %>
   </div>
 </li>
 
