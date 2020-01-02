@@ -10,8 +10,7 @@ class ReportsController < ApplicationController
   end
 
   def new_years_eve
-    given_year = '2019'
-    # given_year = Time.zone.now.year
+    given_year = Time.zone.now.year
     @celebrations = current_user.accomplishments.search(given_year: given_year, search_terms: '')
                                 .in_chronological_order
                                 .paginate(page: params[:page], per_page: 1)

@@ -31,5 +31,10 @@ module Yayme
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Run this in rails c to get the list of time zones:
+    # ActiveSupport::TimeZone.all.map(&:name)
+    config.time_zone = 'Central Time (US & Canada)'
+    config.active_record.default_timezone = :local # Or :utc
   end
 end
