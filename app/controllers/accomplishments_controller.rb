@@ -14,7 +14,7 @@ class AccomplishmentsController < ApplicationController
   end
 
   def new
-    @accomplishment = current_user.accomplishments.new
+    @accomplishment = current_user.accomplishments.new(date: Time.zone.today)
   end
 
   def edit
