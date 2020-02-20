@@ -79,3 +79,8 @@ code {
   padding: 2px 5px;
   border-radius: 5px;
 }
+
+pre {
+  padding: 10px 15px;
+  background-color: lighten($light-gray, 2%);
+}
