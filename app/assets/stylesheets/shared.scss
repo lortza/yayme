@@ -71,3 +71,11 @@ a { color: $link-color; }
   font-size: .4em;
   padding: 1px 4px;
 }
+
+// markdown
+code {
+  color: $inline-code;
+  background-color: lighten($inline-code, 35%);
+  padding: 2px 5px;
+  border-radius: 5px;
+}

@@ -11,7 +11,7 @@
     <% if accomplishment.given_by.present? %>
       <h5 class="card-title"><%= accomplishment.given_by %> said:</h5>
     <% end %>
-    <%= simple_format(accomplishment.description, { class: 'card-text' }, wrapper_tag: 'p') %>
+    <%= markdown(accomplishment.description) %>
     <small class="text-muted">
       <%= display_categories(accomplishment) %>
       <%= link_to 'edit', edit_accomplishment_path(accomplishment), class: 'float-right ml-2' %>
