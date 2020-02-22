@@ -40,7 +40,7 @@ module ApplicationHelper
 
   class CodeRayify < Redcarpet::Render::HTML
     def block_code(code, language)
-     CodeRay.scan(code, language).div
+     CodeRay.scan(code, language).div(line_numbers: :table)
     end
   end
 
@@ -52,7 +52,7 @@ module ApplicationHelper
       with_toc_data: true,
       prettify: true
     }
-    
+
     redcarpet_options = {
       autolink: true,
       disable_indented_code_blocks: false,
