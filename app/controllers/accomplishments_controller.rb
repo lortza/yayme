@@ -8,6 +8,7 @@ class AccomplishmentsController < ApplicationController
     given_year = params[:given_year]
 
     @accomplishments = current_user.accomplishments
+                                   .includes(:categories)
                                    .search(given_year: given_year, search_terms: search_terms)
                                    .by_date
                                    .paginate(page: params[:page], per_page: 50)
