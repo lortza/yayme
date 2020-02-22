@@ -51,6 +51,12 @@ class Accomplishment < ApplicationRecord
       .where('accomplishment_types.name ILIKE ? OR accomplishment_types.name ILIKE ?', '%merit%', '%praise%')
   end
 
+  def self.for_gratitude_and_praise
+    includes(:accomplishment_type)
+      .joins(:accomplishment_type)
+      .where('accomplishment_types.name ILIKE ? OR accomplishment_types.name ILIKE ?', '%gratitude%', '%praise%')
+  end
+
   def self.bookmarked
     where(bookmarked: true)
   end
