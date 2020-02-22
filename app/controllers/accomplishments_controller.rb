@@ -34,7 +34,7 @@ class AccomplishmentsController < ApplicationController
 
   def update
     if @accomplishment.update(accomplishment_params)
-      redirect_to accomplishments_url, notice: "#{@accomplishment.date} #{@accomplishment.accomplishment_type_name} was successfully updated."
+      redirect_to accomplishments_url
       # redirect_back(fallback_location: accomplishments_url,
       #               notice: "#{@accomplishment.date} #{@accomplishment.accomplishment_type_name} was successfully updated.")
     else

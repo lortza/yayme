@@ -41,7 +41,7 @@ class AccomplishmentTypesController < ApplicationController
   def update
     respond_to do |format|
       if @accomplishment_type.update(accomplishment_type_params)
-        format.html { redirect_to @accomplishment_type, notice: 'Accomplishment type was successfully updated.' }
+        format.html { redirect_to @accomplishment_type }
         format.json { render :show, status: :ok, location: @accomplishment_type }
       else
         format.html { render :edit }
