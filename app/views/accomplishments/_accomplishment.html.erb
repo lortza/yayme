@@ -1,4 +1,4 @@
-<div class="card mb-3">
+<div class="card mb-3 <%= accomplishment.accomplishment_type.name.downcase %>-card">
   <div class="card-header">
     <%= accomplishment.date %>
     <% if accomplishment.bookmarked? %>
