@@ -1,10 +1,10 @@
 @import 'variables';
 
 code {
-  color: #000;
   background-color: $inline-code;
-  padding: 2px 5px;
+  border: 1px solid darken($inline-code, 10%);
   border-radius: 2px;
+  padding: 1px 3px;
 }
 
 .CodeRay {

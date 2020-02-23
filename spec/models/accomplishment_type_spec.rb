@@ -15,6 +15,7 @@ RSpec.describe AccomplishmentType, type: :model do
       end
 
       it { should validate_presence_of(:name) }
+      it { should_not validate_presence_of(:description_template) }
 
       let!(:accomplishment_type) { create(:accomplishment_type) }
       it { should validate_uniqueness_of(:name).scoped_to(:user_id) }

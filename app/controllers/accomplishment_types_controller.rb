@@ -27,35 +27,24 @@ class AccomplishmentTypesController < ApplicationController
   def create
     @accomplishment_type = current_user.accomplishment_types.new(accomplishment_type_params)
 
-    respond_to do |format|
-      if @accomplishment_type.save
-        format.html { redirect_to @accomplishment_type, notice: 'Accomplishment type was successfully created.' }
-        format.json { render :show, status: :created, location: @accomplishment_type }
-      else
-        format.html { render :new }
-        format.json { render json: @accomplishment_type.errors, status: :unprocessable_entity }
-      end
+    if @accomplishment_type.save
+      redirect_to @accomplishment_type
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @accomplishment_type.update(accomplishment_type_params)
-        format.html { redirect_to @accomplishment_type }
-        format.json { render :show, status: :ok, location: @accomplishment_type }
-      else
-        format.html { render :edit }
-        format.json { render json: @accomplishment_type.errors, status: :unprocessable_entity }
-      end
+    if @accomplishment_type.update(accomplishment_type_params)
+      redirect_to accomplishment_types_url
+    else
+      render :edit
     end
   end
 
   def destroy
     @accomplishment_type.destroy
-    respond_to do |format|
-      format.html { redirect_to accomplishment_types_url, notice: 'Accomplishment type was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to accomplishment_types_url, notice: "Accomplishment type #{@accomplishment_type.name} was destroyed."
   end
 
   private
@@ -65,6 +54,6 @@ class AccomplishmentTypesController < ApplicationController
   end
 
   def accomplishment_type_params
-    params.require(:accomplishment_type).permit(:name)
+    params.require(:accomplishment_type).permit(:name, :description_template)
   end
 end

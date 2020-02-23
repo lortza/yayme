@@ -1,13 +1,16 @@
 <%= form_with(model: accomplishment_type, local: true) do |form| %>
   <%= render 'shared/errors', object: accomplishment_type %>
-  <div class="form-row align-items-center">
-    <div class="col">
-      <%= form.label :name, class: 'sr-only' %>
+    <div class="field">
+      <%= form.label :name %>
       <%= form.text_field :name, class: 'form-control mb-2' %>
     </div>
 
-    <div class="col">
+    <div class="field">
+      <%= form.label :description_template %>
+      <%= form.text_area :description_template, rows: 10, class: 'form-control mb-2' %>
+    </div>
+
+    <div class="field">
       <%= form.submit class: 'btn btn-primary mb-2' %>
     </div>
-  </div>
 <% end %>

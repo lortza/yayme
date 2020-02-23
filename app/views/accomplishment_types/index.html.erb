@@ -8,6 +8,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th style='text-align: center;'>Has Template?</th>
       <th colspan="2">Manage</th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
     <% @accomplishment_types.each do |accomplishment_type| %>
       <tr>
         <td><%= link_to accomplishment_type.name, accomplishment_type %></td>
+        <td style='text-align: center;'><%= template?(accomplishment_type) %></td>
         <td><%= link_to 'Edit', edit_accomplishment_type_path(accomplishment_type) %></td>
         <td><%= link_to 'Delete', accomplishment_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
