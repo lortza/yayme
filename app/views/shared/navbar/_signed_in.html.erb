@@ -15,6 +15,17 @@
 
 <li class="nav-item dropdown">
   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    By Year
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <% Report.available_years.each do |year| %>
+      <%= link_to year, accomplishments_path(given_year: year), class: 'dropdown-item' %>
+    <% end %>
+  </div>
+</li>
+
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Fancy Views
   </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -32,4 +43,5 @@
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
     <%= link_to 'Accomplishment Types', accomplishment_types_path, class: 'dropdown-item' %>
     <%= link_to 'Categories', categories_path, class: 'dropdown-item' %>
+  </div>
 </li>
