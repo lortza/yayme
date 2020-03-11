@@ -10,41 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_22_224228) do
+ActiveRecord::Schema.define(version: 2020_03_11_121715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "accomplishment_categories", force: :cascade do |t|
-    t.bigint "accomplishment_id", null: false
-    t.bigint "category_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["accomplishment_id"], name: "index_accomplishment_categories_on_accomplishment_id"
-    t.index ["category_id"], name: "index_accomplishment_categories_on_category_id"
-  end
-
-  create_table "accomplishment_types", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.text "description_template"
-    t.index ["user_id"], name: "index_accomplishment_types_on_user_id"
-  end
-
-  create_table "accomplishments", force: :cascade do |t|
-    t.date "date", null: false
-    t.text "description"
-    t.text "given_by"
-    t.bigint "accomplishment_type_id", null: false
-    t.string "url"
-    t.boolean "bookmarked", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "image_url"
-    t.index ["accomplishment_type_id"], name: "index_accomplishments_on_accomplishment_type_id"
-  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -52,6 +21,37 @@ ActiveRecord::Schema.define(version: 2020_02_22_224228) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "post_categories", force: :cascade do |t|
+    t.bigint "post_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_post_categories_on_category_id"
+    t.index ["post_id"], name: "index_post_categories_on_post_id"
+  end
+
+  create_table "post_types", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "description_template"
+    t.index ["user_id"], name: "index_post_types_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.date "date", null: false
+    t.text "description"
+    t.text "given_by"
+    t.bigint "post_type_id", null: false
+    t.string "url"
+    t.boolean "bookmarked", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "image_url"
+    t.index ["post_type_id"], name: "index_posts_on_post_type_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -68,9 +68,9 @@ ActiveRecord::Schema.define(version: 2020_02_22_224228) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "accomplishment_categories", "accomplishments"
-  add_foreign_key "accomplishment_categories", "categories"
-  add_foreign_key "accomplishment_types", "users"
-  add_foreign_key "accomplishments", "accomplishment_types"
   add_foreign_key "categories", "users"
+  add_foreign_key "post_categories", "categories"
+  add_foreign_key "post_categories", "posts"
+  add_foreign_key "post_types", "users"
+  add_foreign_key "posts", "post_types"
 end
