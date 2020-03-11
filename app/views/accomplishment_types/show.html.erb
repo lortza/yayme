@@ -1,14 +1,14 @@
 <% content_for(:title, @accomplishment_type.name) %>
 
-<%= link_to 'Back', accomplishment_types_path, class: button_class('secondary float-right ml-2') %>
-<%= link_to 'New Entry', new_accomplishment_path, class: button_class('primary float-right ml-2') %>
+<%= link_to 'Back', post_types_path, class: button_class('secondary float-right ml-2') %>
+<%= link_to 'New Entry', new_post_path, class: button_class('primary float-right ml-2') %>
 
 <h1><%= @accomplishment_type.name %></h1>
 
 <%= render partial: 'shared/filter_form', locals: { destination_url: @accomplishment_type } %>
 
-<% @accomplishments.by_date.each do |accomplishment| %>
-  <%= render partial: 'accomplishments/accomplishment', locals: { accomplishment: accomplishment } %>
+<% @posts.by_date.each do |post| %>
+  <%= render partial: 'posts/post', locals: { post: post } %>
 <% end %>
 
-<%= will_paginate @accomplishments, :page_links => false %>
+<%= will_paginate @posts, :page_links => false %>

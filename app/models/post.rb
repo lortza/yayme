@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class Accomplishment < ApplicationRecord
-  belongs_to :accomplishment_type
-  has_many :accomplishment_categories
-  has_many :categories, through: :accomplishment_categories
+class Post < ApplicationRecord
+  belongs_to :post_type
+  has_many :post_categories
+  has_many :categories, through: :post_categories
 
   validates :date,
             :description,

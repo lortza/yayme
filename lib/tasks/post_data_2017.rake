@@ -159,7 +159,7 @@ namespace :accomplishments do
 
 
     ])
-    puts "Gratitude Accomplishments count: #{gratitude.accomplishments.count} "
+    puts "Gratitude Posts count: #{gratitude.posts.count} "
     puts 'Done'
   end
 

@@ -1,7 +1,7 @@
 @import 'variables';
 
 
-@mixin accomplishment-type-card($type-color) {
+@mixin post-type-card($type-color) {
   border: 1px solid $type-color;
 
   .card-header {
@@ -11,21 +11,21 @@
 }
 
 .gratitude-card {
-  @include accomplishment-type-card($gratitude);
+  @include post-type-card($gratitude);
 }
 
 .til-card {
-  @include accomplishment-type-card($til);
+  @include post-type-card($til);
 }
 
 .praise-card {
-  @include accomplishment-type-card($praise);
+  @include post-type-card($praise);
 }
 
 .merit-card,
 .pdp-card,
 .hype-card {
-  @include accomplishment-type-card($merit);
+  @include post-type-card($merit);
 }
 
 .card {

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe AccomplishmentsHelper, type: :helper do
+RSpec.describe PostsHelper, type: :helper do
   let(:last_item) { 'All Time' }
 
   describe 'years_dropdown' do
@@ -20,15 +20,15 @@ RSpec.describe AccomplishmentsHelper, type: :helper do
   describe 'display_categories' do
     let!(:category1) { create(:category, name: 'lorem') }
     let!(:category2) { create(:category, name: 'ipsum') }
-    let!(:accomplishment) { create(:accomplishment) }
+    let!(:post) { create(:post) }
 
-    it 'displays a list of categories for the accomplishment' do
-      accomplishment.categories << [category1, category2]
-      expect(helper.display_categories(accomplishment)).to eq('lorem, ipsum')
+    it 'displays a list of categories for the post' do
+      post.categories << [category1, category2]
+      expect(helper.display_categories(post)).to eq('lorem, ipsum')
     end
 
     it 'returns an empty string if no categories are available' do
-      expect(helper.display_categories(accomplishment)).to eq('')
+      expect(helper.display_categories(post)).to eq('')
     end
   end
 end

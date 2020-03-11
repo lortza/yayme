@@ -1,12 +1,12 @@
 function populateTemplate() {
   document.addEventListener('DOMContentLoaded', function () {
-    const entryTypeDropdown = document.getElementById('accomplishment_accomplishment_type_id');
-    const initialAccomplishmentTypeId = entryTypeDropdown.options[entryTypeDropdown.selectedIndex].value;
+    const entryTypeDropdown = document.getElementById('post_post_type_id');
+    const initialPostTypeId = entryTypeDropdown.options[entryTypeDropdown.selectedIndex].value;
 
     const baseUrl = window.location.origin
     const apiUrl = `${baseUrl}/accomplishment_types/${initialAccomplishmentTypeId}.json`
 
-    const description = document.getElementById('accomplishment_description');
+    const description = document.getElementById('post_description');
 
 
     function populateDOM(data) {

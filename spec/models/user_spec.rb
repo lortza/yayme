@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
   let(:user) { build(:user) }
 
   context 'associations' do
-    it { should have_many(:accomplishment_types) }
-    it { should have_many(:accomplishments).through(:accomplishment_types) }
+    it { should have_many(:post_types) }
+    it { should have_many(:posts).through(:post_types) }
   end
 end

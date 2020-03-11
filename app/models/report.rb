@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class Report < ApplicationRecord
-  def self.available_years(model = Accomplishment, date_field = :date)
+  def self.available_years(model = Post, date_field = :date)
     model.all.pluck(date_field).map(&:year).uniq.sort.reverse
   end
 
-  def self.generate_word_cloud(accomplishments:, minimum_count:)
-    words = accomplishments.each_with_object({}) do |accomplishment, words_hash|
-      words_hash.merge!(accomplishment.word_cloud) do |_k, hash_value, incoming_value|
+  def self.generate_word_cloud(posts:, minimum_count:)
+    words = posts.each_with_object({}) do |post, words_hash|
+      words_hash.merge!(post.word_cloud) do |_k, hash_value, incoming_value|
         hash_value + incoming_value
       end
     end

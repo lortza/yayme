@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe AccomplishmentType, type: :model do
   context 'associations' do
     it { should belong_to(:user) }
-    it { should have_many(:accomplishments) }
+    it { should have_many(:posts) }
   end
 
   describe 'a valid accomplishment_type' do
