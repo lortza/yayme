@@ -38,9 +38,9 @@ RSpec.describe Report, type: :model do
     end
 
     it 'can work for any model and date field' do
-      create(:accomplishment_type, created_at: '2018-01-16')
+      create(:post_type, created_at: '2018-01-16')
 
-      expect(Report.available_years(AccomplishmentType, :created_at)).to eq([2018])
+      expect(Report.available_years(PostType, :created_at)).to eq([2018])
     end
   end
 end

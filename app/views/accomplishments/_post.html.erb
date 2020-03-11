@@ -1,6 +1,6 @@
-<div class="card mb-3 <%= accomplishment.accomplishment_type.name.downcase %>-card">
+<div class="card mb-3 <%= accomplishment.post_type.name.downcase %>-card">
   <div class="card-header">
-    <%= accomplishment.accomplishment_type_name %> <%= accomplishment.date %>
+    <%= accomplishment.post_type_name %> <%= accomplishment.date %>
     <% if accomplishment.bookmarked? %>
       <i class="fas fa-bookmark float-right ml-2"></i>
     <% end %>

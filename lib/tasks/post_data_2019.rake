@@ -7,10 +7,10 @@ namespace :accomplishments do
   desc 'populate gratitude journal'
   task gratitude_2019: :environment do
     puts 'Populating 2019 gratitude journal...'
-    # Accomplishment.destroy_all
+    # Post.destroy_all
 
     user = User.first
-    gratitude = user.accomplishment_types.find_by(name: 'Gratitude')
+    gratitude = user.post_types.find_by(name: 'Gratitude')
 
     Post.create!([
       { post_type_id: gratitude.id, date: '2019-01-05', description: "This morning, I sat in bed and knocked out a bunch of tasks I've been meaning to do. It's been really cold, but today is the first nice day in a while. I am grateful that I got to take care of a bunch of business and then later I get to go be outside in the nice weather :)" },

@@ -9,7 +9,7 @@ namespace :accomplishments do
     puts 'Populating 2018 gratitude journal...'
 
     user = User.first
-    gratitude = user.accomplishment_types.find_by(name: 'Gratitude')
+    gratitude = user.post_types.find_by(name: 'Gratitude')
 
     Post.create!([
       { post_type_id: gratitude.id, date: '2018-01-14', description: "It had been a few weeks since we'd seen Alex our kitty friend. But as soon as we approached his house one evening this week, he came running. He is my friend and I sure like him a lot." },

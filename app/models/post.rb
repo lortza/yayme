@@ -7,12 +7,12 @@ class Post < ApplicationRecord
 
   validates :date,
             :description,
-            :accomplishment_type,
+            :post_type,
             presence: true
 
   before_save :format_image_url
 
-  delegate :name, to: :accomplishment_type, prefix: true
+  delegate :name, to: :post_type, prefix: true
 
   scope :by_date, -> { order(date: :desc) }
   scope :in_chronological_order, -> { order(date: :asc) }
@@ -31,30 +31,30 @@ class Post < ApplicationRecord
 
   def self.for_words(terms)
     if terms.blank?
-      includes(:accomplishment_type).by_date
+      includes(:post_type).by_date
     else
-      includes(:accomplishment_type).where('description ILIKE ? OR given_by ILIKE ?', "%#{terms}%", "%#{terms}%").by_date
+      includes(:post_type).where('description ILIKE ? OR given_by ILIKE ?', "%#{terms}%", "%#{terms}%").by_date
     end
   end
 
   def self.for_year(given_year)
     if given_year.blank? || given_year.to_i == 0
-      includes(:accomplishment_type).by_date
+      includes(:post_type).by_date
     else
-      includes(:accomplishment_type).where('extract(year from date) = ?', given_year)
+      includes(:post_type).where('extract(year from date) = ?', given_year)
     end
   end
 
   def self.for_merit_and_praise
-    includes(:accomplishment_type)
-      .joins(:accomplishment_type)
-      .where('accomplishment_types.name ILIKE ? OR accomplishment_types.name ILIKE ?', '%merit%', '%praise%')
+    includes(:post_type)
+      .joins(:post_type)
+      .where('post_types.name ILIKE ? OR post_types.name ILIKE ?', '%merit%', '%praise%')
   end
 
   def self.for_gratitude_and_praise
-    includes(:accomplishment_type)
-      .joins(:accomplishment_type)
-      .where('accomplishment_types.name ILIKE ? OR accomplishment_types.name ILIKE ?', '%gratitude%', '%praise%')
+    includes(:post_type)
+      .joins(:post_type)
+      .where('post_types.name ILIKE ? OR post_types.name ILIKE ?', '%gratitude%', '%praise%')
   end
 
   def self.bookmarked

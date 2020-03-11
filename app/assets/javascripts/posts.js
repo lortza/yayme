@@ -4,7 +4,7 @@ function populateTemplate() {
     const initialPostTypeId = entryTypeDropdown.options[entryTypeDropdown.selectedIndex].value;
 
     const baseUrl = window.location.origin
-    const apiUrl = `${baseUrl}/accomplishment_types/${initialAccomplishmentTypeId}.json`
+    const apiUrl = `${baseUrl}/post_types/${initialPostTypeId}.json`
 
     const description = document.getElementById('post_description');
 
@@ -13,7 +13,7 @@ function populateTemplate() {
       description.value = data.description_template;
     }
 
-    function getAccomplishmentType(url) {
+    function getPostType(url) {
       fetch(url)
         .then(response => response.json())
         .then(populateDOM)
@@ -22,7 +22,7 @@ function populateTemplate() {
 
     // Populate description template on pageload
     if(!description){
-      getAccomplishmentType(apiUrl);
+      getPostType(apiUrl);
     }
 
     // Populate description template on dropdown change
@@ -31,10 +31,10 @@ function populateTemplate() {
 
       // Do not overwrite content if some has been populated.
       if(description.value.length == 0){
-        const selectedAccomplishmentTypeId = event.target.value;
-        const apiUrl = `${baseUrl}/accomplishment_types/${selectedAccomplishmentTypeId}.json`
+        const selectedPostTypeId = event.target.value;
+        const apiUrl = `${baseUrl}/post_types/${selectedPostTypeId}.json`
 
-        getAccomplishmentType(apiUrl);
+        getPostType(apiUrl);
       }
     })
   });

@@ -9,8 +9,8 @@
   <div class='row'>
     <div class='col-10'>
       <div class="field">
-        <%= form.label :accomplishment_type_id %>
-        <%= form.collection_select :accomplishment_type_id, current_user.accomplishment_types.by_name, :id, :name, {}, class: 'form-control' %>
+        <%= form.label :post_type_id %>
+        <%= form.collection_select :post_type_id, current_user.post_types.by_name, :id, :name, {}, class: 'form-control' %>
       </div>
     </div>
     <div class='col-2'>

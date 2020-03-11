@@ -7,8 +7,8 @@
     By Type
   </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <% current_user.accomplishment_types.each do |type| %>
-      <%= link_to type.name, accomplishment_type_path(type), class: "dropdown-item #{type.name.downcase}-nav-item" if type.persisted? %>
+    <% current_user.post_types.each do |type| %>
+      <%= link_to type.name, post_type_path(type), class: "dropdown-item #{type.name.downcase}-nav-item" if type.persisted? %>
     <% end %>
   </div>
 </li>
@@ -41,7 +41,7 @@
     Manage
   </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <%= link_to 'Accomplishment Types', accomplishment_types_path, class: 'dropdown-item' %>
+    <%= link_to 'Post Types', post_types_path, class: 'dropdown-item' %>
     <%= link_to 'Categories', categories_path, class: 'dropdown-item' %>
   </div>
 </li>
