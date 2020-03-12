@@ -12,9 +12,9 @@ class PostTypesController < ApplicationController
     given_year = params[:given_year]
 
     @posts = @post_type.posts
-                                           .search(given_year: given_year, search_terms: search_terms)
-                                           .by_date
-                                           .paginate(page: params[:page], per_page: 50)
+                       .search(given_year: given_year, search_terms: search_terms)
+                       .by_date
+                       .paginate(page: params[:page], per_page: 50)
   end
 
   def new
