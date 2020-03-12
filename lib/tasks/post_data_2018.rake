@@ -3,7 +3,7 @@
 # run these tasks like:
 # rake ingredients:task_name
 
-namespace :accomplishments do
+namespace :posts do
   desc 'populate gratitude journal'
   task gratitude_2018: :environment do
     puts 'Populating 2018 gratitude journal...'
