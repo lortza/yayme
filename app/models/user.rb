@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :accomplishment_types, dependent: :destroy
-  has_many :accomplishments, through: :accomplishment_types
-  has_many :categories
+  has_many :post_types, dependent: :destroy
+  has_many :posts, through: :post_types
+  has_many :categories, dependent: :destroy
 end

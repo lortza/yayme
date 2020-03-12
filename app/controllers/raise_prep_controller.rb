@@ -3,7 +3,7 @@
 class RaisePrepController < ApplicationController
   def index
     @categories = Category.all
-    # @accomplishments = current_user.accomplishments
+    # @posts = current_user.posts
     #                                .bookmarked
     #                                .in_last_calendar_year
     #                                .for_merit_and_praise

@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :category do
-    user_id { create(:user).id }
+    user_id         { create(:user).id }
     sequence(:name) { |n| "category#{n}" }
   end
 end

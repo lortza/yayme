@@ -1,32 +1,34 @@
 # frozen_string_literal: true
 
 class Report < ApplicationRecord
-  def self.available_years(model = Accomplishment, date_field = :date)
-    model.all.pluck(date_field).map(&:year).uniq.sort.reverse
-  end
-
-  def self.generate_word_cloud(accomplishments:, minimum_count:)
-    words = accomplishments.each_with_object({}) do |accomplishment, words_hash|
-      words_hash.merge!(accomplishment.word_cloud) do |_k, hash_value, incoming_value|
-        hash_value + incoming_value
-      end
+  class << self
+    def available_years(model = Post, date_field = :date)
+      model.all.pluck(date_field).map(&:year).uniq.sort.reverse
     end
-    filtered_words = filter_minimum_count(words, minimum_count)
-    filter_out_common(filtered_words)
-  end
 
-  private
+    def generate_word_cloud(posts:, minimum_count:)
+      words = posts.each_with_object({}) do |post, words_hash|
+        words_hash.merge!(post.word_cloud) do |_k, hash_value, incoming_value|
+          hash_value + incoming_value
+        end
+      end
+      filtered_words = filter_minimum_count(words, minimum_count)
+      filter_out_common(filtered_words)
+    end
 
-  def self.filter_minimum_count(words_hash, minimum)
-    words_hash.select { |_word, count| count >= minimum }
-  end
+    private
 
-  def self.sort_descending_count(words_hash)
-    words_hash.sort_by { |_word, count| -count }
-  end
+    def filter_minimum_count(words_hash, minimum)
+      words_hash.select { |_word, count| count >= minimum }
+    end
 
-  def self.filter_out_common(words_hash)
-    common_words = %w[a am an at as and be been for from had have i in is it of on that the this to was]
-    words_hash.select { |word, _count| common_words.exclude?(word) }
+    def sort_descending_count(words_hash)
+      words_hash.sort_by { |_word, count| -count }
+    end
+
+    def filter_out_common(words_hash)
+      common_words = %w[a am an at as and be been for from had have i in is it of on that the this to was]
+      words_hash.select { |word, _count| common_words.exclude?(word) }
+    end
   end
 end
