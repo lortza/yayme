@@ -10,8 +10,8 @@ class PostType < ApplicationRecord
             presence: true,
             uniqueness: { scope: :user_id }
 
-  def self.is_merit_or_praise
-    raise_types = PostType.where('name ILIKE ? OR name ILIKE ?', "%merit%", "%praise%")
+  def self.merit_or_praise
+    raise_types = PostType.where('name ILIKE ? OR name ILIKE ?', '%merit%', '%praise%')
     where('post_type IN ?', raise_types)
   end
 end

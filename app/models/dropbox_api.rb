@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DropboxApi
   DOMAIN = 'www.dropbox.com'.freeze
   READABLE_DOMAIN = 'dl.dropboxusercontent.com'.freeze

@@ -4,7 +4,7 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/5900dd05417f73a806a7/maintainability)](https://codeclimate.com/github/lortza/yayme/maintainability)
 
-WIP post tracking app.
+Accomplishment-, TIL-, merit-, and praise-tracking tracking app.
 
 Live on heroku as [yayme](http://yay-me.herokuapp.com)
 

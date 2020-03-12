@@ -2,7 +2,7 @@
 
 class Post < ApplicationRecord
   belongs_to :post_type
-  has_many :post_categories
+  has_many :post_categories, dependent: :destroy
   has_many :categories, through: :post_categories
 
   validates :date,
@@ -25,7 +25,7 @@ class Post < ApplicationRecord
     elsif given_year.blank? && search_terms.present?
       for_words(search_terms)
     else
-      for_year(Date.today.year)
+      for_year(Time.zone.today.year)
     end
   end
 
@@ -38,7 +38,7 @@ class Post < ApplicationRecord
   end
 
   def self.for_year(given_year)
-    if given_year.blank? || given_year.to_i == 0
+    if given_year.blank? || given_year.to_i.zero?
       includes(:post_type).by_date
     else
       includes(:post_type).where('extract(year from date) = ?', given_year)
@@ -62,7 +62,7 @@ class Post < ApplicationRecord
   end
 
   def self.in_last_calendar_year
-    where('date BETWEEN ? AND ?', Date.today - 365, Date.today)
+    where('date BETWEEN ? AND ?', Time.zone.today - 365, Time.zone.today)
   end
 
   def word_cloud

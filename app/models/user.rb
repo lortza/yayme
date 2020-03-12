@@ -8,5 +8,5 @@ class User < ApplicationRecord
 
   has_many :post_types, dependent: :destroy
   has_many :posts, through: :post_types
-  has_many :categories
+  has_many :categories, dependent: :destroy
 end
