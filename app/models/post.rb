@@ -18,14 +18,12 @@ class Post < ApplicationRecord
   scope :in_chronological_order, -> { order(date: :asc) }
 
   def self.search(given_year: '', search_terms: '')
-    if given_year.present? && search_terms.present?
-      for_words(search_terms).for_year(given_year)
-    elsif given_year.present? && search_terms.blank?
-      for_year(given_year)
-    elsif given_year.blank? && search_terms.present?
-      for_words(search_terms)
+    return for_year(Report.this_year) if given_year.blank? && search_terms.blank?
+
+    if Report.timeframe_labels.include?(given_year)
+      for_words(search_terms).for_timeframe(given_year)
     else
-      for_year(Time.zone.today.year)
+      for_words(search_terms).for_year(given_year)
     end
   end
 
@@ -42,6 +40,18 @@ class Post < ApplicationRecord
       includes(:post_type).by_date
     else
       includes(:post_type).where('extract(year from date) = ?', given_year)
+    end
+  end
+
+  def self.for_timeframe(given_year)
+    qty_days = Report::TIMEFRAMES[given_year]
+
+    if qty_days.blank?
+      includes(:post_type).by_date
+    else
+      includes(:post_type)
+        .where('date >= ? AND date <= ?', qty_days.days.ago, Time.zone.now)
+        .by_date
     end
   end
 

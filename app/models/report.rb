@@ -1,7 +1,24 @@
 # frozen_string_literal: true
 
 class Report < ApplicationRecord
+  TIMEFRAMES = {
+    'Past Week' => 7,
+    'Past Month' => 30,
+    'Past Quarter' => 90,
+    'Past Half Year' => 182,
+    'Past Year' => 365,
+    'All Time' => nil
+  }.freeze
+
   class << self
+    def timeframe_labels
+      TIMEFRAMES.keys
+    end
+
+    def this_year
+      Time.zone.today.year
+    end
+
     def available_years(model = Post, date_field = :date)
       model.all.pluck(date_field).map(&:year).uniq.sort.reverse
     end
