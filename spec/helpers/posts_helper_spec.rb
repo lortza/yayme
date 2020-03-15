@@ -3,17 +3,26 @@
 require 'rails_helper'
 
 RSpec.describe PostsHelper, type: :helper do
-  let(:last_item) { 'All Time' }
-
-  describe 'years_dropdown' do
+  describe 'timeframes_dropdown' do
     it 'lists all available years' do
-      allow(Report).to receive(:available_years).and_return([2019])
-      expect(helper.years_dropdown).to eq([2019, last_item])
+      allow(Report).to receive(:available_years).and_return([2018, 2019])
+
+      expect(helper.timeframes_dropdown).to include(2018)
+      expect(helper.timeframes_dropdown).to include(2019)
     end
 
-    it 'has "All Time" as the last option' do
+    it 'includes timeline options' do
       allow(Report).to receive(:available_years).and_return([2019])
-      expect(helper.years_dropdown.last).to eq(last_item)
+      allow(Report).to receive(:timeframe_labels).and_return(['Past Week'])
+
+      expect(helper.timeframes_dropdown).to include('Past Week')
+    end
+
+    it 'lists years before timeframe options' do
+      allow(Report).to receive(:available_years).and_return([2019])
+      allow(Report).to receive(:timeframe_labels).and_return(['Past Week'])
+
+      expect(helper.timeframes_dropdown).to eq([2019, 'Past Week'])
     end
   end
 
