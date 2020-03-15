@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module PostsHelper
-  def years_dropdown
-    Report.available_years.push('All Time')
+  def timeframes_dropdown
+    Report.available_years + Report.timeframe_labels
   end
 
   def display_categories(post)
