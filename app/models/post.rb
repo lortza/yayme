@@ -65,6 +65,14 @@ class Post < ApplicationRecord
     where('date BETWEEN ? AND ?', Time.zone.today - 365, Time.zone.today)
   end
 
+  def with_people
+    given_by
+  end
+
+  def with_people=(with_people)
+    self.given_by = with_people
+  end
+
   def word_cloud
     description.split(' ').each_with_object({}) do |raw_word, hash|
       word = stripped_word(raw_word).downcase

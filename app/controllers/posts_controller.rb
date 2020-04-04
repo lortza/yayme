@@ -64,6 +64,7 @@ class PostsController < ApplicationController
                   :date,
                   :description,
                   :given_by,
+                  :with_people,
                   :image_url,
                   :url,
                   category_ids: [])

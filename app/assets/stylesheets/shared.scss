@@ -66,6 +66,10 @@ a { color: $link-color; }
     height: $card-image-height;
   }
 }
+.card-title {
+  font-style: italic;
+  color: $gray;
+}
 
 .btn-xs {
   font-size: .4em;
