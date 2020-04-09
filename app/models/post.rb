@@ -13,6 +13,7 @@ class Post < ApplicationRecord
   before_save :format_image_url
 
   delegate :name, to: :post_type, prefix: true
+  alias_attribute :with_people, :given_by
 
   scope :by_date, -> { order(date: :desc) }
   scope :in_chronological_order, -> { order(date: :asc) }
@@ -63,14 +64,6 @@ class Post < ApplicationRecord
 
   def self.in_last_calendar_year
     where('date BETWEEN ? AND ?', Time.zone.today - 365, Time.zone.today)
-  end
-
-  def with_people
-    given_by
-  end
-
-  def with_people=(with_people)
-    self.given_by = with_people
   end
 
   def word_cloud
