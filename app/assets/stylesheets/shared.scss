@@ -67,6 +67,11 @@ a { color: $link-color; }
   }
 }
 
+.card-title {
+  color: $gray;
+  font-style: italic;
+}
+
 .btn-xs {
   font-size: .4em;
   padding: 1px 4px;

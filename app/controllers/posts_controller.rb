@@ -63,7 +63,7 @@ class PostsController < ApplicationController
                   :bookmarked,
                   :date,
                   :description,
-                  :given_by,
+                  :with_people,
                   :image_url,
                   :url,
                   category_ids: [])

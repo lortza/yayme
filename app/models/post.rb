@@ -13,6 +13,7 @@ class Post < ApplicationRecord
   before_save :format_image_url
 
   delegate :name, to: :post_type, prefix: true
+  alias_attribute :with_people, :given_by
 
   scope :by_date, -> { order(date: :desc) }
   scope :in_chronological_order, -> { order(date: :asc) }

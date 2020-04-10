@@ -8,8 +8,8 @@
   </div>
   <div class="card-body">
     <%= image_tag(post.image_url, class: 'image', title: post.date) if post.image_url.present? %>
-    <% if post.given_by.present? %>
-      <h5 class="card-title"><%= post.given_by %> said:</h5>
+    <% if post.with_people.present? %>
+      <p class="card-title">with <%= post.with_people %>...</p>
     <% end %>
     <%= markdown(post.description) %>
     <small class="text-muted">
