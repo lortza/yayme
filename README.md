@@ -4,13 +4,16 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/5900dd05417f73a806a7/maintainability)](https://codeclimate.com/github/lortza/yayme/maintainability)
 
-Accomplishment-, TIL-, merit-, and praise-tracking tracking app.
+Microposting app for tracking, TILs, merit, praise, and gratitude.
 
 Live on heroku as [yayme](http://yay-me.herokuapp.com)
 
 ## Features
 
-* WIP
+* create different types of posts (ex: praise, TIL)
+* renders posts in markdown
+* takes codeblocks in markdown
+* create markdown templates for types of posts
 
 ## Getting Started
 
