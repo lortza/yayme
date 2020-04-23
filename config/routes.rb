@@ -3,7 +3,13 @@
 Rails.application.routes.draw do
   root 'posts#index'
 
-  devise_for :users, skip: [:registrations] # this 'skip' prevents people from creating new acconuts
+  # Skip registrations for now so no new users can sign up.
+  # devise_for :users, skip: [:registrations]
+
+  # When we do want to allow new users to sign up, we need to override the
+  # devise registrations controller so that we can run custom UserDataSetup
+  # methods using this line:
+  devise_for :users, controllers: { registrations: 'registrations' }
 
   resources :post_types, only: [:index, :new, :show, :create, :edit, :update, :destroy]
   resources :posts, only: [:index, :new, :create, :edit, :update, :destroy]
