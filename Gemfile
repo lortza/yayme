@@ -32,6 +32,7 @@ group :development, :test do
   gem 'binding_of_caller'       # goes with better_errors
   gem 'bullet'                  # detects n+1 queries
   gem 'byebug', platforms: %i[mri mingw x64_mingw] # Call 'byebug' anywhere in the code to get a debugger console
+  gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
   gem 'pry-rails'
   gem 'reek' # https://github.com/troessner/reek/blob/master/docs/Code-Smells.md
 end
