@@ -140,9 +140,9 @@ RSpec.describe Post, type: :model do
       expect(Post.for_words(search_term)).to_not include(post2)
     end
 
-    it 'returns only relevant records if a search term is present in the given_by field' do
-      post1 = create(:post, given_by: 'Starsky')
-      post2 = create(:post, given_by: 'Hutch')
+    it 'returns only relevant records if a search term is present in the with_people field' do
+      post1 = create(:post, with_people: 'Starsky')
+      post2 = create(:post, with_people: 'Hutch')
       search_term = 'Starsky'
 
       expect(Post.for_words(search_term)).to include(post1)
