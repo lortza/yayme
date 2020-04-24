@@ -21,6 +21,7 @@ Live on heroku as [yayme](http://yay-me.herokuapp.com)
 * `bundle`
 * Set up DB: `rake db:setup` (Runs `db:create`, `db:schema:load` and `db:seed`)
 * User: In development, see the seeds file for the user credentials so you can log in
+* `routes.rb`: comment out line 7, uncomment line 10 to allow users to sign up at http://localhost:3000/users/sign_up
 
 ## Rubocop
 Rubocop is used for enforcing style guide
