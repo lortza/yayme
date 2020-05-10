@@ -25,9 +25,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
 
     if @post.save
-      redirect_to posts_url
-      # redirect_back(fallback_location: posts_url,
-      #               notice: "#{@post.date} #{@post.post_type_name} was successfully created.")
+      redirect_to post_type_url(id: @post.post_type.id)
     else
       render :new
     end
@@ -35,18 +33,16 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to posts_url
-      # redirect_back(fallback_location: posts_url,
-      #               notice: "#{@post.date} #{@post.post_type_name} was successfully updated.")
+      redirect_to post_type_url(id: @post.post_type.id)
     else
       render :edit
     end
   end
 
   def destroy
-    @post.destroy
+    @post.destroy    
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: "#{@post.date} #{@post.post_type_name} was successfully deleted." }
+      format.html { redirect_to post_type_url(id: @post.post_type.id), notice: "#{@post.date} #{@post.post_type_name} was successfully deleted." }
       format.json { head :no_content }
     end
   end
