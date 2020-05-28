@@ -40,7 +40,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy    
+    @post.destroy
     respond_to do |format|
       format.html { redirect_to post_type_url(id: @post.post_type.id), notice: "#{@post.date} #{@post.post_type_name} was successfully deleted." }
       format.json { head :no_content }
@@ -60,6 +60,7 @@ class PostsController < ApplicationController
                   :date,
                   :description,
                   :with_people,
+                  :image,
                   :image_url,
                   :url,
                   category_ids: [])

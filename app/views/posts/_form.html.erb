@@ -32,6 +32,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image, class: 'form-control' %>
+  </div>
+
+  <div class="field">
     <%= form.label :with_people %>
     <%= form.text_field :with_people, class: 'form-control' %>
   </div>

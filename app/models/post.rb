@@ -4,7 +4,9 @@ class Post < ApplicationRecord
   belongs_to :post_type
   has_many :post_categories, dependent: :destroy
   has_many :categories, through: :post_categories
+  has_one_attached :image
 
+  validate :acceptable_image
   validates :date,
             :description,
             :post_type,
@@ -85,6 +87,19 @@ class Post < ApplicationRecord
 
   def format_image_url
     self.image_url = image_url.present? ? DropboxApi.format_url(self.image_url) : ''
+  end
+
+  def acceptable_image
+    return unless image.attached?
+
+    unless image.byte_size <= 1.megabyte
+      errors.add(:image, "is too big")
+    end
+
+    acceptable_types = ['image/jpeg', 'image/png']
+    unless acceptable_types.include?(image.content_type)
+      errors.add(:image, 'must be a JPEG or PNG')
+    end
   end
 
   private
