@@ -5,10 +5,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.3'
 
+gem 'activestorage-dropbox'     # service adapter for dropbox
+gem 'dropbox_api'               # dependency for the activestorage-dropbox gem
 gem 'bootsnap', '>= 1.1.0', require: false # Reduces boot times through caching; required in config/boot.rb
 gem 'coderay'                   # syntax highlighting: http://coderay.rubychan.de/
-gem 'coffee-rails'              # Use CoffeeScript for .coffee assets and views
+gem 'coffee-rails'              # Use CoffeeScripgt for .coffee assets and views
 gem 'devise'                    # User authentication
+gem 'image_processing', '~> 1.2'# Creates various sizes for ActiveStorage image files
 gem 'jbuilder', '~> 2.5'        # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'loofah', '>= 2.2.3'        # Upgrade for security update
 gem 'nokogiri', '>= 1.8.5'      # Upgrade for security update
@@ -21,7 +24,7 @@ gem 'sass-rails', '~> 6.0'      # Use SCSS for stylesheets
 gem 'uglifier', '>= 1.3.0'      # Use Uglifier as compressor for JavaScript assets
 gem 'will_paginate', '~> 3.2.0' # pagination. Styles: http://mislav.github.io/will_paginate/
 # gem 'redis', '~> 4.0'           # Use Redis adapter to run Action Cable in production
-# gem 'mini_magick', '~> 4.8'  # Use ActiveStorage variant
+gem 'mini_magick', '~> 4.8'  # Use ActiveStorage variant
 # gem 'capistrano-rails', group: :development # Use Capistrano for deployment
 
 group :development, :test do

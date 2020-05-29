@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DropboxApi
+class DropboxService
   DOMAIN = 'www.dropbox.com'
   READABLE_DOMAIN = 'dl.dropboxusercontent.com'
 

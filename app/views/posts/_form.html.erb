@@ -32,6 +32,21 @@
   </div>
 
   <div class="field">
+    <%= form.label :image %>
+    <% if post.image.attached? %>
+      <p>
+        <%= image_tag(post.image.variant(resize_to_limit: [75, 75])) %><br>
+        <%= post.image.filename %>
+      </p>
+      <div class='form-check'>
+        <%= form.check_box :remove_attached_image, class: 'form-check-input' %>
+        <%= form.label 'Check to remove attached image', class: 'form-check-label' %>
+      </div>
+    <% end %>
+    <%= form.file_field :image, class: 'mt-2 file-field' %>
+  </div>
+
+  <div class="field">
     <%= form.label :with_people %>
     <%= form.text_field :with_people, class: 'form-control' %>
   </div>

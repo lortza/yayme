@@ -8,7 +8,10 @@
   padding-top: 1rem;
 }
 
-.image { width: 100%; }
+.image {
+  max-width: 600px;
+  width: 100%;
+}
 
 .environment-banner {
   color: $white;
@@ -35,6 +38,8 @@ a { color: $link-color; }
     margin-top: 0;
   }
 }
+
+.file-field { color: $medium-gray; }
 
 
 // SEARCH BAR
