@@ -9,7 +9,7 @@
 }
 
 .image {
-  max-width: 600px; 
+  max-width: 600px;
   width: 100%;
 }
 
@@ -37,6 +37,10 @@ a { color: $link-color; }
     font-weight: normal;
     margin-top: 0;
   }
+}
+
+input[type=file] {
+  color: $medium-gray;
 }
 
 

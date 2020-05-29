@@ -7,7 +7,6 @@
     <span class="float-right ml-2"><%= link_to 'edit', edit_post_path(post), class: button_class('btn btn-sm btn-light float-right ml-2') %></span>
   </div>
   <div class="card-body">
-    <%#= image_tag(post.image.variant(resize_to_limit: [600, nil]), class: 'image', title: post.date) if post.image_url.present? %>
     <%= image_tag(post.image, class: 'image', title: post.date) if post.image.present? %>
     <%= image_tag(post.image_url, class: 'image', title: post.date) if post.image_url.present? %>
     <% if post.with_people.present? %>

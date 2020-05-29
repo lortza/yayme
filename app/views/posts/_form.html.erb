@@ -33,7 +33,13 @@
 
   <div class="field">
     <%= form.label :image %>
-    <%= form.file_field :image, class: 'form-control' %>
+    <% if post.image.attached? %>
+      <p>
+        <%= image_tag(post.image.variant(resize_to_limit: [75, 75])) %><br>
+        <%= post.image.filename %>
+      </p>
+    <% end %>
+    <%= form.file_field :image, class: 'mt-2' %>
   </div>
 
   <div class="field">
