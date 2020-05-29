@@ -199,7 +199,7 @@ RSpec.describe Post, type: :model do
 
     it 'formats the url' do
       post = build(:post, image_url: 'some_url')
-      allow(DropboxApi).to receive(:format_url).and_return('fixed_url')
+      allow(DropboxService).to receive(:format_url).and_return('fixed_url')
       post.save
 
       expect(post.image_url).to eq('fixed_url')

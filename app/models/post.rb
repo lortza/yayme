@@ -86,7 +86,7 @@ class Post < ApplicationRecord
   end
 
   def format_image_url
-    self.image_url = image_url.present? ? DropboxApi.format_url(self.image_url) : ''
+    self.image_url = image_url.present? ? DropboxService.format_url(self.image_url) : ''
   end
 
   def acceptable_image
