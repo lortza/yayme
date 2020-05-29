@@ -39,9 +39,7 @@ a { color: $link-color; }
   }
 }
 
-input[type=file] {
-  color: $medium-gray;
-}
+.file_field { color: $medium-gray; }
 
 
 // SEARCH BAR
