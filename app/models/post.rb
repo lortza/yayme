@@ -20,6 +20,9 @@ class Post < ApplicationRecord
   scope :by_date, -> { order(date: :desc) }
   scope :in_chronological_order, -> { order(date: :asc) }
 
+  attr_accessor :remove_attached_image
+  after_save :purge_attached_image, if: :remove_attached_image?
+
   def self.search(given_year: '', search_terms: '')
     return for_year(Report.this_year) if given_year.blank? && search_terms.blank?
 
@@ -103,6 +106,14 @@ class Post < ApplicationRecord
   end
 
   private
+
+  def remove_attached_image?
+    remove_attached_image == '1'
+  end
+
+  def purge_attached_image
+    image.purge_later
+  end
 
   def stripped_word(word)
     unwanted_characters = %w[: " . ( ) [ ] , … ... ? — -- & ; 0 1 2 3 4 5 6 7 8 9]
