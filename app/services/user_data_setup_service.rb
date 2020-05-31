@@ -14,35 +14,35 @@ class UserDataSetupService
 
     def create_categories(user)
       user.categories.create!([
-        { name: 'Citizenship' },
-        { name: 'Health' },
-        { name: 'Leadership' },
-        { name: 'Networking & Friendship' },
-        { name: 'Skills & Competencies' }
-      ])
+                                { name: 'Citizenship' },
+                                { name: 'Health' },
+                                { name: 'Leadership' },
+                                { name: 'Networking & Friendship' },
+                                { name: 'Skills & Competencies' },
+                              ])
     end
 
     def create_post_types(user)
       user.post_types.create!([
-        { name: 'Gratitude' },
-        { name: 'TIL' }
-      ])
+                                { name: 'Gratitude' },
+                                { name: 'TIL' },
+                              ])
 
       merit_template = <<~MERIT
-      ## Project
-      tbd
+        ## Project
+        tbd
 
-      ## Problem
-      tbd
+        ## Problem
+        tbd
 
-      ## How I solved it
-      tbd
+        ## How I solved it
+        tbd
 
-      ## Key Skills/Technologies Used
-      tbd
+        ## Key Skills/Technologies Used
+        tbd
 
-      ## Special Concerns
-      tbd
+        ## Special Concerns
+        tbd
       MERIT
 
       user.post_types.create!(
@@ -51,14 +51,14 @@ class UserDataSetupService
       )
 
       praise_template = <<~PRAISE
-      ## Given By
-      tbd
+        ## Given By
+        tbd
 
-      ## Context
-      tbd
+        ## Context
+        tbd
 
-      ## Praise Given
-      tbd
+        ## Praise Given
+        tbd
       PRAISE
 
       user.post_types.create!(
