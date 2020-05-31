@@ -12,16 +12,14 @@ class Post < ApplicationRecord
             :post_type,
             presence: true
 
-  before_save :format_image_url
+  attr_accessor :remove_attached_image
+  after_save :purge_attached_image, if: :remove_attached_image?
 
   delegate :name, to: :post_type, prefix: true
   alias_attribute :with_people, :given_by
 
   scope :by_date, -> { order(date: :desc) }
   scope :in_chronological_order, -> { order(date: :asc) }
-
-  attr_accessor :remove_attached_image
-  after_save :purge_attached_image, if: :remove_attached_image?
 
   def self.search(given_year: '', search_terms: '')
     return for_year(Report.this_year) if given_year.blank? && search_terms.blank?
@@ -88,16 +86,15 @@ class Post < ApplicationRecord
     end
   end
 
-  def format_image_url
-    self.image_url = image_url.present? ? DropboxService.format_url(image_url) : ''
-  end
-
   def acceptable_image
     return unless image.attached?
 
-    errors.add(:image, 'is too big') unless image.byte_size <= 1.megabyte
+    if image.byte_size > 1.megabyte
+      image_size = (image.byte_size / 1_000_000.0).round(2)
+      errors.add(:image, "size #{image_size} MB exceeds 1 MB limit")
+    end
 
-    acceptable_types = ['image/jpeg', 'image/png']
+    acceptable_types = ['image/jpeg', 'image/jpg', 'image/png']
     errors.add(:image, 'must be a JPEG or PNG') unless acceptable_types.include?(image.content_type)
   end
 

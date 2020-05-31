@@ -8,7 +8,6 @@
   </div>
   <div class="card-body">
     <%= image_tag(post.image, class: 'image', title: post.date) if post.image.present? %>
-    <%= image_tag(post.image_url, class: 'image', title: post.date) if post.image_url.present? %>
     <% if post.with_people.present? %>
       <p class="card-title">with <%= post.with_people %>...</p>
     <% end %>

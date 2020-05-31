@@ -60,7 +60,6 @@ class PostsController < ApplicationController
                   :description,
                   :with_people,
                   :image,
-                  :image_url,
                   :remove_attached_image,
                   :url,
                   category_ids: [])
