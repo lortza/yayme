@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'coderay'
 
 module ApplicationHelper
@@ -64,7 +65,7 @@ module ApplicationHelper
       no_intra_emphasis: true,
       strikethrough: true,
       superscript: true,
-      tables: true,
+      tables: true
     }
 
     coderayified = CodeRayify.new(coderay_options)

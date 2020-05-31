@@ -89,20 +89,16 @@ class Post < ApplicationRecord
   end
 
   def format_image_url
-    self.image_url = image_url.present? ? DropboxService.format_url(self.image_url) : ''
+    self.image_url = image_url.present? ? DropboxService.format_url(image_url) : ''
   end
 
   def acceptable_image
     return unless image.attached?
 
-    unless image.byte_size <= 1.megabyte
-      errors.add(:image, "is too big")
-    end
+    errors.add(:image, 'is too big') unless image.byte_size <= 1.megabyte
 
     acceptable_types = ['image/jpeg', 'image/png']
-    unless acceptable_types.include?(image.content_type)
-      errors.add(:image, 'must be a JPEG or PNG')
-    end
+    errors.add(:image, 'must be a JPEG or PNG') unless acceptable_types.include?(image.content_type)
   end
 
   private

@@ -19,8 +19,6 @@ RSpec.describe UserDataSetupService, type: :service do
       end
 
       it 'includes name and template' do
-        post_type_count_before = user.post_types.count
-
         UserDataSetupService.setup(user)
         user.reload
         merit = PostType.find_by(name: 'Merit')

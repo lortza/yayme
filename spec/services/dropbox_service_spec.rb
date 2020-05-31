@@ -3,13 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe DropboxService, type: :model do
-  describe 'self.format_dropbox_url' do
+  describe 'self.format_url' do
     let(:raw_url) { 'https://www.dropbox.com/s/sample/sample.png?dl=0' }
-    let(:processed_url) { 'https://www.dropbox.com/s/sample/sample.png?dl=0' }
+    let(:processed_url) { 'https://dl.dropboxusercontent.com/s/sample/sample.png' }
 
     it 'removes unnecessary cruft from end of url' do
       output = DropboxService.format_url(raw_url)
-      expect(output).to_not include('?dl=0')
+      expect(output).to_not include(DropboxService::UNNECESSARY_PARAMS)
     end
 
     it 'switches out dropbox domain for usable one' do
@@ -17,6 +17,7 @@ RSpec.describe DropboxService, type: :model do
 
       expect(output).to_not include(DropboxService::DOMAIN)
       expect(output).to include(DropboxService::READABLE_DOMAIN)
+      expect(output).to eq(processed_url)
     end
 
     it 'leaves non-dropbox urls as-is' do
