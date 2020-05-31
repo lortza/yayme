@@ -36,7 +36,6 @@ puts "Categories: #{user.categories.count}"
     post_type_id: user.post_types.sample.id,
     bookmarked: [true, false, false].sample,
     date: Faker::Date.between(from: 30.days.ago, to: Time.zone.today),
-    image_url: ['', '', '', Faker::Placeholdit.image(size: '600x400')].sample,
     url: ['', '', '', Faker::Internet.url].sample,
     with_people: ['', Faker::Name.first_name].sample,
     description: [Faker::Lorem.paragraph(sentence_count: 10), Faker::Markdown.block_code].sample

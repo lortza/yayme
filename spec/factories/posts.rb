@@ -6,7 +6,6 @@ FactoryBot.define do
     sequence(:date)        { Time.zone.today - rand(0..10) }
     sequence(:description) { |n| "Lorem ipsum dolor sit amet, consectetur do adipisicing elit, sit sed do eiusmod#{n}" }
     sequence(:with_people) { |n| "GivenBy Name#{n}" }
-    sequence(:image_url)   { |n| "http://www.image_url.com/image#{n}.png" }
     sequence(:url)         { |n| "http://www.url#{n}.com" }
     bookmarked             { false }
   end

@@ -186,23 +186,4 @@ RSpec.describe Post, type: :model do
       expect(post.word_cloud).to eq(expected_output)
     end
   end
-
-  describe 'self.format_image_url' do
-    # NOTE: method runs before_save
-
-    it 'safely handles nils' do
-      post = build(:post, image_url: nil)
-      post.save
-
-      expect(post.image_url).to eq('')
-    end
-
-    it 'formats the url' do
-      post = build(:post, image_url: 'some_url')
-      allow(DropboxService).to receive(:format_url).and_return('fixed_url')
-      post.save
-
-      expect(post.image_url).to eq('fixed_url')
-    end
-  end
 end
