@@ -1,7 +1,7 @@
 <% content_for(:title, @post_type.name) %>
 
 <%= link_to 'Back', post_types_path, class: button_class('secondary float-right ml-2') %>
-<%= link_to 'New Entry', new_post_path, class: button_class('primary float-right ml-2') %>
+<%= link_to 'New Entry', new_post_path(post_type_id: @post_type.id), class: button_class('primary float-right ml-2') %>
 
 <h1><%= @post_type.name %></h1>
 

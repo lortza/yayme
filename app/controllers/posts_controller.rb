@@ -15,7 +15,10 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = current_user.posts.new(date: Time.zone.today)
+    @post = current_user.posts.new(
+      date: Time.zone.today,
+      post_type_id: params[:post_type_id]
+    )
   end
 
   def edit
