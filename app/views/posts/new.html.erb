@@ -2,6 +2,6 @@
 
 <%= link_to 'Back', posts_path, class: button_class('secondary float-right') %>
 
-<h1>New Post</h1>
+<h2><%= @post.post_type_id ? "New #{@post.post_type.name} Post": 'New Post' %></h2>
 
 <%= render 'form', post: @post %>
