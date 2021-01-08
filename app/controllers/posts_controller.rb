@@ -4,12 +4,15 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[edit update destroy]
 
   def index
-    search_terms = params[:search]
-    given_year = params[:given_year]
+    search_params = {
+      text: params[:text],
+      year: params[:year],
+      bookmarked: params[:bookmarked]
+    }
 
     @posts = current_user.posts
                          .includes(:categories)
-                         .search(given_year: given_year, search_terms: search_terms)
+                         .search(search_params)
                          .by_date
                          .paginate(page: params[:page], per_page: 50)
   end

@@ -145,7 +145,7 @@ RSpec.describe Post, type: :model do
       this_year_post = create(:post, date: '2020-01-16')
       given_year = '2019'
 
-      results = Post.search(given_year: given_year)
+      results = Post.search(year: given_year)
 
       expect(results).to include(last_year_post)
       expect(results).to_not include(this_year_post)
@@ -159,7 +159,7 @@ RSpec.describe Post, type: :model do
       right_year_wrong_term = create(:post, date: '2019-01-02', description: 'puppies')
       wrong_year_right_term = create(:post, date: '2020-01-16', description: search_terms)
 
-      results = Post.search(given_year: given_year, search_terms: search_terms)
+      results = Post.search(year: given_year, text: search_terms)
 
       expect(results).to include(right_year_right_term)
       expect(results).to_not include(right_year_wrong_term)
@@ -173,7 +173,7 @@ RSpec.describe Post, type: :model do
       post2 = create(:post, date: '2019-01-01')
       post3 = create(:post, date: '2020-01-01')
 
-      results = Post.search(given_year: given_year)
+      results = Post.search(year: given_year)
 
       expect(results).to include(post1)
       expect(results).to include(post2)

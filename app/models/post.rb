@@ -22,11 +22,11 @@ class Post < ApplicationRecord
   scope :by_date, -> { order(date: :desc) }
   scope :in_chronological_order, -> { order(date: :asc) }
 
-  def self.search(given_year: '', search_terms: '', bookmarked: nil)
-    return for_year(Report.this_year) if given_year.blank? && search_terms.blank? && bookmarked.nil?
+  def self.search(year: '', text: '', bookmarked: nil)
+    return for_year(Report.this_year) if year.blank? && text.blank? && bookmarked.nil?
 
-    posts = for_words(search_terms)
-    posts = Report.timeframe_labels.include?(given_year) ? posts.for_timeframe(given_year) : posts.for_year(given_year)
+    posts = for_words(text)
+    posts = Report.timeframe_labels.include?(year) ? posts.for_timeframe(year) : posts.for_year(year)
     posts = posts.bookmarked if bookmarked.present?
     posts
   end
@@ -39,16 +39,16 @@ class Post < ApplicationRecord
     end
   end
 
-  def self.for_year(given_year)
-    if given_year.blank? || given_year.to_i.zero?
+  def self.for_year(year)
+    if year.blank? || year.to_i.zero?
       includes(:post_type).by_date
     else
-      includes(:post_type).where('extract(year from date) = ?', given_year)
+      includes(:post_type).where('extract(year from date) = ?', year)
     end
   end
 
-  def self.for_timeframe(given_year)
-    qty_days = Report::TIMEFRAMES[given_year]
+  def self.for_timeframe(year)
+    qty_days = Report::TIMEFRAMES[year]
 
     if qty_days.blank?
       includes(:post_type).by_date
