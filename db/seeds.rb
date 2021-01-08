@@ -2,43 +2,56 @@
 
 puts '**** Running seeds...'
 
-puts 'Destroying AllTheThings!TM'
-User.destroy_all
-Category.destroy_all
-PostType.destroy_all
-Post.destroy_all
-
-# user = User.find_by(email: 'admin@email.com')
-user = User.create!(
-        email: 'admin@email.com',
-        password: 'password',
-        password_confirmation: 'password',
-        admin: true
-      )
-puts "Users: #{User.count}"
+user = User.find_or_create_by!(email: 'admin@email.com') do |user|
+  user.name = 'admin'
+  user.password = 'password'
+  user.password_confirmation = 'password'
+  user.admin = true
+  user.save
+end
 
 # Post Types
-user.post_types.find_or_create_by!(name: 'TIL')
-user.post_types.find_or_create_by!(name: 'Merit')
-user.post_types.find_or_create_by!(name: 'Praise')
-user.post_types.find_or_create_by!(name: 'Gratitude')
-puts "PostTypes: #{user.post_types.count}"
+SeedsHelper.count_records_for(PostType) do
+  names = [
+    'TIL',
+    'Merit',
+    'Praise',
+    'Gratitude'
+  ]
+  names.each do |name|
+    user.post_types.find_or_create_by!(name: name)
+  end
+end
 
 # Categories
-user.post_types.find_or_create_by!(name: 'Citizenship')
-user.post_types.find_or_create_by!(name: 'Leadership')
-user.post_types.find_or_create_by!(name: 'Skills & Competencies')
-puts "Categories: #{user.categories.count}"
+SeedsHelper.count_records_for(Category) do
+  names = [
+    'Citizenship',
+    'Leadership',
+    'Skills & Competencies'
+  ]
+  names.each do |name|
+    user.categories.find_or_create_by!(name: name)
+  end
+end
 
 # Posts
-10.times do
-  Post.create!({
-    post_type_id: user.post_types.sample.id,
-    bookmarked: [true, false, false].sample,
-    date: Faker::Date.between(from: 30.days.ago, to: Time.zone.today),
-    url: ['', '', '', Faker::Internet.url].sample,
-    with_people: ['', Faker::Name.first_name].sample,
-    description: [Faker::Lorem.paragraph(sentence_count: 10), Faker::Markdown.block_code].sample
-  })
+SeedsHelper.count_records_for(Post) do
+  posts = []
+  10.times do
+    publish_date = Faker::Date.between(from: 30.days.ago, to: Date.current)
+    post = {
+      post_type_id: user.post_types.sample.id,
+      bookmarked: [true, false, false].sample,
+      date: publish_date,
+      url: ['', '', '', Faker::Internet.url].sample,
+      given_by: ['', Faker::Name.first_name].sample,
+      description: [Faker::Lorem.paragraph(sentence_count: 10), Faker::Markdown.block_code].sample,
+      created_at: publish_date,
+      updated_at: publish_date
+    }
+    posts << post
+  end
+
+  Post.insert_all(posts)
 end
-puts "Posts: #{user.posts.count}"
