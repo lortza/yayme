@@ -18,17 +18,17 @@ class Post < ApplicationRecord
   delegate :name, to: :post_type, prefix: true
   alias_attribute :with_people, :given_by
 
+  scope :bookmarked, -> { where(bookmarked: true) }
   scope :by_date, -> { order(date: :desc) }
   scope :in_chronological_order, -> { order(date: :asc) }
 
-  def self.search(given_year: '', search_terms: '')
-    return for_year(Report.this_year) if given_year.blank? && search_terms.blank?
+  def self.search(given_year: '', search_terms: '', bookmarked: nil)
+    return for_year(Report.this_year) if given_year.blank? && search_terms.blank? && bookmarked.nil?
 
-    if Report.timeframe_labels.include?(given_year)
-      for_words(search_terms).for_timeframe(given_year)
-    else
-      for_words(search_terms).for_year(given_year)
-    end
+    posts = for_words(search_terms)
+    posts = Report.timeframe_labels.include?(given_year) ? posts.for_timeframe(given_year) : posts.for_year(given_year)
+    posts = posts.bookmarked if bookmarked.present?
+    posts
   end
 
   def self.for_words(terms)

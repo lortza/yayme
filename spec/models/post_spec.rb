@@ -24,6 +24,43 @@ RSpec.describe Post, type: :model do
     it { should delegate_method(:name).to(:post_type).with_prefix }
   end
 
+  describe 'scope bookmarked' do
+    let!(:bookmarked_post) { create(:post, bookmarked: true) }
+    let!(:unbookmarked_post) { create(:post, bookmarked: false) }
+
+    it 'returns bookmarked posts' do
+      results = Post.bookmarked
+      expect(results).to include(bookmarked_post)
+    end
+
+    it 'excludes non-bookmarked posts' do
+      results = Post.bookmarked
+      expect(results).to_not include(unbookmarked_post)
+    end
+  end
+
+  describe 'scope by_date' do
+    it 'returns posts in descending date order' do
+      post1 = create(:post, date: '2018-01-01')
+      post2 = create(:post, date: '2018-01-02')
+      results = Post.by_date
+
+      expect(results.first).to eq(post2)
+      expect(results.second).to eq(post1)
+    end
+  end
+
+  describe 'scope in_chronological_order' do
+    it 'returns posts in ascending date order' do
+      post1 = create(:post, date: '2018-01-02')
+      post2 = create(:post, date: '2018-01-01')
+      results = Post.in_chronological_order
+
+      expect(results.first).to eq(post2)
+      expect(results.second).to eq(post1)
+    end
+  end
+
   describe 'self.for_year' do
     it 'returns all records if no year is given' do
       post1 = create(:post, date: '2018-01-16')
@@ -70,6 +107,28 @@ RSpec.describe Post, type: :model do
   end
 
   describe 'self.search' do
+    let(:date) { '2021-01-06' }
+    let(:bookmarked_post) { create(:post, date: date, bookmarked: true) }
+    let(:unbookmarked_post) { create(:post, date: date, bookmarked: false) }
+
+    it 'returns both bookmarked and unbookmarked posts if no value is given' do
+      bookmarked_post
+      unbookmarked_post
+      results = Post.search
+
+      expect(results.to_a).to include(bookmarked_post)
+      expect(results.to_a).to include(unbookmarked_post)
+    end
+
+    it 'returns only bookmarked posts if a true value is supplied' do
+      bookmarked_post
+      unbookmarked_post
+      results = Post.search(bookmarked: true)
+
+      expect(results.to_a).to include(bookmarked_post)
+      expect(results.to_a).to_not include(unbookmarked_post)
+    end
+
     it 'returns all posts for current year if no terms are given' do
       last_year_post = create(:post, date: '2019-01-16')
       this_year_post = create(:post, date: '2020-01-16')

@@ -16,7 +16,7 @@ class Report < ApplicationRecord
     end
 
     def this_year
-      Time.zone.today.year
+      Date.current.year
     end
 
     def available_years(model = Post, date_field = :date)
