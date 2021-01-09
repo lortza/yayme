@@ -13,12 +13,12 @@ gem 'coffee-rails'              # Use CoffeeScripgt for .coffee assets and views
 gem 'devise'                    # User authentication
 gem 'image_processing', '~> 1.2'# Creates various sizes for ActiveStorage image files
 gem 'jbuilder', '~> 2.5'        # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'loofah', '>= 2.2.3'        # Upgrade for security update
-gem 'nokogiri', '>= 1.8.5'      # Upgrade for security update
+gem 'loofah'
+gem 'nokogiri'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.3'            # Use Puma as the app server
-gem 'rack', '>= 2.0.6'          # Upgrade for security update
-gem 'rails', '~> 6.0.3.1'       # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rack'
+gem 'rails', '~> 6.1.1'         # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'redcarpet', github: 'vmg/redcarpet' # markdown
 gem 'sass-rails', '~> 6.0'      # Use SCSS for stylesheets
 gem 'uglifier', '>= 1.3.0'      # Use Uglifier as compressor for JavaScript assets
