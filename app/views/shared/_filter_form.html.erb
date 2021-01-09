@@ -1,15 +1,22 @@
 <%= form_tag(destination_url, method: 'get', id: 'filter-form' ) do %>
   <div class='row'>
-    <div class='col-12 col-md-8 mb-2'>
-      <%= text_field_tag :search, params[:search],
+    <div class='col-12 col-md-6 mb-2'>
+      <%= text_field_tag :text, params[:text],
                                   placeholder: "Search Entries",
                                   class: 'form-control'
       %>
     </div>
 
     <div class='col-12 col-md-2 mb-2'>
-      <%= select_tag :given_year,
-        options_for_select(timeframes_dropdown, params[:given_year]),
+      <div class="form-check">
+        <%= check_box_tag :bookmarked, 'yes', false, class: 'form-check-input' %>
+        <label class='form-check-label'>Bookmarked</label>
+      </div>
+    </div>
+
+    <div class='col-12 col-md-2 mb-2'>
+      <%= select_tag :year,
+        options_for_select(timeframes_dropdown, params[:year]),
         class: 'form-control'
       %>
     </div>
