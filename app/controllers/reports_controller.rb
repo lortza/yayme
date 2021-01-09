@@ -17,7 +17,7 @@ class ReportsController < ApplicationController
     search_params = {
       year: Report.this_year
     }
-    
+
     @celebrations = current_user.posts
                                 .in_chronological_order
                                 .search(search_params)
