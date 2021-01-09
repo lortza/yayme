@@ -8,8 +8,10 @@
     </div>
 
     <div class='col-12 col-md-2 mb-2'>
-      <%= label_tag :bookmarked %>
-      <%= check_box_tag :bookmarked %>
+      <div class="form-check">
+        <%= check_box_tag :bookmarked, 'yes', false, class: 'form-check-input' %>
+        <label class='form-check-label'>Bookmarked</label>
+      </div>
     </div>
 
     <div class='col-12 col-md-2 mb-2'>
