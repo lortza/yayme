@@ -25,6 +25,11 @@ jobs:
     steps:
       - checkout
 
+      # Run linters!
+      # - run: bundle exec reek
+      - run: bundle exec rubocop
+      - run: bundle exec scss-lint app/assets/stylesheets/**.scss --exclude app/assets/stylesheets/coderay.scss
+
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "Gemfile.lock" }}
@@ -43,16 +48,10 @@ jobs:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
-
       # Database setup
       - run: bundle exec rake db:create
       - run: bundle exec rake db:migrate
       - run: bundle exec rake db:seed
-
-      # Run linters!
-      # - run: bundle exec rubocop
-      # - run: bundle exec reek
-      - run: bundle exec scss-lint app/assets/stylesheets/**.scss --exclude app/assets/stylesheets/coderay.scss
 
       # Run tests!
       - run: bundle exec rspec
