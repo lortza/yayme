@@ -80,7 +80,7 @@ class Post < ApplicationRecord
   end
 
   def word_cloud
-    description.split(' ').each_with_object({}) do |raw_word, hash|
+    description.split.each_with_object({}) do |raw_word, hash|
       word = stripped_word(raw_word).downcase
       hash[word].nil? ? hash[word] = 1 : hash[word] += 1
     end
@@ -109,7 +109,7 @@ class Post < ApplicationRecord
   end
 
   def stripped_word(word)
-    unwanted_characters = %w[: " . ( ) [ ] , … ... ? — -- & ; 0 1 2 3 4 5 6 7 8 9]
+    unwanted_characters = %w[: " . ( ) [ ] , … ... ? — -- ``` & ; 0 1 2 3 4 5 6 7 8 9]
     unwanted_characters.each do |mark|
       word = word.gsub(mark, '')
     end

@@ -22,6 +22,7 @@ class UserDataSetupService
                               ])
     end
 
+    # rubocop:disable Metrics/MethodLength
     def create_post_types(user)
       user.post_types.create!([
                                 { name: 'Gratitude' },
@@ -66,5 +67,6 @@ class UserDataSetupService
         description_template: praise_template
       )
     end
+    # rubocop:enable Metrics/MethodLength
   end
 end

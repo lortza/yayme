@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Rails/UniqueValidationWithoutIndex
 class PostType < ApplicationRecord
   extend Sortable
 
@@ -15,3 +16,4 @@ class PostType < ApplicationRecord
     where('post_type IN ?', raise_types)
   end
 end
+# rubocop:enable Rails/UniqueValidationWithoutIndex
