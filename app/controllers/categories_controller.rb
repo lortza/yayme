@@ -20,14 +20,10 @@ class CategoriesController < ApplicationController
   def create
     @category = current_user.categories.new(category_params)
 
-    respond_to do |format|
-      if @category.save
-        format.html { redirect_to categories_url, notice: 'Category was successfully created.' }
-        format.json { render :index, status: :created, location: categories_url }
-      else
-        format.html { render :new }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
+    if @category.save
+      redirect_to categories_url, notice: 'Category was successfully created.'
+    else
+      render :new
     end
   end
 

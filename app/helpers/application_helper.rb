@@ -13,9 +13,8 @@ module ApplicationHelper
 
   def bootstrap_flash_class(type)
     case type
-    when 'alert' then 'warning'
+    when 'alert', 'warning' then 'warning'
     when 'error' then 'danger'
-    when 'warning' then 'warning'
     when 'notice' then 'success'
     else
       'info'
@@ -46,6 +45,7 @@ module ApplicationHelper
     end
   end
 
+  # rubocop:disable Metrics/MethodLength, Rails/OutputSafety
   def markdown(text)
     coderay_options = {
       filter_html: true,
@@ -72,4 +72,5 @@ module ApplicationHelper
     markdown_to_html = Redcarpet::Markdown.new(coderayified, redcarpet_options)
     markdown_to_html.render(text).html_safe
   end
+  # rubocop:enable Metrics/MethodLength, Rails/OutputSafety
 end
