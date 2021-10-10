@@ -24,7 +24,6 @@ gem 'sass-rails', '~> 6.0'      # Use SCSS for stylesheets
 gem 'uglifier', '>= 1.3.0'      # Use Uglifier as compressor for JavaScript assets
 gem 'will_paginate', '~> 3.2.0' # pagination. Styles: http://mislav.github.io/will_paginate/
 # gem 'redis', '~> 4.0'           # Use Redis adapter to run Action Cable in production
-gem 'mini_magick', '~> 4.8'  # Use ActiveStorage variant
 # gem 'capistrano-rails', group: :development # Use Capistrano for deployment
 
 group :development, :test do
