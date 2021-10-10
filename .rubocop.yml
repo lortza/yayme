@@ -15,6 +15,7 @@ AllCops:
     - 'Gemfile.lock'
     - 'bin/**'
     - 'config/**/*'
+    - 'config.ru'
     - 'db/**/*'
     - 'script/**/*'
     - 'spec/rails_helper.rb'

@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
+gem 'rails', '~> 6.1.4'           # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
 gem 'activestorage-dropbox'     # service adapter for dropbox
 gem 'dropbox_api'               # dependency for the activestorage-dropbox gem
@@ -18,13 +19,11 @@ gem 'nokogiri', '>= 1.8.5'      # Upgrade for security update
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.3'            # Use Puma as the app server
 gem 'rack', '>= 2.0.6'          # Upgrade for security update
-gem 'rails', '~> 6.0.3.1'       # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'redcarpet', github: 'vmg/redcarpet' # markdown
 gem 'sass-rails', '~> 6.0'      # Use SCSS for stylesheets
 gem 'uglifier', '>= 1.3.0'      # Use Uglifier as compressor for JavaScript assets
 gem 'will_paginate', '~> 3.2.0' # pagination. Styles: http://mislav.github.io/will_paginate/
 # gem 'redis', '~> 4.0'           # Use Redis adapter to run Action Cable in production
-gem 'mini_magick', '~> 4.8'  # Use ActiveStorage variant
 # gem 'capistrano-rails', group: :development # Use Capistrano for deployment
 
 group :development, :test do
