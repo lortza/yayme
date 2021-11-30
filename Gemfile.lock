@@ -8,50 +8,50 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-core.git
-  revision: e7c5d030966a7e8dad3e0a67c61920c4f2437c15
-  branch: master
+  revision: e36aa2a9ebe68acee3ce05190fc2124947b45925
+  branch: main
   specs:
-    rspec-core (3.10.0.pre)
-      rspec-support (= 3.10.0.pre)
+    rspec-core (3.11.0.pre)
+      rspec-support (= 3.11.0.pre)
 
 GIT
   remote: https://github.com/rspec/rspec-expectations.git
-  revision: e63ff4765e1cd2798b02ddddad259f1104ef87a5
-  branch: master
+  revision: dba67987c63f551d1bf0f7877f069fa8b72d0461
+  branch: main
   specs:
-    rspec-expectations (3.10.0.pre)
+    rspec-expectations (3.11.0.pre)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (= 3.10.0.pre)
+      rspec-support (= 3.11.0.pre)
 
 GIT
   remote: https://github.com/rspec/rspec-mocks.git
-  revision: 0a52e0a86b126b4bab94d277b2ad99a7492dc37d
-  branch: master
+  revision: 17cf86ab61544b93232c4e9ca9784ab212dccbf6
+  branch: main
   specs:
-    rspec-mocks (3.10.0.pre)
+    rspec-mocks (3.11.0.pre)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (= 3.10.0.pre)
+      rspec-support (= 3.11.0.pre)
 
 GIT
   remote: https://github.com/rspec/rspec-rails.git
-  revision: 01704c50c146f720db914724c25681781ecefb23
-  branch: master
+  revision: 1fe6c2e8a56f46ae4c2f13ffa0733cce3b717c2d
+  branch: main
   specs:
-    rspec-rails (4.1.0.pre)
-      actionpack (>= 4.2)
-      activesupport (>= 4.2)
-      railties (>= 4.2)
-      rspec-core (= 3.10.0.pre)
-      rspec-expectations (= 3.10.0.pre)
-      rspec-mocks (= 3.10.0.pre)
-      rspec-support (= 3.10.0.pre)
+    rspec-rails (5.1.0.pre)
+      actionpack (>= 5.2)
+      activesupport (>= 5.2)
+      railties (>= 5.2)
+      rspec-core (= 3.11.0.pre)
+      rspec-expectations (= 3.11.0.pre)
+      rspec-mocks (= 3.11.0.pre)
+      rspec-support (= 3.11.0.pre)
 
 GIT
   remote: https://github.com/rspec/rspec-support.git
-  revision: 6447b0c2c9d1cd3e1504784fb85675ca9ae7b7c3
-  branch: master
+  revision: 9499cb622f9feef43a53f357809f9e656e7cb6de
+  branch: main
   specs:
-    rspec-support (3.10.0.pre)
+    rspec-support (3.11.0.pre)
 
 GIT
   remote: https://github.com/vmg/redcarpet.git
