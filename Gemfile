@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
-gem 'rails', '~> 6.1.4'           # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 6.1.4.6'           # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
 gem 'activestorage-dropbox'     # service adapter for dropbox
 gem 'dropbox_api'               # dependency for the activestorage-dropbox gem
@@ -17,7 +17,7 @@ gem 'jbuilder', '~> 2.5'        # Build JSON APIs with ease. Read more: https://
 gem 'loofah', '>= 2.2.3'        # Upgrade for security update
 gem 'nokogiri', '>= 1.8.5'      # Upgrade for security update
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 4.3'            # Use Puma as the app server
+gem 'puma'                      # Use Puma as the app server
 gem 'rack', '>= 2.0.6'          # Upgrade for security update
 gem 'redcarpet', github: 'vmg/redcarpet' # markdown
 gem 'sass-rails', '~> 6.0'      # Use SCSS for stylesheets
@@ -27,9 +27,7 @@ gem 'will_paginate', '~> 3.2.0' # pagination. Styles: http://mislav.github.io/wi
 # gem 'capistrano-rails', group: :development # Use Capistrano for deployment
 
 group :development, :test do
-  %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
-    gem lib, git: "https://github.com/rspec/#{lib}.git", branch: 'main'
-  end
+  gem 'rspec-rails', '~> 5.0.0'
   gem 'better_errors'           # creates console in browser for errors
   gem 'binding_of_caller'       # goes with better_errors
   gem 'bullet'                  # detects n+1 queries
