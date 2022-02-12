@@ -16,7 +16,6 @@ RSpec.describe Post, type: :model do
 
       it { should validate_presence_of(:date) }
       it { should validate_presence_of(:description) }
-      it { should validate_presence_of(:post_type) }
     end
   end
 
@@ -107,7 +106,7 @@ RSpec.describe Post, type: :model do
   end
 
   describe 'self.search' do
-    let(:date) { '2021-01-06' }
+    let(:date) { Time.zone.today }
     let(:bookmarked_post) { create(:post, date: date, bookmarked: true) }
     let(:unbookmarked_post) { create(:post, date: date, bookmarked: false) }
 
