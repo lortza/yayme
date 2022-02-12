@@ -9,7 +9,6 @@ class Post < ApplicationRecord
   validate :acceptable_image
   validates :date,
             :description,
-            :post_type,
             presence: true
 
   attr_accessor :remove_attached_image
