@@ -106,9 +106,9 @@ RSpec.describe Post, type: :model do
   end
 
   describe 'self.search' do
-    let(:date) { Time.zone.today }
-    let(:bookmarked_post) { create(:post, date: date, bookmarked: true) }
-    let(:unbookmarked_post) { create(:post, date: date, bookmarked: false) }
+    let(:today) { Time.zone.today }
+    let(:bookmarked_post) { create(:post, date: today, bookmarked: true) }
+    let(:unbookmarked_post) { create(:post, date: today, bookmarked: false) }
 
     it 'returns both bookmarked and unbookmarked posts if no value is given' do
       bookmarked_post
