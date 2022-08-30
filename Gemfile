@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '3.1.0'
 gem 'rails', '~> 6.1.4.6'           # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
 gem 'activestorage-dropbox'     # service adapter for dropbox
@@ -25,6 +25,9 @@ gem 'uglifier', '>= 1.3.0'      # Use Uglifier as compressor for JavaScript asse
 gem 'will_paginate', '~> 3.2.0' # pagination. Styles: http://mislav.github.io/will_paginate/
 # gem 'redis', '~> 4.0'           # Use Redis adapter to run Action Cable in production
 # gem 'capistrano-rails', group: :development # Use Capistrano for deployment
+gem 'net-imap', require: false
+gem 'net-pop', require: false
+gem 'net-smtp', require: false # Send internet mail via SMTP
 
 group :development, :test do
   gem 'rspec-rails', '~> 5.0.0'
