@@ -53,9 +53,9 @@ jobs:
           bundler-cache: true
       - name: Lint CSS
         run: bundle exec scss-lint app/assets/stylesheets/**.scss
-      - name: Rubocop
-        run: bundle exec rubocop --parallel
       # Add or replace any other lints here
+      # - name: Rubocop
+      #   run: bundle exec rubocop --parallel
       # - name: Reek
       #   run: bundle exec reek
       # - name: Security audit dependencies
