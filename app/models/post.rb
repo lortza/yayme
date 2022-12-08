@@ -22,6 +22,8 @@
 #
 #  fk_rails_...  (post_type_id => post_types.id)
 #
+require 'csv'
+
 class Post < ApplicationRecord
   belongs_to :post_type
   has_many :post_categories, dependent: :destroy
@@ -98,6 +100,20 @@ class Post < ApplicationRecord
 
   def self.in_last_calendar_year
     where('date BETWEEN ? AND ?', Time.zone.today - 365, Time.zone.today)
+  end
+
+  def self.to_csv
+    headers = new.attributes.keys + %w[post_type exported_at]
+    CSV.generate(headers: true) do |csv|
+      csv << headers
+      find_each do |post|
+        updated_attributes = post.attributes.merge(
+          post_type: post.post_type_name,
+          exported_at: Time.zone.today
+        )
+        csv << updated_attributes.values
+      end
+    end
   end
 
   def word_cloud
