@@ -41,6 +41,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'annotate' # lists db table details as comments in models, etc
   gem 'awesome_print'
   gem 'listen', '>= 3.0.5', '< 3.3'
   gem 'magic_frozen_string_literal'
