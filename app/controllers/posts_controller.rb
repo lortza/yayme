@@ -15,11 +15,6 @@ class PostsController < ApplicationController
                          .search(**search_params)
                          .by_date
                          .paginate(page: params[:page], per_page: 50)
-
-    respond_to do |format|
-      format.html
-      format.csv { send_data current_user.posts.to_csv }
-    end
   end
 
   def new

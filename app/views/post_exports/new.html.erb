@@ -1,0 +1,74 @@
+<% content_for(:title, "Export Posts") %>
+
+<%= link_to 'Cancel', posts_path, class: button_class('secondary float-right') %>
+<h2>Export Posts</h2>
+
+<%= link_to 'Export All Posts', "#{post_exports_all_path}.csv", class: button_class('primary') %>
+<hr class='mt-5'>
+
+<h4>Filter Posts to Export</h4>
+<p>Filter the posts you'd like to export by filling out the form below.</p>
+
+<%= form_with(url: "#{post_exports_path}.csv", method: :get) do |form| %>
+  <div class='row'>
+    <div class='col'>
+      <div class="field">
+        <%= form.label :timeframe %>
+        <%= form.select :timeframe, timeframes_dropdown, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-6 col-sm-12'>
+      <div class="field">
+        <%= form.label :text, "Search for Text:" %>
+        <%= form.text_field :text, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class='col-md-6 col-sm-12'>
+      <div class="field">
+        <%= form.label :person_who_was_there %>
+        <%= form.text_field :with_people, class: 'form-control' %>
+      </div>
+    </div>
+  </div><!-- row -->
+
+  <div class='row'>
+    <div class='col-md-4 col-sm-12'>
+      <div class="field">
+        <%= form.label 'Types' %>
+        <%= form.collection_check_boxes :post_type_id, current_user.post_types.by_name, :id, :name do |r| %>
+          <div class='form-check'>
+            <%= r.check_box class: 'form-check-input' %>
+            <%= r.label class: 'form-check-label' %>
+          </div>
+        <% end %>
+      </div>
+    </div> <!-- col -->
+
+    <div class='col-md-4 col-sm-12'>
+      <div class="field">
+        <%= form.label 'Categories' %>
+        <%= form.collection_check_boxes :category_ids, current_user.categories.by_name, :id, :name do |r| %>
+          <div class='form-check'>
+            <%= r.check_box class: 'form-check-input' %>
+            <%= r.label class: 'form-check-label' %>
+          </div>
+        <% end %>
+      </div>
+    </div><!-- col -->
+
+    <div class='col-md-4 col-sm-12'>
+      <div class="field">
+        <%= form.label :bookmarked %>
+        <%= form.check_box :bookmarked, class: 'form-control' %>
+      </div>
+    </div><!-- col -->
+  </div><!-- row -->
+
+  <div class="actions mt-5">
+    <%= form.submit 'Export Filtered Posts', class: button_class %>
+  </div>
+<% end %>
