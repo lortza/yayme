@@ -104,13 +104,15 @@ class Post < ApplicationRecord
   end
 
   def self.to_csv
-    headers = new.attributes.keys + %w[post_type exported_at]
+    headers = new.attributes.keys + %w[post_type categories user exported_at]
     CSV.generate(headers: true) do |csv|
       csv << headers
       find_each do |post|
         updated_attributes = post.attributes.merge(
           post_type: post.post_type_name,
-          exported_at: Time.zone.today
+          categories: post.categories.map(&:name),
+          user: post.post_type.user.name,
+          exported_at: Time.zone.now
         )
         csv << updated_attributes.values
       end
