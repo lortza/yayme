@@ -55,3 +55,9 @@ SeedsHelper.count_records_for(Post) do
 
   Post.insert_all(posts)
 end
+
+sample_size = Post.count * 0.7
+Post.all.sample(sample_size).each do |post|
+  category = Category.all.sample
+  post.categories << category
+end

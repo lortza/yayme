@@ -78,6 +78,9 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    annotate (3.2.0)
+      activerecord (>= 3.2, < 8.0)
+      rake (>= 10.4, < 14.0)
     ast (2.4.2)
     awesome_print (1.9.2)
     axiom-types (0.1.1)
@@ -411,6 +414,7 @@ PLATFORMS
 
 DEPENDENCIES
   activestorage-dropbox
+  annotate
   awesome_print
   better_errors
   binding_of_caller

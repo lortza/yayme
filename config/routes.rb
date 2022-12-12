@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :posts, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :categories, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   resources :raise_prep, only: [:index]
+  resources :post_exports, only: [:index, :new]
+  get '/post_exports/all', to: 'post_exports#all'
 
   get '/word_cloud', to: 'reports#word_cloud'
   get '/new_years_eve', to: 'reports#new_years_eve'
