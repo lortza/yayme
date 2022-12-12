@@ -41,6 +41,8 @@ class Post < ApplicationRecord
   delegate :name, to: :post_type, prefix: true
   alias_attribute :with_people, :given_by
 
+  scope :in_post_type_ids, -> (ids) { where(post_type_id: ids) }
+  scope :in_category_ids, -> (ids) { joins(:categories).where('post_categories.category_id IN (?)', ids) }
   scope :bookmarked, -> { where(bookmarked: true) }
   scope :by_date, -> { order(date: :desc) }
   scope :in_chronological_order, -> { order(date: :asc) }
@@ -51,6 +53,20 @@ class Post < ApplicationRecord
     posts = for_words(text)
     posts = Report.timeframe_labels.include?(year) ? posts.for_timeframe(year) : posts.for_year(year)
     posts = posts.bookmarked if bookmarked.present?
+    posts
+  end
+
+  def self.filter_for_export(timeframe: 'All Time', text: '', post_type_ids: [], bookmarked: nil, with_people: '', category_ids: [])
+    posts = all
+    return [] if posts.blank?
+
+    posts = Report.timeframe_labels.include?(timeframe) ? for_timeframe(timeframe) : for_year(timeframe)
+    posts = posts.in_post_type_ids(post_type_ids) if posts.present? && post_type_ids.present?
+    posts = posts.for_words(text) if posts.present? && text.present?
+    posts = posts.for_words(with_people) if posts.present? && with_people.present?
+    posts = posts.bookmarked if posts.present? && !bookmarked.nil?
+    posts = posts.in_category_ids(category_ids) if posts.present? && category_ids.present?
+    posts = posts.by_date if posts.present?
     posts
   end
 
@@ -93,10 +109,6 @@ class Post < ApplicationRecord
     includes(:post_type)
       .joins(:post_type)
       .where('post_types.name ILIKE ? OR post_types.name ILIKE ?', '%gratitude%', '%praise%')
-  end
-
-  def self.bookmarked
-    where(bookmarked: true)
   end
 
   def self.in_last_calendar_year
