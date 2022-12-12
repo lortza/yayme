@@ -54,11 +54,12 @@ class Post < ApplicationRecord
     posts
   end
 
-  def self.for_words(terms)
-    if terms.blank?
+  def self.for_words(text)
+    if text.blank?
       includes(:post_type).by_date
     else
-      includes(:post_type).where('description ILIKE ? OR given_by ILIKE ?', "%#{terms}%", "%#{terms}%").by_date
+      concat_statement = "concat_ws(' ', description, given_by)"
+      includes(:post_type).where("#{concat_statement} ILIKE ?", "%#{text}%").by_date
     end
   end
 
