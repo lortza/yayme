@@ -10,9 +10,10 @@ body { background-image: image-url('hatch_marks.png'); }
   padding-top: 1rem;
 }
 
-.image {
-  max-width: 600px;
-  // width: 100%;
+.image { max-width: 600px; }
+
+@media screen and (max-width: $mobile-breakpoint) {
+  .image { max-width: 100%; }
 }
 
 .environment-banner {
