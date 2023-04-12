@@ -22,6 +22,7 @@ class PostsController < ApplicationController
       date: Time.zone.today,
       post_type_id: params[:post_type_id]
     )
+    fail
   end
 
   def edit
