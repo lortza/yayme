@@ -4,9 +4,9 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.0'
-gem 'rails', '~> 7.0.4.3'           # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 7.0.4.3'       # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
-gem 'activestorage-dropbox'     # service adapter for dropbox
+gem 'activestorage-dropbox'     # connects activestorage and dropbox
 gem 'dropbox_api'               # dependency for the activestorage-dropbox gem
 gem 'bootsnap', '>= 1.1.0', require: false # Reduces boot times through caching; required in config/boot.rb
 gem 'coderay'                   # syntax highlighting: http://coderay.rubychan.de/
