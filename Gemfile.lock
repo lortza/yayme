@@ -67,8 +67,8 @@ GEM
       activesupport (= 7.0.4.3)
       marcel (~> 1.0)
       mini_mime (>= 1.1.0)
-    activestorage-dropbox (1.0.0)
-      dropbox_api (~> 0.1.16)
+    activestorage-dropbox (2.0.0)
+      dropbox_api (~> 0.1.18)
     activesupport (7.0.4.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
@@ -413,7 +413,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  activestorage-dropbox
+  activestorage-dropbox (~> 2.0)
   annotate
   awesome_print
   better_errors
