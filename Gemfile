@@ -4,9 +4,9 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.0'
-gem 'rails', '~> 6.1.4.6'           # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 7.0.4.3'       # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
-gem 'activestorage-dropbox'     # service adapter for dropbox
+gem 'activestorage-dropbox', '~> 2.0' # connects activestorage and dropbox
 gem 'dropbox_api'               # dependency for the activestorage-dropbox gem
 gem 'bootsnap', '>= 1.1.0', require: false # Reduces boot times through caching; required in config/boot.rb
 gem 'coderay'                   # syntax highlighting: http://coderay.rubychan.de/
@@ -37,7 +37,7 @@ group :development, :test do
   gem 'binding_of_caller'       # goes with better_errors
   gem 'bullet'                  # detects n+1 queries
   gem 'byebug', platforms: %i[mri mingw x64_mingw] # Call 'byebug' anywhere in the code to get a debugger console
-  gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
+  gem 'faker'                   # creates seed data for specs
   gem 'pry-rails'
   gem 'reek' # https://github.com/troessner/reek/blob/master/docs/Code-Smells.md
 end
