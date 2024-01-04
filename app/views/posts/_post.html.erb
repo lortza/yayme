@@ -1,6 +1,6 @@
 <div class="card mb-3 <%= post.post_type.name.downcase %>-card">
   <div class="card-header">
-    <%= post.post_type_name %> <%= post.date %>
+    <%= post.post_type_name %>: <%= post.date.to_formatted_s(:with_month_name) %>
     <% if post.bookmarked? %>
       <i class="fas fa-bookmark float-right ml-2"></i>
     <% end %>
