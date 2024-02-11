@@ -45,15 +45,18 @@ class Post < ApplicationRecord
   scope :in_category_ids, -> (ids) { joins(:categories).where('post_categories.category_id IN (?)', ids) }
   scope :bookmarked, -> { where(bookmarked: true) }
   scope :by_date, -> { order(date: :desc) }
+  scope :by_recently_updated, -> { order(updated_at: :desc) }
   scope :in_chronological_order, -> { order(date: :asc) }
 
-  def self.search(year: '', text: '', bookmarked: nil)
+  def self.search(year: '', text: '', bookmarked: nil, order_by: Report::ORDERING_OPTIONS[:by_date])
     return for_year(Report.this_year) if year.blank? && text.blank? && bookmarked.nil?
 
     posts = for_words(text)
     posts = Report.timeframe_labels.include?(year) ? posts.for_timeframe(year) : posts.for_year(year)
     posts = posts.bookmarked if bookmarked.present?
-    posts
+    order = Report::ORDERING_OPTIONS.key(order_by)
+
+    order == :by_updated_at ? posts.by_recently_updated : posts.by_date
   end
 
   def self.filter_for_export(timeframe: 'All Time', text: '', post_type_ids: [], bookmarked: nil, with_people: '', category_ids: [])
@@ -72,16 +75,16 @@ class Post < ApplicationRecord
 
   def self.for_words(text)
     if text.blank?
-      includes(:post_type).by_date
+      includes(:post_type)
     else
       concat_statement = "concat_ws(' ', description, given_by)"
-      includes(:post_type).where("#{concat_statement} ILIKE ?", "%#{text}%").by_date
+      includes(:post_type).where("#{concat_statement} ILIKE ?", "%#{text}%")
     end
   end
 
   def self.for_year(year)
     if year.blank? || year.to_i.zero?
-      includes(:post_type).by_date
+      includes(:post_type)
     else
       includes(:post_type).where('extract(year from date) = ?', year)
     end
@@ -91,11 +94,10 @@ class Post < ApplicationRecord
     qty_days = Report::TIMEFRAMES[year]
 
     if qty_days.blank?
-      includes(:post_type).by_date
+      includes(:post_type)
     else
       includes(:post_type)
         .where('date >= ? AND date <= ?', qty_days.days.ago, Time.zone.now)
-        .by_date
     end
   end
 
