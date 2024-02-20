@@ -7,13 +7,13 @@ class PostsController < ApplicationController
     search_params = {
       text: params[:text],
       year: params[:year],
-      bookmarked: params[:bookmarked],
-      order_by: params[:order_by]
+      bookmarked: params[:bookmarked]
     }
 
     @posts = current_user.posts
                          .includes(:categories)
                          .search(**search_params)
+                         .by_date
                          .paginate(page: params[:page], per_page: 50)
   end
 

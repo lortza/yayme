@@ -1,26 +1,17 @@
 <%= form_tag(destination_url, method: 'get', id: 'filter-form' ) do %>
   <div class='row'>
-    <div class='col-12 col-md-5 mb-2'>
+    <div class='col-12 col-md-6 mb-2'>
       <%= text_field_tag :text, params[:text],
                                   placeholder: "Search Entries",
                                   class: 'form-control'
       %>
     </div>
 
-    <div class='col-12 col-md-1 mb-2'>
+    <div class='col-12 col-md-2 mb-2'>
       <div class="form-check">
         <%= check_box_tag :bookmarked, 'yes', false, class: 'form-check-input' %>
-        <label class='form-check-label'>
-          <span class="material-symbols-outlined">bookmark_added</span>
-        </label>
+        <label class='form-check-label'>Bookmarked</label>
       </div>
-    </div>
-
-    <div class='col-12 col-md-2 mb-2'>
-      <%= select_tag :order_by,
-        options_for_select(Report.ordering_options_labels, params[:order_by]),
-        class: 'form-control'
-      %>
     </div>
 
     <div class='col-12 col-md-2 mb-2'>

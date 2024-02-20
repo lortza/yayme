@@ -50,21 +50,6 @@ RSpec.describe Post, type: :model do
       end
     end
 
-    describe 'by_recently_updated' do
-      it 'returns posts in descending date order' do
-        post1 = create(:post, date: '2018-01-01')
-        post2 = create(:post, date: '2018-01-02')
-        post3 = create(:post, date: '2018-01-03')
-
-        post2.update(given_by: 'foo')
-        results = Post.by_recently_updated
-
-        expect(results.first).to eq(post2)
-        expect(results.second).to eq(post3)
-        expect(results.last).to eq(post1)
-      end
-    end
-
     describe 'in_chronological_order' do
       it 'returns posts in ascending date order' do
         post1 = create(:post, date: '2018-01-02')
