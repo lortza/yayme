@@ -10,18 +10,9 @@ class Report < ApplicationRecord
     'All Time' => nil
   }.freeze
 
-  ORDERING_OPTIONS = {
-    by_date: 'Order by Date',
-    by_updated_at: 'Order by Recently Updated'
-  }
-
   class << self
     def timeframe_labels
       TIMEFRAMES.keys
-    end
-
-    def ordering_options_labels
-      ORDERING_OPTIONS.values
     end
 
     def this_year
