@@ -3,8 +3,10 @@
 Rails.application.routes.draw do
   root 'posts#index'
 
-  # Skip registrations for now so no new users can sign up.
-  devise_for :users, skip: [:registrations]
+   # Clobber sign_up for now so no new users can sign up.
+  devise_for :users, path_names: {
+    sign_up: ''
+  }
 
   # Allow users to sign up and automatically populate categories and post types
   # devise_for :users, controllers: { registrations: 'registrations' }
