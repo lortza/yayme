@@ -7,9 +7,9 @@
 name: "Ruby on Rails CI"
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -38,7 +38,7 @@ jobs:
         run: bin/rails db:schema:load
       # Add or replace test runners here
       - name: Run tests
-        run: bin/rake
+        run: bundle exec rspec
       - name: Check Seeds
         run: bundle exec rake db:seed
 
