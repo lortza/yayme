@@ -7,3 +7,4 @@ ignore:
   - 'tmp/**/*'
   - 'vendor/**/*'
   - 'db/migrate/20211006000236_add_service_name_to_active_storage_blobs.active_storage.rb'
+  - 'spec/spec_helper.rb'
