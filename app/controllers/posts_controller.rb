@@ -11,10 +11,10 @@ class PostsController < ApplicationController
     }
 
     @posts = current_user.posts
-                         .includes(:categories)
-                         .search(**search_params)
-                         .by_date
-                         .paginate(page: params[:page], per_page: 50)
+      .includes(:categories)
+      .search(**search_params)
+      .by_date
+      .paginate(page: params[:page], per_page: 50)
   end
 
   def new
@@ -60,14 +60,14 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post)
-          .permit(:post_type_id,
-                  :bookmarked,
-                  :date,
-                  :description,
-                  :with_people,
-                  :image,
-                  :remove_attached_image,
-                  :url,
-                  category_ids: [])
+      .permit(:post_type_id,
+        :bookmarked,
+        :date,
+        :description,
+        :with_people,
+        :image,
+        :remove_attached_image,
+        :url,
+        category_ids: [])
   end
 end

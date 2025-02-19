@@ -19,9 +19,9 @@ class ReportsController < ApplicationController
     }
 
     @celebrations = current_user.posts
-                                .in_chronological_order
-                                .search(**search_params)
-                                .for_gratitude_and_praise
-                                .paginate(page: params[:page], per_page: 1)
+      .in_chronological_order
+      .search(**search_params)
+      .for_gratitude_and_praise
+      .paginate(page: params[:page], per_page: 1)
   end
 end
