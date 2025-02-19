@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.0'
-gem 'rails', '~> 7.0.4.3'       # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 7.2.2.1'       # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
 gem 'activestorage-dropbox', '~> 2.0' # connects activestorage and dropbox
 gem 'dropbox_api'               # dependency for the activestorage-dropbox gem
@@ -63,7 +63,7 @@ group :test do
   gem 'factory_bot_rails'       # factory support for rspec
   gem 'launchy'                 # open browser with save_and_open_page
   gem 'shoulda-matchers'        # library for easier testing syntax
-  gem 'webdrivers'              # to help with testing
+  gem "selenium-webdriver"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
