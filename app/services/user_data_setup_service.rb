@@ -14,20 +14,20 @@ class UserDataSetupService
 
     def create_categories(user)
       user.categories.create!([
-                                { name: 'Citizenship' },
-                                { name: 'Health' },
-                                { name: 'Leadership' },
-                                { name: 'Networking & Friendship' },
-                                { name: 'Skills & Competencies' },
-                              ])
+        {name: "Citizenship"},
+        {name: "Health"},
+        {name: "Leadership"},
+        {name: "Networking & Friendship"},
+        {name: "Skills & Competencies"}
+      ])
     end
 
     # rubocop:disable Metrics/MethodLength
     def create_post_types(user)
       user.post_types.create!([
-                                { name: 'Gratitude' },
-                                { name: 'TIL' },
-                              ])
+        {name: "Gratitude"},
+        {name: "TIL"}
+      ])
 
       merit_template = <<~MERIT
         ## Project
@@ -47,7 +47,7 @@ class UserDataSetupService
       MERIT
 
       user.post_types.create!(
-        name: 'Merit',
+        name: "Merit",
         description_template: merit_template
       )
 
@@ -63,7 +63,7 @@ class UserDataSetupService
       PRAISE
 
       user.post_types.create!(
-        name: 'Praise',
+        name: "Praise",
         description_template: praise_template
       )
     end

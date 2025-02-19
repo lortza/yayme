@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe PostType, type: :model do
-  context 'associations' do
+  context "associations" do
     it { should belong_to(:user) }
     it { should have_many(:posts) }
   end
 
-  describe 'a valid post_type' do
-    context 'when has valid params' do
-      it 'is valid' do
+  describe "a valid post_type" do
+    context "when has valid params" do
+      it "is valid" do
         expect(post_type).to be_valid
       end
 

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-puts '**** Running seeds...'
+puts "**** Running seeds..."
 
-user = User.find_or_create_by!(email: 'admin@email.com') do |user|
-  user.name = 'admin'
-  user.password = 'password'
-  user.password_confirmation = 'password'
+user = User.find_or_create_by!(email: "admin@email.com") do |user|
+  user.name = "admin"
+  user.password = "password"
+  user.password_confirmation = "password"
   user.admin = true
   user.save
 end
@@ -13,10 +13,10 @@ end
 # Post Types
 SeedsHelper.count_records_for(PostType) do
   names = [
-    'TIL',
-    'Merit',
-    'Praise',
-    'Gratitude'
+    "TIL",
+    "Merit",
+    "Praise",
+    "Gratitude"
   ]
   names.each do |name|
     user.post_types.find_or_create_by!(name: name)
@@ -26,9 +26,9 @@ end
 # Categories
 SeedsHelper.count_records_for(Category) do
   names = [
-    'Citizenship',
-    'Leadership',
-    'Skills & Competencies'
+    "Citizenship",
+    "Leadership",
+    "Skills & Competencies"
   ]
   names.each do |name|
     user.categories.find_or_create_by!(name: name)
@@ -44,8 +44,8 @@ SeedsHelper.count_records_for(Post) do
       post_type_id: user.post_types.sample.id,
       bookmarked: [true, false, false].sample,
       date: publish_date,
-      url: ['', '', '', Faker::Internet.url].sample,
-      given_by: ['', Faker::Name.first_name].sample,
+      url: ["", "", "", Faker::Internet.url].sample,
+      given_by: ["", Faker::Name.first_name].sample,
       description: [Faker::Lorem.paragraph(sentence_count: 10), Faker::Markdown.block_code].sample,
       created_at: publish_date,
       updated_at: publish_date

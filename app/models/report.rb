@@ -2,12 +2,12 @@
 
 class Report
   TIMEFRAMES = {
-    'Past Week' => 7,
-    'Past Month' => 30,
-    'Past Quarter' => 90,
-    'Past Half Year' => 182,
-    'Past Year' => 365,
-    'All Time' => nil
+    "Past Week" => 7,
+    "Past Month" => 30,
+    "Past Quarter" => 90,
+    "Past Half Year" => 182,
+    "Past Year" => 365,
+    "All Time" => nil
   }.freeze
 
   class << self

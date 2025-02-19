@@ -6,6 +6,6 @@ module PostsHelper
   end
 
   def display_categories(post)
-    post.categories.map(&:name).join(', ')
+    post.categories.map(&:name).join(", ")
   end
 end

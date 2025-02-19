@@ -21,7 +21,7 @@ class CategoriesController < ApplicationController
     @category = current_user.categories.new(category_params)
 
     if @category.save
-      redirect_to categories_url, notice: 'Category was successfully created.'
+      redirect_to categories_url, notice: "Category was successfully created."
     else
       render :new
     end
@@ -42,7 +42,7 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
+      format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
       format.json { head :no_content }
     end
   end

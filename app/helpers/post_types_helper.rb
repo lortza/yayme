@@ -2,6 +2,6 @@
 
 module PostTypesHelper
   def template?(post_type)
-    return '✓' if post_type.description_template.present?
+    "✓" if post_type.description_template.present?
   end
 end

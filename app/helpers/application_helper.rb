@@ -1,46 +1,46 @@
 # frozen_string_literal: true
 
-require 'coderay'
+require "coderay"
 
 module ApplicationHelper
   def page_title
     if content_for?(:title)
       content_for(:title)
     else
-      'Yay Me!'
+      "Yay Me!"
     end
   end
 
   def bootstrap_flash_class(type)
     case type
-    when 'alert', 'warning' then 'warning'
-    when 'error' then 'danger'
-    when 'notice' then 'success'
+    when "alert", "warning" then "warning"
+    when "error" then "danger"
+    when "notice" then "success"
     else
-      'info'
+      "info"
     end
   end
 
   def session_links
     if current_user
-      link_to 'Sign Out',
-              destroy_user_session_path,
-              method: :delete,
-              class: 'nav-link'
+      link_to "Sign Out",
+        destroy_user_session_path,
+        method: :delete,
+        class: "nav-link"
     else
-      link_to 'Sign In',
-              user_session_path,
-              class: 'nav-link'
+      link_to "Sign In",
+        user_session_path,
+        class: "nav-link"
     end
   end
 
-  def button_class(style = 'primary')
+  def button_class(style = "primary")
     "btn btn-sm btn-outline-#{style}"
   end
 
   class CodeRayify < Redcarpet::Render::HTML
     def block_code(code, language)
-      language = 'bash' if language.nil?
+      language = "bash" if language.nil?
       CodeRay.scan(code, language).div(line_numbers: :table)
     end
   end

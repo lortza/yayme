@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe UserDataSetupService, type: :service do
   let(:user) { create(:user) }
 
-  describe 'self.setup' do
-    context 'post types' do
-      it 'creates new records' do
+  describe "self.setup" do
+    context "post types" do
+      it "creates new records" do
         post_type_count_before = user.post_types.count
         expect(post_type_count_before).to eq(0)
 
@@ -18,17 +18,17 @@ RSpec.describe UserDataSetupService, type: :service do
         expect(post_type_count_after).to eq(4)
       end
 
-      it 'includes name and template' do
+      it "includes name and template" do
         UserDataSetupService.setup(user)
         user.reload
-        merit = PostType.find_by(name: 'Merit')
+        merit = PostType.find_by(name: "Merit")
 
-        expect(merit.description_template).to include('Problem')
+        expect(merit.description_template).to include("Problem")
       end
     end
 
-    context 'categories' do
-      it 'creates new records' do
+    context "categories" do
+      it "creates new records" do
         category_count_before = user.categories.count
         expect(category_count_before).to eq(0)
 
