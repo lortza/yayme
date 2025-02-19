@@ -1,0 +1,6 @@
+ignore:
+  # - 'some/file/in/particular.rb'
+  # - 'a/whole/directory/**/*'
+  - 'config/environments/**/*'
+  - 'config/initializers/**/*'
+  - 'db/migrate/**/*'
