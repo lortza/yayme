@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.0'
+ruby File.read(".ruby-version").strip
 gem 'rails', '~> 7.2.2.1'       # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
 gem 'activestorage-dropbox', '~> 2.0' # connects activestorage and dropbox
