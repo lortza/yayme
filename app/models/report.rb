@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Report < ApplicationRecord
+class Report
   TIMEFRAMES = {
     'Past Week' => 7,
     'Past Month' => 30,
@@ -45,7 +45,7 @@ class Report < ApplicationRecord
 
     def filter_out_common(words_hash)
       common_words = %w[a am an at as and be been for from had have i in is it of on that the this to was]
-      words_hash.select { |word, _count| common_words.exclude?(word) }
+      words_hash.except(*common_words)
     end
   end
 end
