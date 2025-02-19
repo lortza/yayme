@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'posts#index'
+  root "posts#index"
 
-   # Clobber sign_up for now so no new users can sign up.
+  # Clobber sign_up for now so no new users can sign up.
   devise_for :users, path_names: {
-    sign_up: ''
+    sign_up: ""
   }
 
   # Allow users to sign up and automatically populate categories and post types
@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   resources :categories, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   resources :raise_prep, only: [:index]
   resources :post_exports, only: [:index, :new]
-  get '/post_exports/all', to: 'post_exports#all'
+  get "/post_exports/all", to: "post_exports#all"
 
-  get '/word_cloud', to: 'reports#word_cloud'
-  get '/new_years_eve', to: 'reports#new_years_eve'
+  get "/word_cloud", to: "reports#word_cloud"
+  get "/new_years_eve", to: "reports#new_years_eve"
 end
