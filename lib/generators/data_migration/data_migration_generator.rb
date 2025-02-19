@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DataMigrationGenerator < Rails::Generators::NamedBase
+class Generators::DataMigration::DataMigrationGenerator < Rails::Generators::NamedBase
   def create_data_migration_file
     timestamp = Time.zone.now.to_s.tr('^0-9', '')[0..13]
     filepath = "db/migrate/#{timestamp}_#{file_name}.rb"
