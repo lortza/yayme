@@ -27,12 +27,12 @@ class PostType < ApplicationRecord
   has_many :posts, dependent: :destroy
 
   validates :name,
-            presence: true,
-            uniqueness: { scope: :user_id }
+    presence: true,
+    uniqueness: {scope: :user_id}
 
   def self.merit_or_praise
-    raise_types = PostType.where('name ILIKE ? OR name ILIKE ?', '%merit%', '%praise%')
-    where('post_type IN ?', raise_types)
+    raise_types = PostType.where("name ILIKE ? OR name ILIKE ?", "%merit%", "%praise%")
+    where("post_type IN ?", raise_types)
   end
 end
 # rubocop:enable Rails/UniqueValidationWithoutIndex
