@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.0'
-gem 'rails', '~> 7.0.4.3'       # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 7.2.2.1'       # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
 gem 'activestorage-dropbox', '~> 2.0' # connects activestorage and dropbox
 gem 'dropbox_api'               # dependency for the activestorage-dropbox gem
@@ -21,7 +21,6 @@ gem 'puma'                      # Use Puma as the app server
 gem 'rack', '>= 2.0.6'          # Upgrade for security update
 gem 'redcarpet', github: 'vmg/redcarpet' # markdown
 gem 'sass-rails', '~> 6.0'      # Use SCSS for stylesheets
-gem 'uglifier', '>= 1.3.0'      # Use Uglifier as compressor for JavaScript assets
 gem 'will_paginate', '~> 3.3'   # Pagination. Styles: http://mislav.github.io/will_paginate/
 # gem 'redis', '~> 4.0'           # Use Redis adapter to run Action Cable in production
 # gem 'capistrano-rails', group: :development # Use Capistrano for deployment
@@ -32,7 +31,7 @@ gem 'sentry-rails'              # Rails support for Sentry
 gem 'sentry-ruby'               # Error reporting to Sentry.io
 
 group :development, :test do
-  gem 'rspec-rails', '~> 5.0.0'
+  gem 'rspec-rails'
   gem 'better_errors'           # creates console in browser for errors
   gem 'binding_of_caller'       # goes with better_errors
   gem 'bullet'                  # detects n+1 queries
@@ -63,7 +62,7 @@ group :test do
   gem 'factory_bot_rails'       # factory support for rspec
   gem 'launchy'                 # open browser with save_and_open_page
   gem 'shoulda-matchers'        # library for easier testing syntax
-  gem 'webdrivers'              # to help with testing
+  gem "selenium-webdriver"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -10,7 +10,7 @@ class ReportsController < ApplicationController
 
     posts = current_user.posts.search(**search_params)
 
-    @words = Report.generate_word_cloud(posts: posts, minimum_count: 5)
+    @words = Report.generate_word_cloud(posts: posts, minimum_count: 3)
   end
 
   def new_years_eve
