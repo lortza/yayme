@@ -30,7 +30,8 @@ class Report
         end
       end
       filtered_words = filter_minimum_count(words, minimum_count)
-      filter_out_common(filtered_words)
+      filtered_words = filter_out_common(filtered_words)
+      filter_out_code_artifacts(filtered_words)
     end
 
     private
@@ -44,8 +45,43 @@ class Report
     end
 
     def filter_out_common(words_hash)
-      common_words = %w[a am an at as and be been for from had have i in is it of on that the this to was]
-      words_hash.except(*common_words)
+      common_words = %w[
+        a am an and are as at
+        be been being but by
+        can could
+        did do does doing done
+        for from
+        had has have having he her here hers herself him himself his how
+        i if in into is it its itself
+        just
+        me my myself
+        of on or our ours ourselves out over
+        really
+        said same she should so some such
+        than that the their theirs them themselves then there these they this those through to too
+        up us
+        very
+        was we were what when where which while who whom why will with would
+        you your yours yourself yourselves
+      ]
+
+      # Also filter short words (1-2 characters) and numeric-only strings
+      words_hash.reject do |word, _count|
+        common_words.include?(word) || word.length <= 2 || word.match?(/^\d+$/)
+      end
+    end
+
+    def filter_out_code_artifacts(words_hash)
+      words_hash.reject do |word, _count|
+        # Filter out HTML/XML tags
+        word.match?(/^<\/?[a-z][a-z0-9]*>?$/i) ||
+          # Filter out words that are mostly special characters (like {}, [], etc.)
+          word.match?(/^[^a-z]*$/i) ||
+          # Filter out words containing HTML entities
+          word.include?("&") ||
+          # Filter out common code keywords that might slip through
+          %w[div span href src alt class style function const let var return].include?(word)
+      end
     end
   end
 end

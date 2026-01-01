@@ -132,8 +132,11 @@ class Post < ApplicationRecord
   end
 
   def word_cloud
-    description.split.each_with_object({}) do |raw_word, hash|
+    cleaned_description = remove_code_blocks(description)
+    cleaned_description.split.each_with_object({}) do |raw_word, hash|
       word = stripped_word(raw_word).downcase
+      next if word.empty?
+
       hash[word].nil? ? hash[word] = 1 : hash[word] += 1
     end
   end
@@ -158,6 +161,11 @@ class Post < ApplicationRecord
 
   def purge_attached_image
     image.purge_later
+  end
+
+  def remove_code_blocks(text)
+    # Remove content between triple backticks (code blocks)
+    text.gsub(/```.*?```/m, " ")
   end
 
   def stripped_word(word)
