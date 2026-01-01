@@ -23,15 +23,19 @@ class Report
       model.all.pluck(date_field).map(&:year).uniq.sort.reverse
     end
 
-    def generate_word_cloud(posts:, minimum_count:)
+    def generate_word_cloud(user:, search_params:, minimum_count:)
+      posts = user.posts.search(**search_params)
+
       words = posts.each_with_object({}) do |post, words_hash|
         words_hash.merge!(post.word_cloud) do |_k, hash_value, incoming_value|
           hash_value + incoming_value
         end
       end
+
       filtered_words = filter_minimum_count(words, minimum_count)
       filtered_words = filter_out_common(filtered_words)
-      filter_out_code_artifacts(filtered_words)
+      filtered_words = filter_out_code_artifacts(filtered_words)
+      filter_out_template_words(filtered_words, user)
     end
 
     private
@@ -82,6 +86,35 @@ class Report
           # Filter out common code keywords that might slip through
           %w[div span href src alt class style function const let var return].include?(word)
       end
+    end
+
+    def filter_out_template_words(words_hash, user)
+      template_words = extract_all_template_words(user)
+      words_hash.except(*template_words)
+    end
+
+    def extract_all_template_words(user)
+      user.post_types
+        .where.not(description_template: [nil, ""])
+        .pluck(:description_template)
+        .flat_map { |template| extract_words_from_text(template) }
+        .uniq
+    end
+
+    def extract_words_from_text(text)
+      # Remove code blocks first
+      cleaned_text = text.gsub(/```.*?```/m, " ")
+
+      cleaned_text.split.map { |word|
+        stripped = strip_punctuation(word).downcase
+        stripped if stripped.length > 2 # Only include words longer than 2 chars
+      }.compact
+    end
+
+    def strip_punctuation(word)
+      unwanted = %w[: " . ( ) [ ] , … ... ? ! — -- ``` & ; 0 1 2 3 4 5 6 7 8 9]
+      unwanted.each { |mark| word = word.gsub(mark, "") }
+      word
     end
   end
 end
