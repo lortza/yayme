@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
   def word_cloud
     search_params = {
       text: params[:text],
-      year: params[:year],
+      year: params[:year] || Report.this_year,
       bookmarked: params[:bookmarked]
     }
 
@@ -15,7 +15,9 @@ class ReportsController < ApplicationController
 
   def new_years_eve
     search_params = {
-      year: Report.this_year
+      text: params[:text],
+      year: params[:year] || Report.this_year,
+      bookmarked: params[:bookmarked]
     }
 
     @celebrations = current_user.posts

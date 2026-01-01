@@ -1,5 +1,9 @@
 <h1>Word Cloud</h1>
-<%= render partial: 'shared/filter_form', locals: { destination_url: word_cloud_path } %>
+<details open class='mb-3'>
+  <summary class='mb-2'><h5 class="inline">Search</h5></summary>
+  
+  <%= render partial: 'shared/filter_form', locals: { destination_url: word_cloud_path } %>
+</details>
 
 <% @words.each do |word, count| %>
   <span style="<%= styler(count) %>"><%= word %></span>
