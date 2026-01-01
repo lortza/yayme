@@ -8,9 +8,11 @@ class ReportsController < ApplicationController
       bookmarked: params[:bookmarked]
     }
 
-    posts = current_user.posts.search(**search_params)
-
-    @words = Report.generate_word_cloud(posts: posts, minimum_count: 3)
+    @words = Report.generate_word_cloud(
+      user: current_user,
+      search_params: search_params,
+      minimum_count: 3
+    )
   end
 
   def new_years_eve

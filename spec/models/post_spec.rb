@@ -442,5 +442,58 @@ RSpec.describe Post, type: :model do
 
       expect(post.word_cloud).to eq(expected_output)
     end
+
+    it "removes code blocks enclosed in triple backticks" do
+      post = build(:post, description: "I wrote ```ruby\ndef hello\n  puts 'world'\nend\n``` today")
+      expected_output = {"i" => 1, "wrote" => 1, "today" => 1}
+
+      expect(post.word_cloud).to eq(expected_output)
+    end
+
+    it "handles multiple code blocks" do
+      post = build(:post, description: "First ```code block``` and second ```another block``` test")
+      expected_output = {"first" => 1, "and" => 1, "second" => 1, "test" => 1}
+
+      expect(post.word_cloud).to eq(expected_output)
+    end
+
+    it "skips empty words after stripping punctuation" do
+      post = build(:post, description: "test... ...test")
+      expected_output = {"test" => 2}
+
+      expect(post.word_cloud).to eq(expected_output)
+    end
+  end
+
+  describe "#remove_code_blocks" do
+    let(:post) { build(:post) }
+
+    it "removes content between triple backticks" do
+      text = "Hello ```code here``` world"
+      result = post.send(:remove_code_blocks, text)
+
+      expect(result).to eq("Hello   world")
+    end
+
+    it "removes multiline code blocks" do
+      text = "Start\n```\nline1\nline2\nline3\n```\nEnd"
+      result = post.send(:remove_code_blocks, text)
+
+      expect(result).to eq("Start\n \nEnd")
+    end
+
+    it "removes multiple code blocks" do
+      text = "First ```block1``` middle ```block2``` end"
+      result = post.send(:remove_code_blocks, text)
+
+      expect(result).to eq("First   middle   end")
+    end
+
+    it "returns original text if no code blocks present" do
+      text = "No code blocks here"
+      result = post.send(:remove_code_blocks, text)
+
+      expect(result).to eq(text)
+    end
   end
 end
