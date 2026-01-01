@@ -1,10 +1,33 @@
-<h1>Word Cloud</h1>
-<details open class='mb-3'>
-  <summary class='mb-2'><h5 class="inline">Search</h5></summary>
-  
-  <%= render partial: 'shared/filter_form', locals: { destination_url: word_cloud_path } %>
-</details>
+<div class="word-cloud-container">
+  <h1>Word Cloud</h1>
 
-<% @words.each do |word, count| %>
-  <span style="<%= styler(count) %>"><%= word %></span>
-<% end %>
+  <details open class='mb-3 filter-box'>
+    <summary class='mb-2 cursor-pointer'>
+      <h5 class="inline">Search</h5>
+    </summary>
+    <div class="mt-2">
+      <%= render partial: 'shared/filter_form', locals: { destination_url: word_cloud_path } %>
+    </div>
+  </details>
+
+  <% if @words.empty? %>
+    <p class="empty-message">No words found. Try adjusting your filters.</p>
+  <% else %>
+    <div class="word-cloud-box">
+      <div class="word-cloud-content">
+        <% @words.each do |word, count| %>
+          <span
+            class="<%= word_classes %>"
+            style="<%= styler(count) %>"
+            title="<%= word %>: <%= count %> occurrences">
+            <%= word %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="word-count-info">
+      <p><%= pluralize(@words.count, 'unique word') %> found</p>
+    </div>
+  <% end %>
+</div>
