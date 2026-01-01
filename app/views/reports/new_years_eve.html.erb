@@ -1,7 +1,11 @@
 <% content_for(:title, "Celebrations") %>
 <h1>Happy New Year's Eve!</h1>
 <p>Remember and celebrate all of the good things we've experienced over the past year.</p>
-<%= render partial: 'shared/filter_form', locals: { destination_url: new_years_eve_path } %>
+<details class='mb-3'>
+  <summary class='mb-2'><h5 class="inline">Search</h5></summary>
+  
+  <%= render partial: 'shared/filter_form', locals: { destination_url: new_years_eve_path } %>
+</details>
 
 
 <% @celebrations.each do |celebration| %>
