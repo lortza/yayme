@@ -24,6 +24,10 @@ class PostsController < ApplicationController
     )
   end
 
+  def show
+    authorize(@post)
+  end
+
   def edit
   end
 
