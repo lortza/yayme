@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[edit update destroy]
+  before_action :set_post, only: %i[edit show update destroy]
 
   def index
     search_params = {
@@ -24,7 +24,12 @@ class PostsController < ApplicationController
     )
   end
 
+  def show
+    authorize(@post)
+  end
+
   def edit
+    authorize(@post)
   end
 
   def create
@@ -38,14 +43,16 @@ class PostsController < ApplicationController
   end
 
   def update
+    authorize(@post)
     if @post.update(post_params)
-      redirect_to post_type_url(id: @post.post_type.id)
+      redirect_to @post
     else
       render :edit
     end
   end
 
   def destroy
+    authorize(@post)
     @post.destroy
 
     notice = "#{@post.date} #{@post.post_type_name} was successfully deleted."
@@ -55,7 +62,7 @@ class PostsController < ApplicationController
   private
 
   def set_post
-    @post = current_user.posts.find(params[:id])
+    @post = Post.find(params[:id])
   end
 
   def post_params

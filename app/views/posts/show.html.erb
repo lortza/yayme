@@ -1,24 +1,7 @@
 <% content_for(:title, @post.date) %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @post.description %>
-</p>
+<%= tag.div class: 'mb-3' do %>
+<%= link_to "Back to #{@post.post_type.name} Posts", post_type_path(@post.post_type), class: button_class('btn btn-primary mt-3') %>
+<% end %>
 
-<p>
-  <strong>Post type:</strong>
-  <%= @post.post_type_id %>
-</p>
-
-<p>
-  <strong>Url:</strong>
-  <%= @post.url %>
-</p>
-
-<p>
-  <strong>Bookmarked:</strong>
-  <%= @post.bookmarked %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<%= render @post %>
