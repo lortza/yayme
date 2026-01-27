@@ -3,7 +3,7 @@
 class PostPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.joins(:post_type).where(post_types: { user_id: user.id })
+      scope.joins(:post_type).where(post_types: {user_id: user.id})
     end
   end
 
