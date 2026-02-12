@@ -2,10 +2,10 @@
   <div class="card-header">
     <%= post.post_type_name %>: <%= post.date.to_formatted_s(:with_month_name) %>
     <% if post.bookmarked? %>
-      <i class="fas fa-bookmark float-right ml-2"></i>
+      <i class="fas fa-bookmark float-end ms-2"></i>
     <% end %>
-    <span class="float-right ml-2"><%= link_to 'edit', edit_post_path(post), class: button_class('btn btn-sm btn-light float-right ml-2') %></span>
-    <span class="float-right ml-2"><%= link_to 'show', post_path(post), class: button_class('btn btn-sm btn-light float-right ml-2') %></span>
+    <span class="float-end ms-2"><%= link_to 'edit', edit_post_path(post), class: button_class('btn btn-sm btn-light float-end ms-2') %></span>
+    <span class="float-end ms-2"><%= link_to 'show', post_path(post), class: button_class('btn btn-sm btn-light float-end ms-2') %></span>
   </div>
   <div class="card-body">
     <%= image_tag(post.image, class: 'image', title: post.date) if post.image.present? %>
@@ -16,7 +16,7 @@
     <small class="text-muted">
       <%= display_categories(post) %>
 
-      <%= link_to 'related info', post.url, target: '_blank', class: 'float-right ml-2' if post.url.present? %>
+      <%= link_to 'related info', post.url, target: '_blank', class: 'float-end ms-2' if post.url.present? %>
     </small>
   </div>
 </div>

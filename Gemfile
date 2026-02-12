@@ -10,7 +10,6 @@ gem "activestorage-dropbox", "~> 2.0" # connects activestorage and dropbox
 gem "dropbox_api"               # dependency for the activestorage-dropbox gem
 gem "bootsnap", ">= 1.1.0", require: false # Reduces boot times through caching; required in config/boot.rb
 gem "coderay"                   # syntax highlighting: http://coderay.rubychan.de/
-gem "coffee-rails"              # Use CoffeeScripgt for .coffee assets and views
 gem "devise"                    # User authentication
 gem "image_processing", "~> 1.2" # Creates various sizes for ActiveStorage image files
 gem "jbuilder", "~> 2.5"        # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -20,7 +19,6 @@ gem "pg", ">= 0.18", "< 2.0"
 gem "puma"                      # Use Puma as the app server
 gem "rack", ">= 2.0.6"          # Upgrade for security update
 gem "redcarpet", github: "vmg/redcarpet" # markdown
-gem "sass-rails", "~> 6.0"      # Use SCSS for stylesheets
 gem "will_paginate", "~> 3.3"   # Pagination. Styles: http://mislav.github.io/will_paginate/
 # gem 'redis', '~> 4.0'           # Use Redis adapter to run Action Cable in production
 # gem 'capistrano-rails', group: :development # Use Capistrano for deployment
@@ -29,7 +27,9 @@ gem "net-pop", require: false
 gem "net-smtp", require: false # Send internet mail via SMTP
 gem "sentry-rails"              # Rails support for Sentry
 gem "sentry-ruby"               # Error reporting to Sentry.io
+gem "sprockets-rails"           # The original asset pipeline for Rails 
 gem 'pundit'                    # Authorization library
+gem "oauth2", "~> 1.4"
 
 group :development, :test do
   gem "rspec-rails"
@@ -55,7 +55,6 @@ group :development do
   # gem "rubocop", require: false
   # gem 'rubocop-performance'
   # gem 'rubocop-rails'
-  gem "scss_lint", require: false      # css linter
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "web-console", ">= 3.3.0"        # Access an IRB console by using <%= console %> anywhere in the code.
@@ -70,3 +69,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
+

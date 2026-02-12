@@ -1,6 +1,6 @@
 <% content_for(:title, "New Post") %>
 
-<%= link_to 'Back', posts_path, class: button_class('secondary float-right') %>
+<%= link_to 'Back', posts_path, class: button_class('secondary float-end') %>
 
 <h2><%= @post.post_type_id ? "New #{@post.post_type.name} Post": 'New Post' %></h2>
 

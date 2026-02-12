@@ -1,0 +1,95 @@
+body { background-image: url('hatch_marks.png'); }
+
+.right { float: right; }
+
+.footer--delete {
+  border-top: 1px solid var(--gray);
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+
+.image { max-width: 600px; }
+
+@media screen and (max-width: 850px) {
+  .image { max-width: 100%; }
+}
+
+.environment-banner {
+  color: var(--white);
+  font-family: monospace;
+  font-size: 1.25em;
+  padding: .75em;
+  text-align: center;
+}
+
+/* Links */
+a { color: var(--link-color); }
+
+
+/* Forms */
+form label {
+  font-weight: 600;
+}
+
+.file-field { color: var(--medium-gray); }
+
+
+/* SEARCH BAR */
+.search-icon {
+  color: var(--medium-gray);
+  float: right;
+  position: relative;
+  right: 14px;
+  top: 25px;
+}
+
+.clear-search {
+  font-size: 90%;
+  margin-bottom: 2em;
+  text-align: center;
+}
+
+.clear-search a {
+  color: var(--medium-gray);
+}
+
+.brand-image {
+  height: 25px;
+}
+
+
+/* BOOTSTRAP OVERRIDES */
+/* .card { height: var(--card-height); } */
+
+.card .card-img-top {
+  background-color: var(--gray);
+  height: var(--card-image-height);
+}
+
+.card-title {
+  color: var(--gray);
+  font-style: italic;
+}
+
+.btn-xs {
+  font-size: .4em;
+  padding: 1px 4px;
+}
+
+.dropdown-menu .gratitude-nav-item:hover {
+  background-color: color-mix(in srgb, var(--gratitude) 30%, white);
+}
+
+.dropdown-menu .praise-nav-item:hover {
+  background-color: color-mix(in srgb, var(--praise) 70%, white);
+}
+
+.dropdown-menu .til-nav-item:hover {
+  background-color: color-mix(in srgb, var(--til) 80%, white);
+}
+
+.dropdown-menu .merit-nav-item:hover,
+.dropdown-menu .hype-nav-item:hover,
+.dropdown-menu .pdp-nav-item:hover {
+  background-color: color-mix(in srgb, var(--merit) 60%, white);
+}
