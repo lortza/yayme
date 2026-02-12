@@ -1,8 +1,6 @@
-@import 'variables';
-
 code {
-  background-color: $inline-code;
-  border: 1px solid darken($inline-code, 10%);
+  background-color: var(--inline-code);
+  border: 1px solid color-mix(in srgb, var(--inline-code) 90%, black);
   border-radius: 2px;
   padding: 1px 3px;
 }
@@ -27,7 +25,7 @@ table.CodeRay {
   border-collapse: collapse;
   width: 100%;
   padding: 2px;
-  background-color: $code-block;
+  background-color: var(--code-block);
 }
 table.CodeRay td {
   padding: 1em 0.5em;
@@ -35,7 +33,7 @@ table.CodeRay td {
 }
 
 .CodeRay .line-numbers, .CodeRay .no {
-  background-color: $code-block;
+  background-color: var(--code-block);
   color: #AAA;
   text-align: right;
   padding-right: 15px;

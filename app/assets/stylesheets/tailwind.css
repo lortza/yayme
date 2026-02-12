@@ -1,9 +1,7 @@
-@import 'variables';
-
-// Display
+/* Display */
 .inline {display: inline;}
 
-// Margin
+/* Margin */
 .mt-1 { margin-top: .25rem; }
 .mb-1 { margin-bottom: .25rem; }
 .mt-2 { margin-top: .5rem; }
@@ -13,5 +11,5 @@
 .mt-5 { margin-top: 1.25rem; }
 .mb-5 { margin-bottom: 1.25rem; }
 
-// Cursor
+/* Cursor */
 .cursor-pointer { cursor: pointer; }
