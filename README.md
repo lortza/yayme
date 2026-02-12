@@ -32,8 +32,7 @@ Live on heroku as [yayme](http://yay-me.herokuapp.com)
 ### Linters
 This project uses these linters in CI:
 * [reek](https://github.com/troessner/reek)
-* [scss-lint](https://github.com/sds/scss-lint) | 
-* [standard rb](https://github.com/standardrb/standard) (in support of the [VS Code extension](https://github.com/standardrb/vscode-standard-ruby?tab=readme-ov-file)). If VS Code is being a jerk about not recognizing the right version of ruby, you can set the ruby version via the VS Code terminal like: `RBENV_VERSION='3.3.6'`
+* [standard rb](https://github.com/standardrb/standard) (in support of the [VS Code extension](https://github.com/standardrb/vscode-standard-ruby?tab=readme-ov-file)). If VS Code is being a jerk about not recognizing the right version of ruby, you can set the ruby version via the VS Code terminal like: `RBENV_VERSION='3.3.10'`
 * FactoryBot.lint -- coming soon
 
 Run them locally on your machine like this:
@@ -41,8 +40,6 @@ Run them locally on your machine like this:
 bundle exec reek
 
 bundle exec standardrb
-
-bundle exec scss-lint app/assets/stylesheets/**.scss
 ```
 
 ## Related Docs
