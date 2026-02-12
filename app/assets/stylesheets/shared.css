@@ -27,15 +27,8 @@ a { color: var(--link-color); }
 
 
 /* Forms */
-.field label {
+form label {
   font-weight: 600;
-  margin-bottom: 0;
-  margin-top: 1rem;
-}
-
-.field .form-check-label {
-  font-weight: normal;
-  margin-top: 0;
 }
 
 .file-field { color: var(--medium-gray); }
