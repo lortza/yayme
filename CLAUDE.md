@@ -8,6 +8,18 @@ YayMe is a Rails 7.2 microposting application for tracking personal accomplishme
 
 Live on Heroku: http://yay-me.herokuapp.com
 
+**Tech Stack:**
+- Ruby 3.3.10
+- Rails 7.2.3
+- PostgreSQL
+- Bootstrap 5.3.3
+- Plain CSS with CSS custom properties (no SASS/SCSS)
+- Vanilla JavaScript
+- RSpec for testing
+- Standard RB for linting
+- Devise for authentication
+- Pundit for authorization
+
 ## Development Setup
 
 ```bash
@@ -71,22 +83,18 @@ Post
 - Posts access their user via `post.post_type.user`
 
 ### Non-Standard Models
-
 - **Report** (`app/models/report.rb`): Plain Ruby class (not ActiveRecord) providing class methods for analytics and word cloud generation
 - **Sortable** (`app/models/sortable.rb`): Concern for sorting functionality
 
 ### Services
-
 - **UserDataSetupService** (`app/services/user_data_setup_service.rb`): Creates default PostTypes and Categories for new users. Called from `RegistrationsController` when users sign up.
 
 ### Authorization
-
 Uses **Pundit** for authorization. Policies are in `app/policies/`. Always check policy permissions before controller actions that modify resources.
 
 ## Key Features & Implementation Details
 
 ### Post Search & Filtering
-
 Posts can be filtered by:
 - **Timeframes**: "Past Week" (7 days), "Past Month" (30 days), "Past Quarter" (90 days), "Past Half Year" (182 days), "Past Year" (365 days), "All Time"
 - **Year**: Specific calendar year
@@ -135,7 +143,6 @@ Post.in_chronological_order      # Order by date ascending
 ```
 
 ### Date Queries
-
 - `Post.for_year(year)` - Posts for specific year using PostgreSQL `extract(year from date)`
 - `Post.for_timeframe(label)` - Posts within timeframe (e.g., "Past Week" = last 7 days)
 - Timeframe constants defined in `Report::TIMEFRAMES`
@@ -159,22 +166,26 @@ PostTypes can have `description_template` (markdown text). When creating a new p
 - `lighten(color, %)` → `color-mix(in srgb, color X%, white)`
 
 ## Testing
-
 - **Framework**: RSpec with FactoryBot for fixtures
 - **Matchers**: Shoulda Matchers for model testing
 - **Structure**: `spec/` directory mirrors `app/` structure
 - Tests include models, controllers, services, and policies
 
 ## CI/CD
-
 - **CircleCI**: Runs tests and linters on every push
 - **CodeClimate**: Monitors maintainability (badge in README)
 - **Dependabot**: Automated dependency updates
 
 ## Common Gotchas
-
 - **User signup is disabled by default** - Must modify routes.rb to allow new user registration
 - **Dropbox required** - Image uploads require Dropbox API credentials configured
 - **Dev credentials in seeds** - Don't commit actual credentials, use seeds.rb pattern
 - **PostType ownership** - Posts don't directly belong to users; access user via `post.post_type.user`
 - **Timeframe labels** - Must use exact strings from `Report::TIMEFRAMES` keys for filtering
+
+## Coding Style
+- IMPORTANT: Any new code should be written in idiomatic Rails 8 (or the current version). This means reaching for a Turbo solution (turbo links, streams, frames, or Stimulus) before writing vanilla javascript.
+- Do not ask to run the server
+- Any new features must have tests written for them
+- Use rails helpers instead of vanilla HTML to avoid interpolating with ERB tags
+- When using a Rails `tag` helper, in block format, the options should be wrapped in parenthesis.
