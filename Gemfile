@@ -19,7 +19,7 @@ gem "pg"                        # Use PostgreSQL as the database
 gem "puma"                      # Use Puma as the app server
 gem "rack"                      # modular Ruby webserver interface. Required for Action Cable and other middleware.
 gem "redcarpet", github: "vmg/redcarpet" # markdown
-gem "will_paginate", "~> 3.3"   # Pagination. Styles: http://mislav.github.io/will_paginate/
+gem "pagy"                      # Pagination: https://github.com/ddnexus/pagy?tab=readme-ov-file. Styles: https://ddnexus.github.io/pagy/resources/stylesheets/
 
 # gem "net-imap", require: false  # IMAP client library for Ruby
 # gem "net-pop", require: false   # POP3 client library for Ruby
