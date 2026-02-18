@@ -19,7 +19,7 @@
         <td><%= link_to post_type.name, post_type %></td>
         <td style='text-align: center;'><%= template?(post_type) %></td>
         <td><%= link_to 'Edit', edit_post_type_path(post_type) %></td>
-        <td><%= link_to 'Delete', post_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', post_type, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
