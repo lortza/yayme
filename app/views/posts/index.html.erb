@@ -6,4 +6,4 @@
   <%= render partial: 'post', locals: { post: post } %>
 <% end %>
 
-<%= will_paginate @posts, :page_links => false %>
+<%== @pagy.series_nav %>

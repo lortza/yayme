@@ -22,10 +22,11 @@ class ReportsController < ApplicationController
       bookmarked: params[:bookmarked]
     }
 
-    @celebrations = current_user.posts
+    celebrations = current_user.posts
       .in_chronological_order
       .search(**search_params)
       .for_gratitude_and_praise
-      .paginate(page: params[:page], per_page: 1)
+
+    @pagy, @celebrations = pagy(celebrations, limit: 1)
   end
 end

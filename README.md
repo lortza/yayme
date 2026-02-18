@@ -60,3 +60,4 @@ bundle exec standardrb
 * [Dependabot](https://app.dependabot.com/accounts/lortza/) dependency manager
 * [Shoulda Matchers](https://github.com/thoughtbot/shoulda-matchers) for testing model relationships and validations
 * [FactoryBot](https://github.com/thoughtbot/factory_bot/blob/master/GETTING_STARTED.md) to build test objects
+* [Pagy](https://ddnexus.github.io/pagy/guides/quick-start/) for pagination

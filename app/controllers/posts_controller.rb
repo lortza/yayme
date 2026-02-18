@@ -10,11 +10,12 @@ class PostsController < ApplicationController
       bookmarked: params[:bookmarked]
     }
 
-    @posts = current_user.posts
+    posts = current_user.posts
       .includes(:categories)
       .search(**search_params)
       .by_date
-      .paginate(page: params[:page], per_page: 50)
+
+    @pagy, @posts = pagy(posts, limit: 50)
   end
 
   def new
