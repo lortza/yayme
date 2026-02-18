@@ -54,6 +54,11 @@ bundle exec reek
 bundle exec standardrb
 ```
 
+https://guides.rubyonrails.org/8_0_release_notes.html
+
+## Solid Trio Implementation
+The Solid Trio (`solid_cache`, `solid_cable`, `solid_queue`) are implemented as tables in 
+
 ## Related Docs
 * [Devise](https://github.com/plataformatec/devise) user authentication (sign up/in/out)
 * [Pundit](https://github.com/varvet/pundit) user authorization (restricts access to content)
