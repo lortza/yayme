@@ -11,11 +11,11 @@ module ApplicationHelper
     end
   end
 
-  def bootstrap_flash_class(type)
+  def bootstrap_color_class(type)
     case type
-    when "alert", "warning" then "warning"
+    when "alert" || "warning" then "warning"
     when "error" then "danger"
-    when "notice" then "success"
+    when "success" then "success"
     else
       "info"
     end
