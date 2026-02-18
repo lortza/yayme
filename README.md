@@ -21,7 +21,7 @@ Live on heroku as [yayme](http://yay-me.herokuapp.com)
 - PostgreSQL
 - Bootstrap
 - Plain CSS with CSS custom properties (no SASS/SCSS)
-- Vanilla JavaScript
+- Stimulus for Javascript
 - RSpec for testing
 - Standard RB for linting
 - Devise for authentication
@@ -57,7 +57,7 @@ bundle exec standardrb
 https://guides.rubyonrails.org/8_0_release_notes.html
 
 ## Solid Trio Implementation
-The Solid Trio (`solid_cache`, `solid_cable`, `solid_queue`) are implemented as tables in 
+The Solid Trio (`solid_cache`, `solid_cable`, `solid_queue`) are implemented as tables in the main database instead of separate tables.
 
 ## Related Docs
 * [Devise](https://github.com/plataformatec/devise) user authentication (sign up/in/out)
