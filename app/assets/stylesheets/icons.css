@@ -8,12 +8,3 @@
 
 .star-outline:link,
 .star-outline:visited { color: var(--light-gray); }
-
-/* WIP idea to replace Icon ruby class */
-/* .icon-back { */
-  /* @extend .icon; */
-  /* @extend .left; */
-  /* @extend .nav-link-icon; */
-  /* @extend .fas; */
-  /* @extend .fa-arrow-left; */
-/* } */

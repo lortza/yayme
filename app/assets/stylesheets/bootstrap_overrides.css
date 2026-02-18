@@ -1,0 +1,35 @@
+/* BOOTSTRAP OVERRIDES */
+/* .card { height: var(--card-height); } */
+
+.card .card-img-top {
+  background-color: var(--gray);
+  height: var(--card-image-height);
+}
+
+.card-title {
+  color: var(--gray);
+  font-style: italic;
+}
+
+.btn-xs {
+  font-size: .4em;
+  padding: 1px 4px;
+}
+
+.dropdown-menu .gratitude-nav-item:hover {
+  background-color: color-mix(in srgb, var(--gratitude) 30%, white);
+}
+
+.dropdown-menu .praise-nav-item:hover {
+  background-color: color-mix(in srgb, var(--praise) 70%, white);
+}
+
+.dropdown-menu .til-nav-item:hover {
+  background-color: color-mix(in srgb, var(--til) 80%, white);
+}
+
+.dropdown-menu .merit-nav-item:hover,
+.dropdown-menu .hype-nav-item:hover,
+.dropdown-menu .pdp-nav-item:hover {
+  background-color: color-mix(in srgb, var(--merit) 60%, white);
+}
