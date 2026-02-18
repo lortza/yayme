@@ -14,10 +14,11 @@ class PostTypesController < ApplicationController
       bookmarked: params[:bookmarked]
     }
 
-    @posts = @post_type.posts
+    posts = @post_type.posts
       .search(**search_params)
       .by_date
-      .paginate(page: params[:page], per_page: 50)
+
+    @pagy, @posts = pagy(posts, items: 50)
   end
 
   def new
