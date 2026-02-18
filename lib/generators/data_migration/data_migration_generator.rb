@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "rails/generators"
+
 class Generators::DataMigration::DataMigrationGenerator < Rails::Generators::NamedBase
   def create_data_migration_file
     timestamp = Time.zone.now.to_s.tr("^0-9", "")[0..13]
