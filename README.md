@@ -15,6 +15,18 @@ Live on heroku as [yayme](http://yay-me.herokuapp.com)
 * takes codeblocks in markdown
 * create markdown templates for types of posts
 
+## Tech Stack
+- Ruby
+- Rails
+- PostgreSQL
+- Bootstrap
+- Plain CSS with CSS custom properties (no SASS/SCSS)
+- Vanilla JavaScript
+- RSpec for testing
+- Standard RB for linting
+- Devise for authentication
+- Pundit for authorization
+
 ## Getting Started
 
 * Fork & Clone

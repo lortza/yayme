@@ -4,7 +4,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby File.read(".ruby-version").strip
-gem "rails", "~> 7.2.2.1"       # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem "rails", "~> 7.2.3"       # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
 gem "activestorage-dropbox", "~> 2.0" # connects activestorage and dropbox
 gem "dropbox_api"               # dependency for the activestorage-dropbox gem
@@ -12,19 +12,19 @@ gem "bootsnap", ">= 1.1.0", require: false # Reduces boot times through caching;
 gem "coderay"                   # syntax highlighting: http://coderay.rubychan.de/
 gem "devise"                    # User authentication
 gem "image_processing", "~> 1.2" # Creates various sizes for ActiveStorage image files
-gem "jbuilder", "~> 2.5"        # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "loofah", ">= 2.2.3"        # Upgrade for security update
-gem "nokogiri", ">= 1.8.5"      # Upgrade for security update
-gem "pg", ">= 0.18", "< 2.0"
+gem "jbuilder"                   # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem "loofah"                    # HTML sanitizer
+gem "nokogiri"                  # HTML, XML, SAX, and Reader parsers with XPath and CSS selector support
+gem "pg"                        # Use PostgreSQL as the database
 gem "puma"                      # Use Puma as the app server
-gem "rack", ">= 2.0.6"          # Upgrade for security update
+gem "rack"                      # modular Ruby webserver interface. Required for Action Cable and other middleware.
 gem "redcarpet", github: "vmg/redcarpet" # markdown
 gem "will_paginate", "~> 3.3"   # Pagination. Styles: http://mislav.github.io/will_paginate/
-# gem 'redis', '~> 4.0'           # Use Redis adapter to run Action Cable in production
-# gem 'capistrano-rails', group: :development # Use Capistrano for deployment
-gem "net-imap", require: false
-gem "net-pop", require: false
-gem "net-smtp", require: false # Send internet mail via SMTP
+
+# gem "net-imap", require: false  # IMAP client library for Ruby
+# gem "net-pop", require: false   # POP3 client library for Ruby
+# gem "net-smtp", require: false  # Send internet mail via SMTP protocol
+
 gem "sentry-rails"              # Rails support for Sentry
 gem "sentry-ruby"               # Error reporting to Sentry.io
 gem "sprockets-rails"           # The original asset pipeline for Rails 
@@ -36,7 +36,7 @@ group :development, :test do
   gem "better_errors"           # creates console in browser for errors
   gem "binding_of_caller"       # goes with better_errors
   gem "bullet"                  # detects n+1 queries
-  gem "byebug", platforms: %i[mri mingw x64_mingw] # Call 'byebug' anywhere in the code to get a debugger console
+  gem "byebug", platforms: %i[mri windows] # Call 'byebug' anywhere in the code to get a debugger console
   gem "faker"                   # creates seed data for specs
   gem "pry-rails"
   gem "reek" # https://github.com/troessner/reek/blob/master/docs/Code-Smells.md
@@ -49,8 +49,6 @@ group :development do
   gem "magic_frozen_string_literal"
   gem "rails-erd" # , require: false   # generates table diagram run `bundle exec erd`
   gem "rubycritic", require: false     # provides stats on code build
-  # Spring speeds up development by keeping your application running
-  # in the background. Read more: https://github.com/rails/spring
   gem "standard", ">= 1.35.1"          # Linter for ruby files
   # gem "rubocop", require: false
   # gem 'rubocop-performance'
@@ -68,5 +66,5 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
+gem "tzinfo-data", platforms: %i[windows jruby]
 
