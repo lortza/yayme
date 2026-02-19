@@ -1,5 +1,27 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: posts
+#
+#  id           :bigint           not null, primary key
+#  bookmarked   :boolean          default(FALSE)
+#  date         :date             not null
+#  description  :text
+#  given_by     :text
+#  url          :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  post_type_id :bigint           not null
+#
+# Indexes
+#
+#  index_posts_on_post_type_id  (post_type_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (post_type_id => post_types.id)
+#
 require "rails_helper"
 
 RSpec.describe Post, type: :model do
