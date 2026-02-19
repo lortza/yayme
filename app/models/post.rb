@@ -28,7 +28,11 @@ class Post < ApplicationRecord
   belongs_to :post_type
   has_many :post_categories, dependent: :destroy
   has_many :categories, through: :post_categories
-  has_one_attached :image
+  has_one_attached :image do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100, 100]
+    attachable.variant :preview, resize_to_limit: [200, 200]
+    attachable.variant :original, resize_to_limit: [2000, 2000]
+  end
 
   validate :acceptable_image
   validates :date,
@@ -37,6 +41,8 @@ class Post < ApplicationRecord
 
   attr_accessor :remove_attached_image
   after_save :purge_attached_image, if: :remove_attached_image?
+  after_commit :process_image, on: [:create, :update],
+    if: -> { image.attached? && !image.blob.metadata["processed"] }
 
   delegate :name, to: :post_type, prefix: true
   alias_attribute :with_people, :given_by
@@ -144,13 +150,56 @@ class Post < ApplicationRecord
   def acceptable_image
     return unless image.attached?
 
-    if image.byte_size > 1.megabyte
-      image_size = (image.byte_size / 1_000_000.0).round(2)
-      errors.add(:image, "size #{image_size} MB exceeds 1 MB limit")
-    end
-
     acceptable_types = ["image/jpeg", "image/jpg", "image/png"]
     errors.add(:image, "must be a JPEG or PNG") unless acceptable_types.include?(image.content_type)
+  end
+
+  def process_image
+    blob = image.blob
+    return if blob.metadata["processed"]
+
+    blob.open do |tempfile|
+      compressed_path = compress_image_to_500kb(tempfile, blob.filename.to_s)
+
+      new_blob = ActiveStorage::Blob.create_and_upload!(
+        io: File.open(compressed_path, "rb"),
+        filename: blob.filename,
+        content_type: blob.content_type,
+        metadata: {"processed" => true}
+      )
+
+      image.attach(new_blob)
+    ensure
+      File.delete(compressed_path) if compressed_path && File.exist?(compressed_path)
+    end
+  rescue => e
+    Rails.logger.error("Image processing failed for Post #{id}: #{e.message}")
+  end
+
+  def compress_image_to_500kb(tempfile, filename)
+    img = MiniMagick::Image.open(tempfile.path)
+    img.resize("2000x2000>")
+    img.quality("85")
+
+    ext = File.extname(filename).downcase
+    ext = ".jpg" if ext == ".jpeg"
+    output_path = Rails.root.join("tmp", "#{SecureRandom.hex}#{ext}").to_s
+    img.write(output_path)
+
+    if File.size(output_path) > 500.kilobytes
+      img = MiniMagick::Image.open(output_path)
+      img.quality("70")
+      img.write(output_path)
+    end
+
+    if File.size(output_path) > 500.kilobytes
+      img = MiniMagick::Image.open(output_path)
+      img.resize("1200x1200>")
+      img.quality("70")
+      img.write(output_path)
+    end
+
+    output_path
   end
 
   private
