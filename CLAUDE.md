@@ -4,13 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-YayMe is a Rails 7.2 microposting application for tracking personal accomplishments across different categories: TILs (Today I Learned), Merit, Praise, and Gratitude. Posts support markdown with code syntax highlighting (via CodeRay), image attachments (via ActiveStorage + Dropbox), and can be organized with custom categories and filtered by timeframes.
+YayMe is a Rails microposting application for tracking personal accomplishments across different categories: TILs (Today I Learned), Merit, Praise, and Gratitude. Posts support markdown with code syntax highlighting (via CodeRay), image attachments (via ActiveStorage + Dropbox), and can be organized with custom categories and filtered by timeframes.
 
 Live on Heroku: http://yay-me.herokuapp.com
 
 **Tech Stack:**
 - Ruby 3.3.10
-- Rails 7.2.3
+- Rails 8.0.0
 - PostgreSQL
 - Bootstrap 5.3.3
 - Plain CSS with CSS custom properties (no SASS/SCSS)

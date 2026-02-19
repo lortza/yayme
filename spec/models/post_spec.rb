@@ -465,6 +465,212 @@ RSpec.describe Post, type: :model do
     end
   end
 
+  describe "#acceptable_image" do
+    context "when no image is attached" do
+      it "is valid" do
+        post = build(:post)
+        expect(post).to be_valid
+      end
+    end
+
+    context "when a JPEG is attached" do
+      it "is valid" do
+        post = build(:post)
+        without_partial_double_verification do
+          allow(post.image).to receive(:attached?).and_return(true)
+          allow(post.image).to receive(:content_type).and_return("image/jpeg")
+        end
+        expect(post).to be_valid
+      end
+    end
+
+    context "when a PNG is attached" do
+      it "is valid" do
+        post = build(:post)
+        without_partial_double_verification do
+          allow(post.image).to receive(:attached?).and_return(true)
+          allow(post.image).to receive(:content_type).and_return("image/png")
+        end
+        expect(post).to be_valid
+      end
+    end
+
+    context "when a non-image file is attached" do
+      it "is invalid" do
+        post = build(:post)
+        without_partial_double_verification do
+          allow(post.image).to receive(:attached?).and_return(true)
+          allow(post.image).to receive(:content_type).and_return("application/pdf")
+        end
+        expect(post).not_to be_valid
+        expect(post.errors[:image]).to include("must be a JPEG or PNG")
+      end
+    end
+
+    context "when an image of any size is attached" do
+      it "is valid regardless of file size" do
+        post = build(:post)
+        without_partial_double_verification do
+          allow(post.image).to receive(:attached?).and_return(true)
+          allow(post.image).to receive(:content_type).and_return("image/jpeg")
+        end
+        expect(post).to be_valid
+      end
+    end
+  end
+
+  describe "#process_image" do
+    let(:post) { create(:post) }
+    let(:tempfile) { Tempfile.new("input") }
+    let(:result) { Tempfile.new("result") }
+    let(:blob) { instance_double(ActiveStorage::Blob, filename: ActiveStorage::Filename.new("photo.jpg"), content_type: "image/jpeg") }
+    let(:new_blob) { instance_double(ActiveStorage::Blob) }
+
+    before do
+      without_partial_double_verification do
+        allow(post.image).to receive(:blob).and_return(blob)
+        allow(post.image).to receive(:attach)
+      end
+      allow(result).to receive(:rewind)
+      allow(result).to receive(:close!)
+      allow(ActiveStorage::Blob).to receive(:create_and_upload!).and_return(new_blob)
+    end
+
+    context "when the blob has already been processed" do
+      before { allow(blob).to receive(:metadata).and_return({"processed" => true}) }
+
+      it "skips processing" do
+        expect(post).not_to receive(:compress_image_to_500kb)
+        post.send(:process_image)
+      end
+    end
+
+    context "when the blob has not been processed" do
+      before do
+        allow(blob).to receive(:metadata).and_return({})
+        allow(blob).to receive(:open).and_yield(tempfile)
+        allow(post).to receive(:compress_image_to_500kb).and_return(result)
+      end
+
+      it "compresses the image" do
+        expect(post).to receive(:compress_image_to_500kb).with(tempfile).and_return(result)
+        post.send(:process_image)
+      end
+
+      it "creates a new blob marked as processed" do
+        expect(ActiveStorage::Blob).to receive(:create_and_upload!).with(
+          hash_including(metadata: {"processed" => true})
+        )
+        post.send(:process_image)
+      end
+
+      it "attaches the new blob to the image" do
+        without_partial_double_verification do
+          expect(post.image).to receive(:attach).with(new_blob)
+        end
+        post.send(:process_image)
+      end
+
+      it "cleans up the result tempfile" do
+        expect(result).to receive(:close!)
+        post.send(:process_image)
+      end
+    end
+
+    context "when processing raises an error" do
+      before do
+        allow(blob).to receive(:metadata).and_return({})
+        allow(blob).to receive(:open).and_raise(StandardError, "disk error")
+      end
+
+      it "logs the error" do
+        expect(Rails.logger).to receive(:error).with(/Image processing failed for Post #{post.id}/)
+        post.send(:process_image)
+      end
+
+      it "does not raise" do
+        expect { post.send(:process_image) }.not_to raise_error
+      end
+    end
+  end
+
+  describe "#compress_image_to_500kb" do
+    let(:post) { build(:post) }
+    let(:input) { Tempfile.new("input") }
+    let(:pipeline) { double("pipeline", resize_to_limit: nil, saver: nil, call: nil) }
+
+    before do
+      allow(pipeline).to receive(:resize_to_limit).and_return(pipeline)
+      allow(pipeline).to receive(:saver).and_return(pipeline)
+      allow(ImageProcessing::MiniMagick).to receive(:source).and_return(pipeline)
+    end
+
+    context "when the first pass produces an image <= 500kb" do
+      let(:small_result) { Tempfile.new("small") }
+
+      before { allow(small_result).to receive(:size).and_return(300.kilobytes) }
+
+      it "returns after the first pass" do
+        allow(pipeline).to receive(:call).and_return(small_result)
+        result = post.send(:compress_image_to_500kb, input)
+        expect(result).to eq(small_result)
+      end
+
+      it "does not attempt further compression" do
+        allow(pipeline).to receive(:call).and_return(small_result)
+        expect(pipeline).to receive(:call).once
+        post.send(:compress_image_to_500kb, input)
+      end
+    end
+
+    context "when the first pass still exceeds 500kb" do
+      let(:large_result) { Tempfile.new("large") }
+      let(:medium_result) { Tempfile.new("medium") }
+
+      before do
+        allow(large_result).to receive(:size).and_return(600.kilobytes)
+        allow(large_result).to receive(:close!)
+        allow(medium_result).to receive(:size).and_return(400.kilobytes)
+        allow(pipeline).to receive(:call).and_return(large_result, medium_result)
+      end
+
+      it "returns after the second pass" do
+        result = post.send(:compress_image_to_500kb, input)
+        expect(result).to eq(medium_result)
+      end
+
+      it "cleans up the first pass result" do
+        expect(large_result).to receive(:close!)
+        post.send(:compress_image_to_500kb, input)
+      end
+    end
+
+    context "when both first and second passes exceed 500kb" do
+      let(:large_result1) { Tempfile.new("large1") }
+      let(:large_result2) { Tempfile.new("large2") }
+      let(:final_result) { Tempfile.new("final") }
+
+      before do
+        allow(large_result1).to receive(:size).and_return(700.kilobytes)
+        allow(large_result1).to receive(:close!)
+        allow(large_result2).to receive(:size).and_return(600.kilobytes)
+        allow(large_result2).to receive(:close!)
+        allow(pipeline).to receive(:call).and_return(large_result1, large_result2, final_result)
+      end
+
+      it "returns the third pass result" do
+        result = post.send(:compress_image_to_500kb, input)
+        expect(result).to eq(final_result)
+      end
+
+      it "cleans up both intermediate results" do
+        expect(large_result1).to receive(:close!)
+        expect(large_result2).to receive(:close!)
+        post.send(:compress_image_to_500kb, input)
+      end
+    end
+  end
+
   describe "#remove_code_blocks" do
     let(:post) { build(:post) }
 

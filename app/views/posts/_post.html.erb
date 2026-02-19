@@ -8,7 +8,7 @@
     <span class="float-end ms-2"><%= link_to 'show', post_path(post), class: button_class('btn btn-sm btn-light float-end ms-2') %></span>
   </div>
   <div class="card-body">
-    <%= image_tag(post.image, class: 'image', title: post.date) if post.image.present? %>
+    <%= image_tag(post.image.variant(:original), class: 'image', title: post.date) if post.image.attached? %>
     <% if post.with_people.present? %>
       <p class="card-title">with <%= post.with_people %>...</p>
     <% end %>

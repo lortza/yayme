@@ -47,15 +47,13 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2" # Uses gem mini_magick as a dependency to process images sizes
+gem "activestorage-dropbox"     # Connects activestorage and dropbox
 
 gem "csv"                      # CSV parsing and generation
 
 gem "devise"                    # User authentication
 gem 'pundit'                    # Authorization library
-
-gem "activestorage-dropbox"     # connects activestorage and dropbox
-# gem "dropbox_api"               # dependency for the activestorage-dropbox gem
 
 gem "coderay"                   # syntax highlighting: http://coderay.rubychan.de/
 gem "redcarpet", github: "vmg/redcarpet" # markdown
@@ -74,7 +72,7 @@ group :development, :test do
   
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
-  
+
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
   

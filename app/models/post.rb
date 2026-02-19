@@ -28,7 +28,11 @@ class Post < ApplicationRecord
   belongs_to :post_type
   has_many :post_categories, dependent: :destroy
   has_many :categories, through: :post_categories
-  has_one_attached :image
+  has_one_attached :image do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100, 100]
+    attachable.variant :preview, resize_to_limit: [200, 200]
+    attachable.variant :original, resize_to_limit: [2000, 2000]
+  end
 
   validate :acceptable_image
   validates :date,
@@ -37,6 +41,8 @@ class Post < ApplicationRecord
 
   attr_accessor :remove_attached_image
   after_save :purge_attached_image, if: :remove_attached_image?
+  after_commit :process_image, on: [:create, :update],
+    if: -> { image.attached? && !image.blob.metadata["processed"] }
 
   delegate :name, to: :post_type, prefix: true
   alias_attribute :with_people, :given_by
@@ -144,13 +150,57 @@ class Post < ApplicationRecord
   def acceptable_image
     return unless image.attached?
 
-    if image.byte_size > 1.megabyte
-      image_size = (image.byte_size / 1_000_000.0).round(2)
-      errors.add(:image, "size #{image_size} MB exceeds 1 MB limit")
-    end
-
     acceptable_types = ["image/jpeg", "image/jpg", "image/png"]
     errors.add(:image, "must be a JPEG or PNG") unless acceptable_types.include?(image.content_type)
+  end
+
+  def process_image
+    blob = image.blob
+    return if blob.metadata["processed"]
+
+    blob.open do |tempfile|
+      result = compress_image_to_500kb(tempfile)
+      result.rewind
+
+      new_blob = ActiveStorage::Blob.create_and_upload!(
+        io: result,
+        filename: blob.filename,
+        content_type: blob.content_type,
+        metadata: {"processed" => true}
+      )
+
+      image.attach(new_blob)
+    ensure
+      result&.close!
+    end
+  rescue => e
+    Rails.logger.error("Image processing failed for Post #{id}: #{e.message}")
+  end
+
+  def compress_image_to_500kb(tempfile)
+    result = ImageProcessing::MiniMagick
+      .source(tempfile)
+      .resize_to_limit(2000, 2000)
+      .saver(quality: 85)
+      .call
+
+    return result if result.size <= 500.kilobytes
+
+    result.close!
+    result = ImageProcessing::MiniMagick
+      .source(tempfile)
+      .resize_to_limit(2000, 2000)
+      .saver(quality: 70)
+      .call
+
+    return result if result.size <= 500.kilobytes
+
+    result.close!
+    ImageProcessing::MiniMagick
+      .source(tempfile)
+      .resize_to_limit(1200, 1200)
+      .saver(quality: 70)
+      .call
   end
 
   private

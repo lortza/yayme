@@ -40,6 +40,7 @@ Live on heroku as [yayme](http://yay-me.herokuapp.com)
 
 ## Required Technologies
 * You will also need a Dropbox account and a dedicated folder in your account for images. See [Dropbox API](https://www.dropbox.com/developers/documentation). At the moment, the image url for posts is highly unsophisticated and is expecting a Dropbox url. If you want to use something other than non-smart url field (like being able to upload photos), go for it! :) You'll have a some work to do in this area.
+* You will need to install imagemagick locally with `brew install imagemagick`
 
 ## Tests
 * Tests: `bundle exec rspec`
@@ -57,14 +58,12 @@ bundle exec reek
 bundle exec standardrb
 ```
 
-https://guides.rubyonrails.org/8_0_release_notes.html
 
 ## Solid Trio Implementation
-The Solid Trio (`solid_cache`, `solid_cable`, `solid_queue`) are implemented as tables in the main database instead of separate tables.
+The Solid Trio (`solid_cache`, `solid_cable`, `solid_queue`) are implemented as tables in the main database instead of separate tables. https://guides.rubyonrails.org/8_0_release_notes.html
 
 
 ## Editing the credentials file
-
 Never open the `master.key` or `credentials.yml.enc` in Atom. This will add newline characters that you can't remove and it will not be able to be unencrypted.
 
 To edit this file, run:
@@ -75,6 +74,9 @@ EDITOR="code --wait" bin/rails credentials:edit
 
 If this file gets borked, [this post](https://stackoverflow.com/a/54279636/5009528) and [this post](https://medium.com/@kirill_shevch/encrypted-secrets-credentials-in-rails-6-rails-5-1-5-2-f470accd62fc) will help.
 
+
+## Image Uploads
+Images are processed by the Raisl gem `image_processing` which uses the `mini_magick` gem as a dependency. This allows a user to submit a photos of any size to the form, but have our file system downsize it before storing to Dropbox. There are size variants available for use in the app. They are defined in the `Post` model.  
 
 ## Related Docs
 * [Devise](https://github.com/plataformatec/devise) user authentication (sign up/in/out)
