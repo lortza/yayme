@@ -159,47 +159,48 @@ class Post < ApplicationRecord
     return if blob.metadata["processed"]
 
     blob.open do |tempfile|
-      compressed_path = compress_image_to_500kb(tempfile, blob.filename.to_s)
+      result = compress_image_to_500kb(tempfile)
+      result.rewind
 
       new_blob = ActiveStorage::Blob.create_and_upload!(
-        io: File.open(compressed_path, "rb"),
+        io: result,
         filename: blob.filename,
         content_type: blob.content_type,
-        metadata: {"processed" => true}
+        metadata: { "processed" => true }
       )
 
       image.attach(new_blob)
     ensure
-      File.delete(compressed_path) if compressed_path && File.exist?(compressed_path)
+      result&.close!
     end
   rescue => e
     Rails.logger.error("Image processing failed for Post #{id}: #{e.message}")
   end
 
-  def compress_image_to_500kb(tempfile, filename)
-    img = MiniMagick::Image.open(tempfile.path)
-    img.resize("2000x2000>")
-    img.quality("85")
+  def compress_image_to_500kb(tempfile)
+    result = ImageProcessing::MiniMagick
+      .source(tempfile)
+      .resize_to_limit(2000, 2000)
+      .saver(quality: 85)
+      .call
 
-    ext = File.extname(filename).downcase
-    ext = ".jpg" if ext == ".jpeg"
-    output_path = Rails.root.join("tmp", "#{SecureRandom.hex}#{ext}").to_s
-    img.write(output_path)
+    return result if result.size <= 500.kilobytes
 
-    if File.size(output_path) > 500.kilobytes
-      img = MiniMagick::Image.open(output_path)
-      img.quality("70")
-      img.write(output_path)
-    end
+    result.close!
+    result = ImageProcessing::MiniMagick
+      .source(tempfile)
+      .resize_to_limit(2000, 2000)
+      .saver(quality: 70)
+      .call
 
-    if File.size(output_path) > 500.kilobytes
-      img = MiniMagick::Image.open(output_path)
-      img.resize("1200x1200>")
-      img.quality("70")
-      img.write(output_path)
-    end
+    return result if result.size <= 500.kilobytes
 
-    output_path
+    result.close!
+    ImageProcessing::MiniMagick
+      .source(tempfile)
+      .resize_to_limit(1200, 1200)
+      .saver(quality: 70)
+      .call
   end
 
   private
