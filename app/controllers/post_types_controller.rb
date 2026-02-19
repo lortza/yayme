@@ -34,7 +34,7 @@ class PostTypesController < ApplicationController
     if @post_type.save
       redirect_to @post_type
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -42,7 +42,7 @@ class PostTypesController < ApplicationController
     if @post_type.update(post_type_params)
       redirect_to post_types_url
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

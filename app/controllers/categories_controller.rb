@@ -23,25 +23,21 @@ class CategoriesController < ApplicationController
     if @category.save
       redirect_to categories_url, notice: "Category was successfully created."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    respond_to do |format|
-      if @category.update(category_params)
-        format.html { redirect_to categories_url }
-      else
-        format.html { render :edit }
-      end
+    if @category.update(category_params)
+      redirect_to categories_url
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @category.destroy
-    respond_to do |format|
-      format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
-    end
+    redirect_to categories_url, notice: "Category was successfully destroyed."
   end
 
   private
