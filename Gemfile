@@ -86,7 +86,7 @@ group :development, :test do
 end
 
 group :development do
-  gem "annotate" # lists db table details as comments in models, etc
+  gem "annot8"                  # A fork of gem `annotate` that is Rails 8 compatible. Annotate models, routes, etc. with schema info
   gem "awesome_print"
   gem "magic_frozen_string_literal"
   
