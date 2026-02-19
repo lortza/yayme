@@ -26,6 +26,7 @@ Live on heroku as [yayme](http://yay-me.herokuapp.com)
 - Standard RB for linting
 - Devise for authentication
 - Pundit for authorization
+- ActiveStorage for image storage
 - Dropbox API for image storage
 
 ## Getting Started
@@ -83,3 +84,4 @@ If this file gets borked, [this post](https://stackoverflow.com/a/54279636/50095
 * [FactoryBot](https://github.com/thoughtbot/factory_bot/blob/master/GETTING_STARTED.md) to build test objects
 * [Pagy](https://ddnexus.github.io/pagy/guides/quick-start/) for pagination
 * [Dropbox API](https://www.dropbox.com/developers/documentation)
+* [ActiveStorage](https://guides.rubyonrails.org/active_storage_overview.html)
