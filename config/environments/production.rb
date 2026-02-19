@@ -49,9 +49,11 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Replace the default in-process memory cache store with a durable alternative.
+  # I have configured this to use a single database instead of a separate db for solid_queue
   config.cache_store = :solid_cache_store
-
+  
   # Replace the default in-process and non-durable queuing backend for Active Job.
+  # I have configured this to use a single database instead of a separate db for solid_queue
   config.active_job.queue_adapter = :solid_queue
 
   # Ignore bad email addresses and do not raise email delivery errors.
