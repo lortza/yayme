@@ -166,7 +166,7 @@ class Post < ApplicationRecord
         io: result,
         filename: blob.filename,
         content_type: blob.content_type,
-        metadata: { "processed" => true }
+        metadata: {"processed" => true}
       )
 
       image.attach(new_blob)
