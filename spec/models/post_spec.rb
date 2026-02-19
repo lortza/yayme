@@ -537,7 +537,7 @@ RSpec.describe Post, type: :model do
     end
 
     context "when the blob has already been processed" do
-      before { allow(blob).to receive(:metadata).and_return({ "processed" => true }) }
+      before { allow(blob).to receive(:metadata).and_return({"processed" => true}) }
 
       it "skips processing" do
         expect(post).not_to receive(:compress_image_to_500kb)
@@ -559,7 +559,7 @@ RSpec.describe Post, type: :model do
 
       it "creates a new blob marked as processed" do
         expect(ActiveStorage::Blob).to receive(:create_and_upload!).with(
-          hash_including(metadata: { "processed" => true })
+          hash_including(metadata: {"processed" => true})
         )
         post.send(:process_image)
       end
