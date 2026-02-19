@@ -12,7 +12,7 @@
 <%= form_with(url: "#{post_exports_path}.csv", method: :get) do |form| %>
   <div class='row'>
     <div class='col'>
-      <div class="field">
+      <div class="mb-3">
         <%= form.label :timeframe %>
         <%= form.select :timeframe, timeframes_dropdown, class: 'form-control' %>
       </div>
@@ -21,14 +21,14 @@
 
   <div class='row'>
     <div class='col-md-6 col-sm-12'>
-      <div class="field">
+      <div class="mb-3">
         <%= form.label :text, "Search for Text:" %>
         <%= form.text_field :text, class: 'form-control' %>
       </div>
     </div>
 
     <div class='col-md-6 col-sm-12'>
-      <div class="field">
+      <div class="mb-3">
         <%= form.label :person_who_was_there %>
         <%= form.text_field :with_people, class: 'form-control' %>
       </div>
@@ -37,7 +37,7 @@
 
   <div class='row'>
     <div class='col-md-4 col-sm-12'>
-      <div class="field">
+      <div class="mb-3">
         <%= form.label 'Types' %>
         <%= form.collection_check_boxes :post_type_id, current_user.post_types.by_name, :id, :name do |r| %>
           <div class='form-check'>
@@ -49,7 +49,7 @@
     </div> <!-- col -->
 
     <div class='col-md-4 col-sm-12'>
-      <div class="field">
+      <div class="mb-3">
         <%= form.label 'Categories' %>
         <%= form.collection_check_boxes :category_ids, current_user.categories.by_name, :id, :name do |r| %>
           <div class='form-check'>
@@ -61,7 +61,7 @@
     </div><!-- col -->
 
     <div class='col-md-4 col-sm-12'>
-      <div class="field">
+      <div class="mb-3">
         <%= form.label :bookmarked %>
         <%= form.check_box :bookmarked, class: 'form-control' %>
       </div>

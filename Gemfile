@@ -54,8 +54,8 @@ gem "csv"                      # CSV parsing and generation
 gem "devise"                    # User authentication
 gem 'pundit'                    # Authorization library
 
-gem "activestorage-dropbox", "~> 2.0" # connects activestorage and dropbox
-gem "dropbox_api"               # dependency for the activestorage-dropbox gem
+gem "activestorage-dropbox"     # connects activestorage and dropbox
+# gem "dropbox_api"               # dependency for the activestorage-dropbox gem
 
 gem "coderay"                   # syntax highlighting: http://coderay.rubychan.de/
 gem "redcarpet", github: "vmg/redcarpet" # markdown

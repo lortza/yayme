@@ -1,16 +1,16 @@
 <%= form_with(model: post_type) do |form| %>
   <%= render 'shared/errors', object: post_type %>
-    <div class="field">
+    <div class="mb-3">
       <%= form.label :name %>
       <%= form.text_field :name, class: 'form-control mb-2' %>
     </div>
 
-    <div class="field">
+    <div class="mb-3">
       <%= form.label :description_template %>
       <%= form.text_area :description_template, rows: 10, class: 'form-control mb-2' %>
     </div>
 
-    <div class="field">
+    <div class="mb-3">
       <%= form.submit class: 'btn btn-primary mb-2' %>
     </div>
 <% end %>

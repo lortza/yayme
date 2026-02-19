@@ -26,6 +26,7 @@ Live on heroku as [yayme](http://yay-me.herokuapp.com)
 - Standard RB for linting
 - Devise for authentication
 - Pundit for authorization
+- Dropbox API for image storage
 
 ## Getting Started
 
@@ -34,9 +35,10 @@ Live on heroku as [yayme](http://yay-me.herokuapp.com)
 * Set up DB: `rake db:setup` (Runs `db:create`, `db:schema:load` and `db:seed`)
 * User: In development, see the seeds file for the user credentials so you can log in
 * `routes.rb`: comment out line 7, uncomment line 10 to allow users to sign up at http://localhost:3000/users/sign_up
+* Note to myself: remember to set up the master.key with the value stored in the password manager 
 
 ## Required Technologies
-* You will also need a Dropbox account and a dedicated folder in your account for images. At the moment, the image url for posts is highly unsophisticated and is expecting a Dropbox url. If you want to use something other than non-smart url field (like being able to upload photos), go for it! :) You'll have a some work to do in this area.
+* You will also need a Dropbox account and a dedicated folder in your account for images. See [Dropbox API](https://www.dropbox.com/developers/documentation). At the moment, the image url for posts is highly unsophisticated and is expecting a Dropbox url. If you want to use something other than non-smart url field (like being able to upload photos), go for it! :) You'll have a some work to do in this area.
 
 ## Tests
 * Tests: `bundle exec rspec`
@@ -59,6 +61,20 @@ https://guides.rubyonrails.org/8_0_release_notes.html
 ## Solid Trio Implementation
 The Solid Trio (`solid_cache`, `solid_cable`, `solid_queue`) are implemented as tables in the main database instead of separate tables.
 
+
+## Editing the credentials file
+
+Never open the `master.key` or `credentials.yml.enc` in Atom. This will add newline characters that you can't remove and it will not be able to be unencrypted.
+
+To edit this file, run:
+
+```
+EDITOR="code --wait" bin/rails credentials:edit
+```
+
+If this file gets borked, [this post](https://stackoverflow.com/a/54279636/5009528) and [this post](https://medium.com/@kirill_shevch/encrypted-secrets-credentials-in-rails-6-rails-5-1-5-2-f470accd62fc) will help.
+
+
 ## Related Docs
 * [Devise](https://github.com/plataformatec/devise) user authentication (sign up/in/out)
 * [Pundit](https://github.com/varvet/pundit) user authorization (restricts access to content)
@@ -66,3 +82,4 @@ The Solid Trio (`solid_cache`, `solid_cable`, `solid_queue`) are implemented as 
 * [Shoulda Matchers](https://github.com/thoughtbot/shoulda-matchers) for testing model relationships and validations
 * [FactoryBot](https://github.com/thoughtbot/factory_bot/blob/master/GETTING_STARTED.md) to build test objects
 * [Pagy](https://ddnexus.github.io/pagy/guides/quick-start/) for pagination
+* [Dropbox API](https://www.dropbox.com/developers/documentation)

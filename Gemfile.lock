@@ -613,7 +613,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  activestorage-dropbox (~> 2.0)
+  activestorage-dropbox
   annotate
   awesome_print
   better_errors
@@ -627,7 +627,6 @@ DEPENDENCIES
   coderay
   csv
   devise
-  dropbox_api
   factory_bot_rails
   faker
   image_processing (~> 1.2)
