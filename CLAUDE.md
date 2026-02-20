@@ -179,7 +179,6 @@ PostTypes can have `description_template` (markdown text). When creating a new p
 ## Common Gotchas
 - **User signup is disabled by default** - Must modify routes.rb to allow new user registration
 - **Dropbox required** - Image uploads require Dropbox API credentials configured
-- **Dev credentials in seeds** - Don't commit actual credentials, use seeds.rb pattern
 - **PostType ownership** - Posts don't directly belong to users; access user via `post.post_type.user`
 - **Timeframe labels** - Must use exact strings from `Report::TIMEFRAMES` keys for filtering
 
