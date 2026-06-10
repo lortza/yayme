@@ -47,7 +47,9 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2" # Uses gem mini_magick as a dependency to process images sizes
+gem "image_processing", "~> 2.0"
+gem "mini_magick", "~> 5.3" # image_processing no longer uses mini_magick by default https://github.com/minimagick/minimagick
+
 gem "activestorage-dropbox"     # Connects activestorage and dropbox
 
 gem "csv"                      # CSV parsing and generation
