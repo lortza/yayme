@@ -29,13 +29,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
       # Add or replace dependency steps here
+      - name: Unfreeze Bundler for Dependabot
+        if: github.actor == 'dependabot[bot]'
+        run: bundle config set frozen false
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          cache-version: 1 # Increment this to clear cache if needed
       # Add or replace database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load
+
       # Add or replace test runners here
       - name: Run tests
         run: bundle exec rspec
@@ -58,10 +63,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
       # Add or replace dependency steps here
+      - name: Unfreeze Bundler for Dependabot
+        if: github.actor == 'dependabot[bot]'
+        run: bundle config set frozen false
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          cache-version: 1 # Increment this to clear cache if needed
       # Add or replace database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load
@@ -72,17 +81,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+      # Add or replace dependency steps here
+      - name: Unfreeze Bundler for Dependabot
+        if: github.actor == 'dependabot[bot]'
+        run: bundle config set frozen false
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      # Add or replace any other lints here
-      - name: StandardRB
+          cache-version: 1 # Increment this to clear cache if needed
+      - name: Standard RB
         run: bundle exec standardrb
-      # - name: Reek
-      #   run: bundle exec reek
-      # - name: Security audit dependencies
-      #   run: bin/bundler-audit --update
-      # - name: Security audit application code
-      #   run: bin/brakeman -q -w2
+  #     #Add or replace any other lints here
+  #     - name: Reek
+  #       run: bundle exec reek
+  #     - name: Security audit dependencies
+  #       run: bin/bundler-audit --update
+  #     - name: Security audit application code
+  #       run: bin/brakeman -q -w2
