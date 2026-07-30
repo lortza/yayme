@@ -1,10 +1,9 @@
-name: "Ruby on Rails CI"
+name: CI
 
 on:
-  push:
-    branches: ["main"]
   pull_request:
-    branches: ["main"]
+  push:
+    branches: [main]
 
 jobs:
   # scan_ruby:
@@ -12,7 +11,7 @@ jobs:
 
   #   steps:
   #     - name: Checkout code
-  #       uses: actions/checkout@v6
+  #       uses: actions/checkout@v7
 
   #     - name: Set up Ruby
   #       uses: ruby/setup-ruby@v1
@@ -22,25 +21,16 @@ jobs:
 
   #     - name: Scan for common Rails security vulnerabilities using static analysis
   #       run: bin/brakeman --no-pager
-  #     - name: Security audit dependencies
-  #       run: bin/bundler-audit --update
 
   scan_js:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-          cache-version: 1 # Increment this to clear cache if needed
-      - name: Unfreeze Bundler for Dependabot
-        if: github.actor == 'dependabot[bot]'
-        run: bundle config set frozen false
+      - name: Setup Ruby with dependencies
+        uses: ./.github/actions/setup-ruby-deps
 
       - name: Scan for security vulnerabilities in JavaScript dependencies
         run: bin/importmap audit
@@ -49,23 +39,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-          cache-version: 1 # Increment this to clear cache if needed
-      - name: Unfreeze Bundler for Dependabot
-        if: github.actor == 'dependabot[bot]'
-        run: bundle config set frozen false
+      - name: Setup Ruby with dependencies
+        uses: ./.github/actions/setup-ruby-deps
 
       - name: Lint code for consistent style
         run: bundle exec standardrb
-      # Add or replace any other linters here
-      # - name: Reek
-      #   run: bundle exec reek
 
   test:
     runs-on: ubuntu-latest
@@ -87,23 +67,15 @@ jobs:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
     steps:
-      - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips imagemagick sqlite3
-
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Setup Ruby with dependencies
+        uses: ./.github/actions/setup-ruby-deps
         with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-          cache-version: 1 # Increment this to clear cache if needed
-      - name: Unfreeze Bundler for Dependabot
-        if: github.actor == 'dependabot[bot]'
-        run: bundle config set frozen false
+          install-system-packages: 'true'
 
-      - name: Run testsgb
+      - name: Run tests
         env:
           RAILS_ENV: test
         # REDIS_URL: redis://localhost:6379/0
@@ -136,18 +108,14 @@ jobs:
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
-      # Add or replace dependency steps here
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1
+      - name: Setup Ruby with dependencies
+        uses: ./.github/actions/setup-ruby-deps
         with:
-          bundler-cache: true
-          cache-version: 1 # Increment this to clear cache if needed
-      - name: Unfreeze Bundler for Dependabot
-        if: github.actor == 'dependabot[bot]'
-        run: bundle config set frozen false
-      # Add or replace database setup steps here
+          install-system-packages: 'true'
+
+      # Database setup steps
       - name: Set up database schema
         run: bin/rails db:schema:load
       - name: Check Seeds
