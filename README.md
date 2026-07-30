@@ -40,7 +40,7 @@ Live on heroku as [yayme](http://yay-me.herokuapp.com)
 
 ## Required Technologies
 * You will also need a Dropbox account and a dedicated folder in your account for images. See [Dropbox API](https://www.dropbox.com/developers/documentation). At the moment, the image url for posts is highly unsophisticated and is expecting a Dropbox url. If you want to use something other than non-smart url field (like being able to upload photos), go for it! :) You'll have a some work to do in this area.
-* You will need to install imagemagick locally with `brew install imagemagick`
+* You will need to install libvips locally with `brew install vips` (for macOS) or `apt-get install libvips` (for Linux)
 
 ## Tests
 * Tests: `bundle exec rspec`
@@ -76,7 +76,34 @@ If this file gets borked, [this post](https://stackoverflow.com/a/54279636/50095
 
 
 ## Image Uploads
-Images are processed by the Raisl gem `image_processing` which uses the `mini_magick` gem as a dependency. This allows a user to submit a photos of any size to the form, but have our file system downsize it before storing to Dropbox. There are size variants available for use in the app. They are defined in the `Post` model.  
+Images are processed by the Rails gem `image_processing` which uses the `ruby-vips` gem for high-performance image processing. This allows a user to submit photos of any size to the form, but have our file system downsize it before storing to Dropbox. There are size variants available for use in the app. They are defined in the `Post` model.
+
+**Why ruby-vips?** ruby-vips is faster and more memory-efficient than ImageMagick/MiniMagick. It's the default image processor for Rails 8.1.3+. The system requires libvips to be installed (see Required Technologies above).  
+
+
+## Deploying
+
+### Heroku Setup for libvips
+The app requires libvips for image processing. Configure buildpacks via the Heroku Dashboard:
+
+1. Go to https://dashboard.heroku.com/apps/myfoodplanner/settings
+2. Scroll to "Buildpacks" section
+3. Ensure buildpacks are in this order:
+   - `https://github.com/Newlywords/heroku-buildpack-vips`
+   - `heroku/ruby`
+
+**Alternative via CLI** (if Heroku CLI is working):
+```bash
+heroku buildpacks:add --index 1 hthttps://github.com/Newlywords/heroku-buildpack-vips -a myfoodplanner
+heroku buildpacks:add --index 2 heroku/ruby -a myfoodplanner
+```
+
+**Note:** If you encounter Heroku CLI errors, use the dashboard method above or reinstall the CLI with:
+```bash
+brew uninstall heroku
+brew install heroku/brew/heroku
+```
+
 
 ## Related Docs
 * [Devise](https://github.com/plataformatec/devise) user authentication (sign up/in/out)

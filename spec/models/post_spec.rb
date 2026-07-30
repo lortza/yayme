@@ -624,7 +624,7 @@ RSpec.describe Post, type: :model do
     before do
       allow(pipeline).to receive(:resize_to_limit).and_return(pipeline)
       allow(pipeline).to receive(:saver).and_return(pipeline)
-      allow(ImageProcessing::MiniMagick).to receive(:source).and_return(pipeline)
+      allow(ImageProcessing::Vips).to receive(:source).and_return(pipeline)
     end
 
     context "when the first pass produces an image <= 500kb" do

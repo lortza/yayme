@@ -119,9 +119,14 @@ Posts render markdown using **Redcarpet** gem with syntax highlighting via **Cod
 ### Image Handling
 
 - Uses ActiveStorage with Dropbox backend (configured in `config/storage.yml`)
+- Image processing via `image_processing` gem with `ruby-vips` backend (faster and more memory-efficient than ImageMagick/MiniMagick)
+- Configured in `config/application.rb`: `config.active_storage.variant_processor = :vips`
+- Requires libvips system library: `brew install vips` (macOS) or `apt-get install libvips` (Linux)
 - Images validated for size (<1MB) and type (JPEG/PNG only)
 - See `Post#acceptable_image` validation
+- Images automatically compressed to ≤500KB via `Post#compress_image_to_500kb` using `ImageProcessing::Vips`
 - Images can be removed via `remove_attached_image` virtual attribute
+- Variants defined: `:thumb` (100×100), `:preview` (200×200), `:original` (2000×2000)
 
 ### Post Exports
 
