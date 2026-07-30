@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby File.read(".ruby-version").strip
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.1.2"
+gem "rails", "~> 8.1.3"
 
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
@@ -48,7 +48,7 @@ gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 2.0"
-gem "mini_magick", "~> 5.3" # image_processing no longer uses mini_magick by default https://github.com/minimagick/minimagick
+gem "ruby-vips", "~> 2.2" # image_processing uses ruby-vips by default for better performance
 
 gem "activestorage-dropbox"     # Connects activestorage and dropbox
 

@@ -178,7 +178,7 @@ class Post < ApplicationRecord
   end
 
   def compress_image_to_500kb(tempfile)
-    result = ImageProcessing::MiniMagick
+    result = ImageProcessing::Vips
       .source(tempfile)
       .resize_to_limit(2000, 2000)
       .saver(quality: 85)
@@ -187,7 +187,7 @@ class Post < ApplicationRecord
     return result if result.size <= 500.kilobytes
 
     result.close!
-    result = ImageProcessing::MiniMagick
+    result = ImageProcessing::Vips
       .source(tempfile)
       .resize_to_limit(2000, 2000)
       .saver(quality: 70)
@@ -196,7 +196,7 @@ class Post < ApplicationRecord
     return result if result.size <= 500.kilobytes
 
     result.close!
-    ImageProcessing::MiniMagick
+    ImageProcessing::Vips
       .source(tempfile)
       .resize_to_limit(1200, 1200)
       .saver(quality: 70)
