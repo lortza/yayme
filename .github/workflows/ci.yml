@@ -31,6 +31,8 @@ jobs:
 
       - name: Setup Ruby with dependencies
         uses: ./.github/actions/setup-ruby-deps
+        with:
+          install-system-packages: 'true'
 
       - name: Scan for security vulnerabilities in JavaScript dependencies
         run: bin/importmap audit
@@ -43,6 +45,8 @@ jobs:
 
       - name: Setup Ruby with dependencies
         uses: ./.github/actions/setup-ruby-deps
+        with:
+          install-system-packages: 'true'
 
       - name: Lint code for consistent style
         run: bundle exec standardrb
